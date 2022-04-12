@@ -1,1 +1,29 @@
-<p>header works!</p>
+<header class="header">
+	<h1>ReadyFoods Administrative Web</h1>
+	<aside id="loginbox" class="loginbox">		
+	
+		<div *ngIf="sessionService.getIsLogin() == false">
+			<label for="username">Username </label>
+			<input type="text" [(ngModel)]="username" size="16" required maxlength="32" />
+			&nbsp;
+			<label for="password">Password </label>
+			<input type="password" [(ngModel)]="password" size="16" required maxlength="32" />
+			&nbsp;
+			<input type="reset" value="Clear" />
+			&nbsp;
+			<input type="button" (click)="staffLogin()" value="Login" />					
+		</div>
+		
+		<div *ngIf="loginError == true" style="text-align: right; color: red;">
+			Invalid login credential: Username does not exist or invalid password!
+		</div>
+		
+		<div *ngIf="sessionService.getIsLogin() == true">
+			You are login as {{sessionService.getCurrentStaff().firstName}} {{sessionService.getCurrentStaff().lastName}} 
+			(Access Right: 
+			<span *ngIf="sessionService.getCurrentStaff().staffType == 0">ADMINISTRATOR</span>
+			<span *ngIf="sessionService.getCurrentStaff().staffType == 1">MODERATOR</span>)
+			<input type="button" (click)="staffLogout()" value="Logout" />
+		</div>
+	</aside>
+</header>

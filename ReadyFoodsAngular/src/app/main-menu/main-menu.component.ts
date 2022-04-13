@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { SessionService } from '../services/session.service';
 
 @Component({
   selector: 'app-main-menu',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainMenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router,
+    public sessionService: SessionService) { }
+
+    
 
   ngOnInit(): void {
   }
 
+  staffLogout(): void {
+    this.sessionService.setIsLogin(false);
+    this.sessionService.setCurrentStaff(null);
+
+    this.router.navigate(["/index"]);
+  }
 }

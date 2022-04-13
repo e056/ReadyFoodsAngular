@@ -69,11 +69,7 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-<<<<<<< HEAD
-          "options": {
-=======
           "options": {            
->>>>>>> f37874046f93ddd7f6390bb54330d5ae88ce4c4f
             "proxyConfig": "proxy.conf.json"
           },
           "configurations": {

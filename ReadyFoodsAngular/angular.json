@@ -27,7 +27,6 @@
               "src/assets"
             ],
             "styles": [
-              // "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css",
               "./node_modules/primeicons/primeicons.css",
               "./node_modules/primeng/resources/themes/nova/theme.css",
@@ -70,7 +69,11 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+<<<<<<< HEAD
           "options": {
+=======
+          "options": {            
+>>>>>>> f37874046f93ddd7f6390bb54330d5ae88ce4c4f
             "proxyConfig": "proxy.conf.json"
           },
           "configurations": {

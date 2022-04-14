@@ -37,8 +37,6 @@
     <ng-template pTemplate="body" let-enquiry>
         <tr>
             <td>{{enquiry.enquiryId}}</td>
-
-
             <td>{{enquiry.customer.firstName}} {{enquiry.customer.lastName}}</td>
             <td><span [class]="'enquiry-badge-' + enquiry.resolved">{{enquiry.resolved}}</span></td>
             <td>
@@ -53,7 +51,8 @@
     [style]="{width: '50vw'}">
     <div class="ui-g">
 
-        <p-panel header="From: {{enquiryToView.customer}}">
+        <p-panel header="From:  {{(enquiryToView.customer != null)?(enquiryToView.customer.firstName):('')}}">
+           
             <p>{{enquiryToView.title}}</p>
             <p>{{enquiryToView.description}}</p>
         </p-panel>

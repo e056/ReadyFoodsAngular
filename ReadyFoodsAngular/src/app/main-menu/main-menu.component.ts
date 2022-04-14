@@ -92,7 +92,7 @@ export class MainMenuComponent implements OnInit {
       icon: 'pi pi-user',
       items: [{
         label: "Create new staff",
-        routerLink: 'staffManagement/CreateNewStaff'
+        routerLink: 'staffManagement/createNewStaff'
       },
       {
         label: "View all staffs",

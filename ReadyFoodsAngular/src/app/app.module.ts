@@ -24,6 +24,7 @@ import { ViewAllStaffsComponent } from './staffManagement/view-all-staffs/view-a
 import { ViewStaffDetailsComponent } from './staffManagement/view-staff-details/view-staff-details.component';
 import { ViewAllCustomersComponent } from './customerManagement/view-all-customers/view-all-customers.component';
 import { ViewCustomerDetailsComponent } from './customerManagement/view-customer-details/view-customer-details.component';
+import { ViewAllEnquiresComponent } from './customerManagement/view-all-enquires/view-all-enquires.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { ViewCustomerDetailsComponent } from './customerManagement/view-customer
     ViewAllStaffsComponent,
     ViewStaffDetailsComponent,
     ViewAllCustomersComponent,
-    ViewCustomerDetailsComponent
+    ViewCustomerDetailsComponent,
+    ViewAllEnquiresComponent
   ],
   imports: [
     BrowserModule,

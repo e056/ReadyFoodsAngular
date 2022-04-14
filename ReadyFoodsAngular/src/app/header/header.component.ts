@@ -36,9 +36,9 @@ export class HeaderComponent implements OnInit {
           let staff: Staff = response;
 
           if (response.staffType?.toString() == "ADMINISTRATOR") {
-            staff.staffType = AccessRightEnum.ADMINISTRATOR;
+            staff.staffType = "ADMINISTRATOR";
           } else if (response.staffType?.toString() == "MODERATOR") {
-            staff.staffType = AccessRightEnum.MODERATOR;
+            staff.staffType = "MODERATOR";
           }
 
           if (staff != null) {

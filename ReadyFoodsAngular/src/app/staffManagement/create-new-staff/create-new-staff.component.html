@@ -34,7 +34,7 @@
   placeholder="username"/>
 
   <label for="staffType" class="block" style="font-weight: bold;">Staff Type</label>
-  <p-dropdown name="staffType" [options]="staffTypes" [(ngModel)]="newStaff.staffType" [showClear]="true"></p-dropdown>
+  <p-dropdown name="staffType"[options]="staffTypes" [(ngModel)]="staffType" [showClear]="true"></p-dropdown>
 
   <label for="password" class="block" style="font-weight: bold;">Password</label>
   <input id="password" type="password"

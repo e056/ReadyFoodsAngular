@@ -3,7 +3,4 @@ export enum AccessRightEnum {
     MODERATOR
 }
 
-export const AccessRightEnumLabelMapping = {
-  [AccessRightEnum.ADMINISTRATOR]: "Admin",
-  [AccessRightEnum.MODERATOR]: "Moderator"
-}
+

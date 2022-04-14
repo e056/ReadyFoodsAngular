@@ -1,4 +1,4 @@
-import { AccessRightEnum,AccessRightEnumLabelMapping } from './../../models/access-right-enum';
+import { AccessRightEnum} from './../../models/access-right-enum';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
@@ -14,8 +14,8 @@ import { StaffService } from '../../services/staff.service';
 })
 export class CreateNewStaffComponent implements OnInit {
 
-  public AccessRightEnumLabelMapping = AccessRightEnumLabelMapping;
-  public staffTypes = Object.keys(AccessRightEnum);
+  // public AccessRightEnumLabelMapping = AccessRightEnumLabelMapping;
+  // public staffTypes = Object.keys(AccessRightEnum);
 
   newStaff: Staff;
 
@@ -23,8 +23,8 @@ export class CreateNewStaffComponent implements OnInit {
   submitted: boolean;
   resultError: boolean;
   message: string | undefined;
-  
-
+  staffType: string;
+  staffTypes: string[];
 
   constructor(
     private router: Router,
@@ -36,6 +36,10 @@ export class CreateNewStaffComponent implements OnInit {
     this.resultError = false;
     this.resultSuccess = false;
     this.submitted = false;
+    this.staffType = "";
+    this.staffTypes = ["admin","mod"]
+
+
 
   }
 
@@ -54,17 +58,24 @@ export class CreateNewStaffComponent implements OnInit {
   create(createStaffForm:NgForm)
   {
     this.submitted = true;
-    console.log('********** CreateNewStaffComponent.ts: ');
+    console.log('********** CreateNewStaffComponent.ts: ' + this.staffType);
+    console.log('********** CreateNewStaffComponent.ts: ' + this.newStaff.firstName);
+    if(this.staffType == 'admin'){
+      this.newStaff.staffType = "ADMINISTRATOR";
+      console.log('********** CreateNewStaffComponent.ts: admin set' + this.newStaff.staffType)
+    } else {
+      this.newStaff.staffType = "MODERATOR";
+    }
 
-    if(createStaffForm.valid)
-    {
-      console.log('********** CreateNewStaffComponent.ts: valid ');
+    // if(createStaffForm.valid)
+    // {
+
       this.staffService.createNewStaff(this.newStaff).subscribe({
         next:(response)=>{
-          let newStaffId: number = response;
+          let newStaff: Staff = response;
           this.resultSuccess = true;
           this.resultError = false;
-          this.message = "New staff " + newStaffId + " created successfully!";
+          this.message = "New staff " + newStaff.firstName + " created successfully!";
 
           this.newStaff = new Staff();
           createStaffForm.resetForm();
@@ -77,6 +88,6 @@ export class CreateNewStaffComponent implements OnInit {
 
         }
       });
-    }
+
   }
 }

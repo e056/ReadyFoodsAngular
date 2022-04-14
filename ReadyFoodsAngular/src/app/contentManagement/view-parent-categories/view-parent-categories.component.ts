@@ -10,7 +10,7 @@ import { SessionService } from 'src/app/services/session.service';
   styleUrls: ['./view-parent-categories.component.css'],
 })
 export class ViewParentCategoriesComponent implements OnInit {
-  categories: Category[] | null;
+  categories: Category[];
 
   constructor(
     private router: Router,

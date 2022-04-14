@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import {TableModule} from 'primeng/table';
+import {InputTextModule} from 'primeng/inputtext';
+import {PanelModule} from 'primeng/panel';
+import {DropdownModule} from 'primeng/dropdown';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -55,7 +58,10 @@ import { ViewCustomerDetailsComponent } from './customerManagement/view-customer
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    TableModule
+    TableModule,
+    InputTextModule,
+    PanelModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

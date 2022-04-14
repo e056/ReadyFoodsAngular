@@ -1,1 +1,43 @@
 <app-breadcrumb [pageName]="'createNewStaff'"></app-breadcrumb>
+
+<h3>Create New Staff</h3>
+<br />
+
+<div *ngIf="resultSuccess == true" style="color: blue">
+  {{ message }}
+</div>
+
+<div *ngIf="resultError == true" style="color: red">
+  {{ message }}
+</div>
+<form #createStaffForm="ngForm" (ngSubmit)="create(createStaffForm)">
+  <label for="firstName" class="block" style="font-weight: bold;">First Name</label>
+  <input id="firstName" type="text"
+  pInputText [(ngModel)]="newStaff.firstName"
+  required="true"
+  placeholder="John"/>
+
+  <label for="lastName" class="block" style="font-weight: bold;">Last Name</label>
+  <input id="lastName" type="text"
+  pInputText [(ngModel)]="newStaff.lastName"
+  required="true"
+  placeholder="Smith"/>
+
+  <label for="username" class="block" style="font-weight: bold;">Username</label>
+  <input id="username" type="username"
+  pInputText [(ngModel)]="newStaff.username"
+  required="true"
+  placeholder="staffxxx"/>
+
+  <label for="staffType" class="block" style="font-weight: bold;">Staff Type</label>
+  <p-dropdown [options]="staffTypes" [(ngModel)]="newStaff.staffType" optionLabel="accesstype" [showClear]="true"></p-dropdown>
+
+  <label for="password" class="block" style="font-weight: bold;">Password</label>
+  <input id="password" type="password"
+  pInputText [(ngModel)]="newStaff.password"
+  required="true"
+  placeholder="staffxxx"/>
+
+
+
+</form>

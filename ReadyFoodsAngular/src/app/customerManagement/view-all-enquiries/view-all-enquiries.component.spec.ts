@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewAllEnquiresComponent } from './view-all-enquires.component';
+import { ViewAllEnquiriesComponent } from './view-all-enquiries.component';
 
-describe('ViewAllEnquiresComponent', () => {
-  let component: ViewAllEnquiresComponent;
-  let fixture: ComponentFixture<ViewAllEnquiresComponent>;
+describe('ViewAllEnquiriesComponent', () => {
+  let component: ViewAllEnquiriesComponent;
+  let fixture: ComponentFixture<ViewAllEnquiriesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ViewAllEnquiresComponent ]
+      declarations: [ ViewAllEnquiriesComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ViewAllEnquiresComponent);
+    fixture = TestBed.createComponent(ViewAllEnquiriesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

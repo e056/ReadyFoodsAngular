@@ -2,8 +2,13 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import {PanelModule} from 'primeng/panel';
 import {TableModule} from 'primeng/table';
+import {ButtonModule} from 'primeng/button';
+import {DialogModule} from 'primeng/dialog';
+import {RatingModule} from 'primeng/rating';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,7 +31,7 @@ import { ViewAllStaffsComponent } from './staffManagement/view-all-staffs/view-a
 import { ViewStaffDetailsComponent } from './staffManagement/view-staff-details/view-staff-details.component';
 import { ViewAllCustomersComponent } from './customerManagement/view-all-customers/view-all-customers.component';
 import { ViewCustomerDetailsComponent } from './customerManagement/view-customer-details/view-customer-details.component';
-import { ViewAllEnquiresComponent } from './customerManagement/view-all-enquires/view-all-enquires.component';
+import { ViewAllEnquiriesComponent } from './customerManagement/view-all-enquiries/view-all-enquiries.component';
 
 @NgModule({
   declarations: [
@@ -50,14 +55,19 @@ import { ViewAllEnquiresComponent } from './customerManagement/view-all-enquires
     ViewStaffDetailsComponent,
     ViewAllCustomersComponent,
     ViewCustomerDetailsComponent,
-    ViewAllEnquiresComponent
+    ViewAllEnquiriesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    TableModule
+    BrowserAnimationsModule,
+    TableModule,
+    PanelModule,
+    ButtonModule,
+    DialogModule,
+    RatingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

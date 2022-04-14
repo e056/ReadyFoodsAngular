@@ -13,6 +13,7 @@ import { ViewCustomerDetailsComponent } from './customerManagement/view-customer
 import { IndexComponent } from './index/index.component';
 import { CreateNewStaffComponent } from './staffManagement/create-new-staff/create-new-staff.component';
 import { ViewAllStaffsComponent } from './staffManagement/view-all-staffs/view-all-staffs.component';
+import { ViewAllEnquiriesComponent } from './customerManagement/view-all-enquiries/view-all-enquiries.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full' },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'staffManagement/viewAllStaffs', component: ViewAllStaffsComponent},
   { path: 'customerManagement/viewAllCustomers', component: ViewAllCustomersComponent},
   { path: 'customerManagement/viewCustomerDetails', component: ViewCustomerDetailsComponent},
+  { path: 'customerManagement/viewAllEnquiries', component: ViewAllEnquiriesComponent}
 ];
 
 @NgModule({

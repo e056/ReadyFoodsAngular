@@ -1,0 +1,69 @@
+<p>view-all-enquires works!</p>
+
+
+<p-table #enquiryDataTable [value]="enquiries" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[10,25,50]" [paginator]="true" [globalFilterFields]="['enquiryId']">
+    <!-- <ng-template pTemplate="caption">
+        <div class="flex">
+            <span class="p-input-icon-left ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="enquiryDataTable.filterGlobal($event.target.value, 'contains')"
+                    placeholder="Search keyword" />
+            </span>
+        </div>
+    </ng-template> -->
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Enquiry ID</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Resolved?</th>
+            <th>Customer</th>
+
+
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-enquiry>
+        <tr>
+            <td>{{enquiry.enquiryId}}</td>
+            <td>{{enquiry.title}}</td>
+            <td>{{enquiry.description}}</td>
+            <td><span [class]="'enquiry-badge-' + enquiry.resolved">{{enquiry.resolved}}</span></td>
+
+            <td>{{enquiry.customer.firstName}}</td>
+
+
+        </tr>
+    </ng-template>
+</p-table>
+
+<!-- 
+<p-table #enquiryDataTable [value]="enquiries" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [globalFilterFields]="['enquiryId']">
+    <ng-template pTemplate="caption">
+        <div class="flex">
+            <span class="p-input-icon-left ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="enquiryDataTable.filterGlobal($event.target.value, 'contains')"
+                    placeholder="Search keyword" />
+            </span>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Name</th>
+            <th>Country</th>
+            <th>Agent</th>
+            <th>Status</th>
+            <th style="width: 6rem">Verified</th>
+        </tr>
+       
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="5">No customers found.</td>
+        </tr>
+    </ng-template>
+</p-table> -->

@@ -1,1 +1,27 @@
-<p>breadcrumb works!</p>
+<section id="breadcrumb" class="breadcrumb">
+	&#9776; Home
+
+	<span *ngIf="pageName == 'createNewStaff' ||
+				 pageName == 'viewAllStaffs' ||
+				 pageName == 'viewStaffDetails'">
+		> Staff Management
+	</span>
+
+	<span *ngIf="pageName == 'createNewStaff'">
+		> Create New Staff
+	</span>
+
+	<span *ngIf="pageName == 'viewAllStaffs'">
+		> View All Staffs
+	</span>
+
+	<span *ngIf="pageName == 'viewStaffDetails'">
+		> Create New Product
+	</span>
+
+	<span *ngIf="pageName == 'viewAllProducts'">
+		> View All Products
+	</span>
+
+
+</section>

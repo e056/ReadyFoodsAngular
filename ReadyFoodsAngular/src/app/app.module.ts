@@ -2,12 +2,16 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule }
-  from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MenuModule } from 'primeng/menu';
-import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
+import {PanelModule} from 'primeng/panel';
+import {TableModule} from 'primeng/table';
+import {ButtonModule} from 'primeng/button';
+import {DialogModule} from 'primeng/dialog';
+import {RatingModule} from 'primeng/rating';
+import { DropdownModule } from 'primeng/dropdown';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +34,7 @@ import { ViewAllStaffsComponent } from './staffManagement/view-all-staffs/view-a
 import { ViewStaffDetailsComponent } from './staffManagement/view-staff-details/view-staff-details.component';
 import { ViewAllCustomersComponent } from './customerManagement/view-all-customers/view-all-customers.component';
 import { ViewCustomerDetailsComponent } from './customerManagement/view-customer-details/view-customer-details.component';
+import { ViewAllEnquiriesComponent } from './customerManagement/view-all-enquiries/view-all-enquiries.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +57,8 @@ import { ViewCustomerDetailsComponent } from './customerManagement/view-customer
     ViewAllStaffsComponent,
     ViewStaffDetailsComponent,
     ViewAllCustomersComponent,
-    ViewCustomerDetailsComponent
+    ViewCustomerDetailsComponent,
+    ViewAllEnquiriesComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +68,13 @@ import { ViewCustomerDetailsComponent } from './customerManagement/view-customer
     MenuModule,
     RippleModule,
     ButtonModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    TableModule,
+    PanelModule,
+    ButtonModule,
+    DialogModule,
+    RatingModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

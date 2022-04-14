@@ -1,48 +1,46 @@
-<h3>Create New Staff</h3>
-<br />
 
-
-
-<div *ngIf="resultSuccess == true" style="color: blue">
-  {{ message }}
-</div>
-
-<div *ngIf="resultError == true" style="color: red">
-  {{ message }}
-</div>
+<p-messages></p-messages>
 <form #createStaffForm="ngForm" (ngSubmit)="create(createStaffForm)">
-  <p-panel>
-  <label for="firstName" class="block" style="font-weight: bold;">First Name</label>
-  <input id="firstName" type="text"
-  pInputText [(ngModel)]="newStaff.firstName"
-  name="firstName"
-  required="true"
-  placeholder="John"/>
+  <p-panel class="card" header="Create New Staff">
+    <div class="p-fluid grid">
+      <div style="margin-bottom: 10px;margin-top: 10px;">
+      <span class="p-float-label">
+        <input type="text" id="firstname" pInputText [(ngModel)]="newStaff.firstName" name="firstName" required="true">
+        <label for="firstname">First Name</label>
+      </span>
+    </div>
+    <div>
 
-  <label for="lastName" class="block" style="font-weight: bold;">Last Name</label>
-  <input id="lastName" type="text"
-  pInputText [(ngModel)]="newStaff.lastName"
-  name="lastName"
-  required="true"
-  placeholder="Smith"/>
+    </div>
+    <div style="margin-bottom: 10px;margin-top: 30px;">
+      <span class="p-float-label">
+        <input type="text" id="lastname" pInputText [(ngModel)]="newStaff.lastName" name="lastName" required="true">
+        <label for="lastname">Last Name</label>
+      </span>
+    </div>
+    <div style="margin-bottom: 10px;margin-top: 30px;">
+      <span class="p-float-label">
+        <input type="text" id="username" pInputText [(ngModel)]="newStaff.username" name="username" required="true">
+        <label for="username">Username</label>
+      </span>
+    </div>
+    <div style="margin-bottom: 10px;margin-top: 30px;" >
+      <span class="p-float-label">
+        <p-dropdown inputId="dropdown"[autoDisplayFirst]="false" [options]="staffTypes" [(ngModel)]="staffType" ></p-dropdown>
+        <label for="dropdown">Staff Type</label>
+      </span>
+    </div>
+    <div style="margin-bottom: 10px;margin-top: 30px;" >
+      <span class="p-float-label">
+        <input type="password" id="passwordd" pInputText [(ngModel)]="newStaff.password" name="password" required="true">
+        <label for="passwordd">Password</label>
+        
+      </span>
+    </div>
 
-  <label for="username" class="block" style="font-weight: bold;">Username</label>
-  <input id="username" type="username"
-  pInputText [(ngModel)]="newStaff.username"
-  name="username"
-  required="true"
-  placeholder="username"/>
 
-  <label for="staffType" class="block" style="font-weight: bold;">Staff Type</label>
-  <p-dropdown name="staffType"[options]="staffTypes" [(ngModel)]="staffType" [showClear]="true"></p-dropdown>
+      <p-button label="Submit" (onClick)="create(createStaffForm)"></p-button>
 
-  <label for="password" class="block" style="font-weight: bold;">Password</label>
-  <input id="password" type="password"
-  pInputText [(ngModel)]="newStaff.password"
-  name="password"
-  required="true"
-  placeholder="password"/>
-
-  <p-button label="Submit" (onClick)="create(createStaffForm)"></p-button>
-</p-panel>
+    </div>
+  </p-panel>
 </form>

@@ -6,11 +6,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MenuModule } from 'primeng/menu';
 import { RippleModule } from 'primeng/ripple';
-import {PanelModule} from 'primeng/panel';
-import {TableModule} from 'primeng/table';
-import {ButtonModule} from 'primeng/button';
-import {DialogModule} from 'primeng/dialog';
-import {RatingModule} from 'primeng/rating';
+import { PanelModule } from 'primeng/panel';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { RatingModule } from 'primeng/rating';
 import { DropdownModule } from 'primeng/dropdown';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -35,6 +35,7 @@ import { ViewStaffDetailsComponent } from './staffManagement/view-staff-details/
 import { ViewAllCustomersComponent } from './customerManagement/view-all-customers/view-all-customers.component';
 import { ViewCustomerDetailsComponent } from './customerManagement/view-customer-details/view-customer-details.component';
 import { ViewAllEnquiriesComponent } from './customerManagement/view-all-enquiries/view-all-enquiries.component';
+import { ViewParentCategoriesComponent } from './contentManagement/view-parent-categories/view-parent-categories.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { ViewAllEnquiriesComponent } from './customerManagement/view-all-enquiri
     ViewStaffDetailsComponent,
     ViewAllCustomersComponent,
     ViewCustomerDetailsComponent,
-    ViewAllEnquiriesComponent
+    ViewAllEnquiriesComponent,
+    ViewParentCategoriesComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,9 +76,9 @@ import { ViewAllEnquiriesComponent } from './customerManagement/view-all-enquiri
     ButtonModule,
     DialogModule,
     RatingModule,
-    DropdownModule
+    DropdownModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

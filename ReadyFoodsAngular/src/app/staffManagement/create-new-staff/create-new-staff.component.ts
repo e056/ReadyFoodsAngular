@@ -15,7 +15,7 @@ import { StaffService } from '../../services/staff.service';
 export class CreateNewStaffComponent implements OnInit {
 
   public AccessRightEnumLabelMapping = AccessRightEnumLabelMapping;
-  public staffTypes = Object.values(AccessRightEnum);
+  public staffTypes = Object.keys(AccessRightEnum);
 
   newStaff: Staff;
 
@@ -23,6 +23,7 @@ export class CreateNewStaffComponent implements OnInit {
   submitted: boolean;
   resultError: boolean;
   message: string | undefined;
+  
 
 
   constructor(
@@ -53,9 +54,11 @@ export class CreateNewStaffComponent implements OnInit {
   create(createStaffForm:NgForm)
   {
     this.submitted = true;
+    console.log('********** CreateNewStaffComponent.ts: ');
 
     if(createStaffForm.valid)
     {
+      console.log('********** CreateNewStaffComponent.ts: valid ');
       this.staffService.createNewStaff(this.newStaff).subscribe({
         next:(response)=>{
           let newStaffId: number = response;
@@ -71,7 +74,7 @@ export class CreateNewStaffComponent implements OnInit {
           this.resultError = true;
           this.resultSuccess = false;
           this.message = "An error has occurred while creating new staff: " + error;
-          console.log('********** CreateNewStaffComponent.ts: ' + error);
+
         }
       });
     }

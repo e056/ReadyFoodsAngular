@@ -1,1 +1,18 @@
-<p>index works!</p>
+<article *ngIf="sessionService.getIsLogin() == false">
+    <h3>Welcome</h3>
+    
+    <p>
+        You are not logged in.
+    </p>
+    <ul style="margin-left: 20px;">
+        <li>Testing line format 1</li>
+        <li>Testing line format 2</li>
+    </ul>
+</article>
+
+<ng-template [ngIf]="sessionService.getIsLogin() == true">		
+    <br/><br/>
+    
+    You are logged in, welcome (This name is to try accessing session service property): {{sessionService.getCurrentStaff().firstName}}
+
+</ng-template>

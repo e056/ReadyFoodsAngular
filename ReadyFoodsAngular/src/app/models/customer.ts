@@ -5,7 +5,6 @@ export class Customer {
     firstName: string | undefined;
     lastName: string | undefined;
     contactNumber: string | undefined;
-    password: string | undefined;
     email: string | undefined;
     isBanned: boolean | undefined;
     address: string | undefined;
@@ -19,7 +18,6 @@ export class Customer {
         firstName?: string,
         lastName?: string,
         contactNumber?: string,
-        password?: string,
         email?: string,
         isBanned?: boolean,
         address?: string
@@ -29,7 +27,6 @@ export class Customer {
         this.firstName = firstName
         this.lastName = lastName
         this.contactNumber = contactNumber
-        this.password = password
         this.email = email
         this.isBanned = isBanned
         this.address = address

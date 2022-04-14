@@ -1,69 +1,70 @@
-<p>view-all-enquires works!</p>
+<h1>View All Enquiries</h1>
 
 
 <p-table #enquiryDataTable [value]="enquiries" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
-    [rowsPerPageOptions]="[10,25,50]" [paginator]="true" [globalFilterFields]="['enquiryId']">
-    <!-- <ng-template pTemplate="caption">
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" responsiveLayout="scroll"
+    [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
+    [globalFilterFields]="['enquiryId','title','description','resolved','customer.firstName']">
+    <ng-template pTemplate="caption">
         <div class="flex">
-            <span class="p-input-icon-left ml-auto">
-                <i class="pi pi-search"></i>
-                <input pInputText type="text" (input)="enquiryDataTable.filterGlobal($event.target.value, 'contains')"
-                    placeholder="Search keyword" />
-            </span>
+            <input pInputText type="text"
+                (input)="enquiryDataTable.filterGlobal($any($event.target).value , 'contains')"
+                placeholder="Search keyword" />
+
         </div>
-    </ng-template> -->
+    </ng-template>
     <ng-template pTemplate="header">
+        <!-- THIS IS THE HEADER LINE WITH FILTERS -->
         <tr>
-            <th>Enquiry ID</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Resolved?</th>
+            <th>
+                <div>
+                    ID
+                    <p-columnFilter type="numeric" field="balance" display="menu"></p-columnFilter>
+                </div>
+            </th>
+
             <th>Customer</th>
-
-
+            <th>
+                <div class="flex justify-content-center align-items-center">
+                    Resolved
+                    <p-columnFilter type="boolean" field="resolved" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>Action</th>
         </tr>
     </ng-template>
+    <!-- THIS IS THE BODY -->
     <ng-template pTemplate="body" let-enquiry>
         <tr>
             <td>{{enquiry.enquiryId}}</td>
-            <td>{{enquiry.title}}</td>
-            <td>{{enquiry.description}}</td>
+            <td>{{enquiry.customer.firstName}} {{enquiry.customer.lastName}}</td>
             <td><span [class]="'enquiry-badge-' + enquiry.resolved">{{enquiry.resolved}}</span></td>
-
-            <td>{{enquiry.customer.firstName}}</td>
-
-
+            <td>
+                <p-button label="View" (onClick)="showDialog(enquiry)"></p-button>
+            </td>
         </tr>
     </ng-template>
 </p-table>
 
-<!-- 
-<p-table #enquiryDataTable [value]="enquiries" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
-    [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    [globalFilterFields]="['enquiryId']">
-    <ng-template pTemplate="caption">
-        <div class="flex">
-            <span class="p-input-icon-left ml-auto">
-                <i class="pi pi-search"></i>
-                <input pInputText type="text" (input)="enquiryDataTable.filterGlobal($event.target.value, 'contains')"
-                    placeholder="Search keyword" />
-            </span>
-        </div>
-    </ng-template>
-    <ng-template pTemplate="header">
-        <tr>
-            <th>Name</th>
-            <th>Country</th>
-            <th>Agent</th>
-            <th>Status</th>
-            <th style="width: 6rem">Verified</th>
-        </tr>
-       
-    </ng-template>
-    <ng-template pTemplate="emptymessage">
-        <tr>
-            <td colspan="5">No customers found.</td>
-        </tr>
-    </ng-template>
-</p-table> -->
+
+<p-dialog *ngIf="display" header="Enquiry ID: {{enquiryToView.enquiryId}}" [(visible)]="display"
+    [style]="{width: '50vw'}">
+    <div class="ui-g">
+
+        <p-panel header="From:  {{(enquiryToView.customer != null)?(enquiryToView.customer.firstName):('')}}">
+           
+            <p>{{enquiryToView.title}}</p>
+            <p>{{enquiryToView.description}}</p>
+        </p-panel>
+        <br />
+        <p-panel header="Actions">
+            <textarea placeholder="Staff response" rows="5" [cols]="30" pInputTextarea autoResize="autoResize"></textarea>
+            <br />
+            <p-button label="Respond"></p-button>
+        </p-panel>
+
+        <br />
+    </div>
+
+
+</p-dialog>

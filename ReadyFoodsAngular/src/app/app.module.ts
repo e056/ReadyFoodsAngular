@@ -79,7 +79,8 @@ import { ViewAllEnquiriesComponent } from './customerManagement/view-all-enquiri
     ButtonModule,
     DialogModule,
     RatingModule,
-    DropdownModule
+    DropdownModule,
+    InputTextModule
   ],
   providers: [],
   bootstrap: [AppComponent]

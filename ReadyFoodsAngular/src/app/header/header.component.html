@@ -19,7 +19,7 @@
 		</div>
 		
 		<div *ngIf="sessionService.getIsLogin() == true">
-			You are login as {{sessionService.getCurrentStaff().firstName}} {{sessionService.getCurrentStaff().lastName}} 
+			You are login as {{sessionService.getCurrentStaff().username}} : {{sessionService.getCurrentStaff().firstName}} {{sessionService.getCurrentStaff().lastName}} 
 			(Access Right: 
 			<span *ngIf="sessionService.getCurrentStaff().staffType == 0">ADMINISTRATOR</span>
 			<span *ngIf="sessionService.getCurrentStaff().staffType == 1">MODERATOR</span>)

@@ -14,27 +14,31 @@
   <label for="firstName" class="block" style="font-weight: bold;">First Name</label>
   <input id="firstName" type="text"
   pInputText [(ngModel)]="newStaff.firstName"
+  name="firstName"
   required="true"
   placeholder="John"/>
 
   <label for="lastName" class="block" style="font-weight: bold;">Last Name</label>
   <input id="lastName" type="text"
   pInputText [(ngModel)]="newStaff.lastName"
+  name="lastName"
   required="true"
   placeholder="Smith"/>
 
   <label for="username" class="block" style="font-weight: bold;">Username</label>
   <input id="username" type="username"
   pInputText [(ngModel)]="newStaff.username"
+  name="username"
   required="true"
   placeholder="staffxxx"/>
 
   <label for="staffType" class="block" style="font-weight: bold;">Staff Type</label>
-  <p-dropdown [options]="staffTypes" [(ngModel)]="newStaff.staffType" optionLabel="accesstype" [showClear]="true"></p-dropdown>
+  <p-dropdown name="staffType" [options]="staffTypes" [(ngModel)]="newStaff.staffType" optionLabel="accesstype" [showClear]="true"></p-dropdown>
 
   <label for="password" class="block" style="font-weight: bold;">Password</label>
   <input id="password" type="password"
   pInputText [(ngModel)]="newStaff.password"
+  name="password"
   required="true"
   placeholder="staffxxx"/>
 

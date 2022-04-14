@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'contentManagement/ViewRecipeDetails', component: ViewRecipeDetailsComponent},
   { path: 'contentManagement/viewAllIngredients', component: ViewAllIngredientsComponent},
   { path: 'contentManagement/viewIngredientDetails', component: ViewIngredientsDetailsComponent},
-  { path: 'staffManagement/CreateNewStaff', component: CreateNewStaffComponent},
+  { path: 'staffManagement/createNewStaff', component: CreateNewStaffComponent},
   { path: 'staffManagement/viewAllStaffs', component: ViewAllStaffsComponent},
   { path: 'customerManagement/viewAllCustomers', component: ViewAllCustomersComponent},
   { path: 'customerManagement/viewCustomerDetails', component: ViewCustomerDetailsComponent},

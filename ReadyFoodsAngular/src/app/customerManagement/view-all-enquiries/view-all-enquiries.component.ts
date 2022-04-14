@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Enquiry } from 'src/app/models/enquiry';
+import { Customer } from 'src/app/models/customer';
 import { EnquiryService } from 'src/app/services/enquiry.service';
 import { SessionService } from 'src/app/services/session.service';
 

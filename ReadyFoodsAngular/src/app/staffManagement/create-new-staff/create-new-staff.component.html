@@ -1,7 +1,7 @@
-<app-breadcrumb [pageName]="'createNewStaff'"></app-breadcrumb>
-
 <h3>Create New Staff</h3>
 <br />
+
+
 
 <div *ngIf="resultSuccess == true" style="color: blue">
   {{ message }}
@@ -11,6 +11,7 @@
   {{ message }}
 </div>
 <form #createStaffForm="ngForm" (ngSubmit)="create(createStaffForm)">
+  <p-panel>
   <label for="firstName" class="block" style="font-weight: bold;">First Name</label>
   <input id="firstName" type="text"
   pInputText [(ngModel)]="newStaff.firstName"
@@ -30,18 +31,18 @@
   pInputText [(ngModel)]="newStaff.username"
   name="username"
   required="true"
-  placeholder="staffxxx"/>
+  placeholder="username"/>
 
   <label for="staffType" class="block" style="font-weight: bold;">Staff Type</label>
-  <p-dropdown name="staffType" [options]="staffTypes" [(ngModel)]="newStaff.staffType" optionLabel="accesstype" [showClear]="true"></p-dropdown>
+  <p-dropdown name="staffType" [options]="staffTypes" [(ngModel)]="newStaff.staffType" [showClear]="true"></p-dropdown>
 
   <label for="password" class="block" style="font-weight: bold;">Password</label>
   <input id="password" type="password"
   pInputText [(ngModel)]="newStaff.password"
   name="password"
   required="true"
-  placeholder="staffxxx"/>
+  placeholder="password"/>
 
-
-
+  <p-button label="Submit" (onClick)="create($event)"></p-button>
+</p-panel>
 </form>

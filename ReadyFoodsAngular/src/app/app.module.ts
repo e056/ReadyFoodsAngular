@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MenuModule } from 'primeng/menu';
+import { RippleModule } from 'primeng/ripple';
 import {PanelModule} from 'primeng/panel';
 import {TableModule} from 'primeng/table';
 import {InputTextModule} from 'primeng/inputtext';
@@ -11,7 +13,6 @@ import {DropdownModule} from 'primeng/dropdown';
 import {ButtonModule} from 'primeng/button';
 import {DialogModule} from 'primeng/dialog';
 import {RatingModule} from 'primeng/rating';
-
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -69,6 +70,9 @@ import { ViewAllEnquiriesComponent } from './customerManagement/view-all-enquiri
     InputTextModule,
     PanelModule,
     DropdownModule,
+    MenuModule,
+    RippleModule,
+    ButtonModule,
     BrowserAnimationsModule,
     TableModule,
     PanelModule,

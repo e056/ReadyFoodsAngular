@@ -31,4 +31,22 @@
             <br/><br/>
         </ng-template>
     </nav>
+
+
+    <ng-template [ngIf]="sessionService.getIsLogin() == false">
+        <p-menu [model]="itemsNotLoggedIn"></p-menu>
+    </ng-template>
+
+    <ng-container *ngIf="sessionService.getIsLogin() == true">
+
+        <ng-template [ngIf]="(sessionService.isAdmin())">
+            <p-menu [model]="itemsAdmin"></p-menu>
+        </ng-template>
+
+        <ng-template [ngIf]="!(sessionService.isAdmin())">
+            <p-menu [model]="itemsMod"></p-menu>
+        </ng-template>
+
+    </ng-container>
+
 </section>

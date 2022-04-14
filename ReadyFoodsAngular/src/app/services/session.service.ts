@@ -22,35 +22,35 @@ export class SessionService {
     sessionStorage['isLogin'] = isLogin;
   }
 
+  isAdmin(): boolean {
+    let staff: Staff = this.getCurrentStaff();
+
+    if(staff.staffType == AccessRightEnum.ADMINISTRATOR) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   getCurrentStaff(): Staff {
     return JSON.parse(sessionStorage['currentStaff']);
   }
-
-
 
   setCurrentStaff(currentStaff: Staff | null): void {
     sessionStorage['currentStaff'] = JSON.stringify(currentStaff);
   }
 
-
-
   getUsername(): string {
     return sessionStorage['username'];
   }
-
-
 
   setUsername(username: string | undefined): void {
     sessionStorage['username'] = username;
   }
 
-
-
   getPassword(): string {
     return sessionStorage['password'];
   }
-
-
 
   setPassword(password: string | undefined): void {
     sessionStorage['password'] = password;

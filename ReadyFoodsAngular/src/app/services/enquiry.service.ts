@@ -6,6 +6,7 @@ import { catchError } from 'rxjs/operators';
 
 import { SessionService } from '../services/session.service';
 import { Enquiry } from '../models/enquiry';
+import { UpdateEnquiryReq } from '../models/update-enquiry-req';
 
 
 const httpOptions = {
@@ -35,10 +36,24 @@ export class EnquiryService {
   }
 
   getEnquiryByEnquiryId(enquiryId: number): Observable<Enquiry> {
-    return this.httpClient.get<Enquiry>(this.baseUrl 
-      + "/retrieveEnquiry/" + enquiryId 
-      + "?username=" + this.sessionService.getUsername() 
+    return this.httpClient.get<Enquiry>(this.baseUrl
+      + "/retrieveEnquiry/" + enquiryId
+      + "?username=" + this.sessionService.getUsername()
       + "&password=" + this.sessionService.getPassword()).pipe
+      (
+        catchError(this.handleError)
+      );
+  }
+
+  updateEnquiry(enquiryToUpdate: Enquiry, response: string | undefined, resolved: boolean | undefined | null): Observable<any> {
+    
+    let updateEnquiryReq: UpdateEnquiryReq = new
+    UpdateEnquiryReq(this.sessionService.getUsername(),
+        this.sessionService.getPassword(), enquiryToUpdate, response, resolved);
+
+    console.log(updateEnquiryReq)
+
+    return this.httpClient.post<any>(this.baseUrl, updateEnquiryReq, httpOptions).pipe
       (
         catchError(this.handleError)
       );
@@ -59,5 +74,5 @@ export class EnquiryService {
     return throwError(() => new Error(errorMessage));
   }
 }
-	
+
 

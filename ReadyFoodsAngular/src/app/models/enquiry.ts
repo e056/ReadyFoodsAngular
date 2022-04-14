@@ -5,13 +5,13 @@ export class Enquiry {
     title: string | undefined
     description: string | undefined
     
-    resolved: boolean | undefined
-    response: string | undefined
+    resolved: boolean | undefined | null
+    response: string | undefined  
 
     customer: Customer | undefined;
 
     constructor(enquiryId?: number, title?: string, 
-        description?: string, resolved?: boolean,
+        description?: string, resolved?: boolean | null,
         response?: string) {
             this.enquiryId = enquiryId;
             this.title = title;

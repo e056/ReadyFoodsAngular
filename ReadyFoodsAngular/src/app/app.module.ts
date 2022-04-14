@@ -11,6 +11,8 @@ import {DropdownModule} from 'primeng/dropdown';
 import {ButtonModule} from 'primeng/button';
 import {DialogModule} from 'primeng/dialog';
 import {RatingModule} from 'primeng/rating';
+import { DropdownModule } from 'primeng/dropdown';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -73,7 +75,8 @@ import { ViewAllEnquiriesComponent } from './customerManagement/view-all-enquiri
     PanelModule,
     ButtonModule,
     DialogModule,
-    RatingModule
+    RatingModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -18,7 +18,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class EnquiryService {
-  baseUrl: string = "/api/Product";
+  baseUrl: string = "/api/Enquiry";
 
   constructor(private httpClient: HttpClient,
     private sessionService: SessionService) {

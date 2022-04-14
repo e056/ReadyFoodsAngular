@@ -10,9 +10,9 @@ export class Enquiry {
 
     customer: Customer | undefined;
 
-    constructor(enquiryId?: number, title?: string, 
-        description?: string, resolved?: boolean,
-        response?: string) {
+    constructor(enquiryId: number, title: string, 
+        description: string, resolved: boolean,
+        response: string) {
             this.enquiryId = enquiryId;
             this.title = title;
             this.description = description;

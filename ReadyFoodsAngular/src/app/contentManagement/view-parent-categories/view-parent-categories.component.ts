@@ -167,10 +167,8 @@ export class ViewParentCategoriesComponent implements OnInit {
           this.resultSuccess = true;
           this.resultError = false;
           this.message = 'Category updated successfully';
-
-          this.categoryToUpdate = new Category();
-
           updateCategoryForm.resetForm();
+          this.categoryToUpdate = new Category();
         },
         error: (error) => {
           this.resultError = true;
@@ -185,7 +183,7 @@ export class ViewParentCategoriesComponent implements OnInit {
       //Update the parent and sub categories table
       this.categoryService.getParentCategories().subscribe({
         next: (response) => {
-          this.categories = response;
+          this.categories = response.slice();
         },
         error: (error) => {
           console.log('********** ViewAllParentCategories.ts: ' + error);
@@ -194,7 +192,7 @@ export class ViewParentCategoriesComponent implements OnInit {
 
       this.categoryService.getSubCategories().subscribe({
         next: (response) => {
-          this.categoriesSub = response;
+          this.categoriesSub = response.slice();
         },
       });
     }

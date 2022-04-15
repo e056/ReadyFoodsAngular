@@ -40,6 +40,28 @@ export class StaffService {
 
   }
 
+  deleteStaff(staffId:number | undefined): Observable<any>{
+    return this.httpClient.get<any>(this.baseUrl
+      + "/deleteStaff/" + staffId
+      + "?username=" + this.sessionService.getUsername()
+      + "&password=" + this.sessionService.getPassword()).pipe
+      (
+        catchError(this.handleError)
+      );
+  }
+
+
+
+  getAllStaff(): Observable<Staff[]> {
+    return this.httpClient.get<Staff[]>(
+      this.baseUrl + "/retrieveAllStaff?username="
+      + this.sessionService.getUsername()
+      + "&password=" + this.sessionService.getPassword()).pipe
+      (
+        catchError(this.handleError)
+      );
+  }
+
 
   private handleError(error: HttpErrorResponse) {
     let errorMessage: string = "";

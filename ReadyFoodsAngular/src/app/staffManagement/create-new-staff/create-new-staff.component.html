@@ -1,42 +1,44 @@
-
 <p-messages></p-messages>
 <form #createStaffForm="ngForm" (ngSubmit)="create(createStaffForm)">
   <p-panel class="card" header="Create New Staff">
     <div class="p-fluid grid">
       <div style="margin-bottom: 10px;margin-top: 10px;">
-      <span class="p-float-label">
-        <input type="text" id="firstname" pInputText [(ngModel)]="newStaff.firstName" name="firstName" required="true">
-        <label for="firstname">First Name</label>
-      </span>
-    </div>
-    <div>
+        <span class="p-float-label">
+          <input type="text" id="firstname" pInputText [(ngModel)]="newStaff.firstName" name="firstName"
+            required="true">
+          <label for="firstname">First Name</label>
+        </span>
+      </div>
+      <div>
 
-    </div>
-    <div style="margin-bottom: 10px;margin-top: 30px;">
-      <span class="p-float-label">
-        <input type="text" id="lastname" pInputText [(ngModel)]="newStaff.lastName" name="lastName" required="true">
-        <label for="lastname">Last Name</label>
-      </span>
-    </div>
-    <div style="margin-bottom: 10px;margin-top: 30px;">
-      <span class="p-float-label">
-        <input type="text" id="username" pInputText [(ngModel)]="newStaff.username" name="username" required="true">
-        <label for="username">Username</label>
-      </span>
-    </div>
-    <div style="margin-bottom: 10px;margin-top: 30px;" >
-      <span class="p-float-label">
-        <p-dropdown inputId="dropdown"[autoDisplayFirst]="false" [options]="staffTypes" [(ngModel)]="staffType" ></p-dropdown>
-        <label for="dropdown">Staff Type</label>
-      </span>
-    </div>
-    <div style="margin-bottom: 10px;margin-top: 30px;" >
-      <span class="p-float-label">
-        <input type="password" id="passwordd" pInputText [(ngModel)]="newStaff.password" name="password" required="true">
-        <label for="passwordd">Password</label>
-        
-      </span>
-    </div>
+      </div>
+      <div style="margin-bottom: 10px;margin-top: 30px;">
+        <span class="p-float-label">
+          <input type="text" id="lastname" pInputText [(ngModel)]="newStaff.lastName" name="lastName" required="true">
+          <label for="lastname">Last Name</label>
+        </span>
+      </div>
+      <div style="margin-bottom: 10px;margin-top: 30px;">
+        <span class="p-float-label">
+          <input type="text" id="username" pInputText [(ngModel)]="newStaff.username" name="username" required="true">
+          <label for="username">Username</label>
+        </span>
+      </div>
+      <div style="margin-bottom: 10px;margin-top: 30px;">
+        <span class="p-float-label">
+          <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [options]="staffTypes" [(ngModel)]="staffType">
+          </p-dropdown>
+          <label for="dropdown">Staff Type</label>
+        </span>
+      </div>
+      <div style="margin-bottom: 10px;margin-top: 30px;">
+        <span class="p-float-label">
+          <input type="password" id="passwordd" pInputText [(ngModel)]="newStaff.password" name="password"
+            required="true">
+          <label for="passwordd">Password</label>
+
+        </span>
+      </div>
 
 
       <p-button label="Submit" (onClick)="create(createStaffForm)"></p-button>

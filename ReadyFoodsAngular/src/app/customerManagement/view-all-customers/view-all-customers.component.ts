@@ -13,17 +13,34 @@ import { Message, MessageService,ConfirmationService } from 'primeng/api';
   selector: 'app-view-all-customers',
   templateUrl: './view-all-customers.component.html',
   styleUrls: ['./view-all-customers.component.css'],
-  providers: [MessageService]
+  providers: [MessageService, ConfirmationService]
+
 })
 export class ViewAllCustomersComponent implements OnInit {
   customers: Customer[]
+
+  customerToView: Customer
+
+  display : boolean
+
+  resultSuccess: boolean;
+  resultError: boolean;
+
+  message: string | undefined;
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
     public sessionService: SessionService,
     private customerService: CustomerService,
-    private messageService: MessageService) {
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService) {
+
     this.customers = new Array();
+    this.customerToView = new Customer();
+    this.display = false;
+
+    this.resultSuccess = false;
+    this.resultError = false;
    }
 
 
@@ -47,5 +64,44 @@ export class ViewAllCustomersComponent implements OnInit {
       this.router.navigate(['/accessRightError']);
     }
   }
+
+  showDialog(customer: Customer) {
+    this.display = true;
+    this.customerToView = customer;
+
+  }
+
+  
+  confirm(event: Event) {
+    this.confirmationService.confirm({
+        target: event.target!,
+        message: 'Are you sure that you want to proceed? This ban (on reviewing and commenting) cannot be reversed.',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+
+          this.customerService.banCustomer(this.customerToView.customerId!).subscribe({
+            next: (response) => {
+              this.resultSuccess = true;
+              this.resultError = false;
+              this.message = "ID: " + this.customerToView.customerId;
+              this.messageService.add({severity:'success', 
+              summary:'Customer banned:', detail: this.message});
+
+            },
+            error: (error) => {
+              this.resultError = true;
+              this.resultSuccess = false;
+              this.message = "An error has occurred while updating the enquiry: " + error;
+    
+              console.log('**********  view-all-enquires.ts: ' + error);
+            }
+          });
+  
+        },
+        reject: () => {
+            //reject action
+        }
+    });
+}
 
 }

@@ -4,7 +4,7 @@ import { OrderEntity } from "./order-entity";
 export class Customer {
 
     customerId: number | undefined;
-    username: string | undefined;
+    userName: string | undefined;
     firstName: string | undefined;
     lastName: string | undefined;
     contactNumber: string | undefined;
@@ -30,11 +30,11 @@ export class Customer {
         address?: string,
         gender?: Gender,
         amountSpent?: number,
-        dob?: Date,
-        orders?: OrderEntity
+        dob?: Date
+
     ) {
         this.customerId = customerId
-        this.username = userName
+        this.userName = userName
         this.firstName = firstName
         this.lastName = lastName
         this.contactNumber = contactNumber
@@ -44,8 +44,6 @@ export class Customer {
         this.gender = gender
         this.amountSpent = amountSpent
         this.dob = dob
-        this.orders = orders
-
 
     }
 

@@ -41,7 +41,14 @@
                 <p-sortIcon [field]="'amountSpent'"></p-sortIcon>
               
             </th>
-            <!--  -->
+
+            <th><div>
+                Banned (review & comment)
+                <p-columnFilter type="boolean" field="isBanned" display="menu"></p-columnFilter>
+            </div>
+            </th>
+            
+            <th>Action</th>
 
         </tr>
     </ng-template>
@@ -53,7 +60,38 @@
             <td>{{customer.firstName}} </td>
             <td>{{customer.lastName}}</td>
             <td> {{customer.amountSpent | currency:'$':'symbol'}}</td>
+            <td><span [class]="'ban-badge-' + customer.isBanned"> {{
+                customer.isBanned == true
+                  ? "BANNED"
+                  : "NOT BANNED"
+              }}
+              </span></td>
+            <td><p-button label="View" (onClick)="showDialog(customer)" icon="pi pi-search"></p-button></td>
 
         </tr>
     </ng-template>
 </p-table>
+
+
+<form #updateCustomerForm="ngForm">
+    <p-dialog *ngIf="display" header="Customer ID: {{customerToView.customerId}}" [(visible)]="display"
+        [style]="{width: '50vw'}">
+        <div class="ui-g">
+            <p-confirmPopup></p-confirmPopup>
+            <p-messages></p-messages>
+            <p><label>{{customerToView.firstName}} {{customerToView.lastName}}, {{customerToView.gender}}</label></p>
+            <p><label>@{{customerToView.userName}}</label></p>
+            <p><label>{{customerToView.email}}</label></p>
+            <p><label>{{customerToView.dob}}</label></p>
+            <br/>
+            <p><label>{{customerToView.address}}</label></p>
+            <p><label>+65 {{customerToView.contactNumber}}</label></p>
+            <br />
+            <p-button label="Ban" [disabled]="customerToView.isBanned!" (click)="confirm($event)"></p-button>
+
+            <br />
+        </div>
+
+
+    </p-dialog>
+</form>

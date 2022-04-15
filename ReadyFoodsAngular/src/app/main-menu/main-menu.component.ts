@@ -98,7 +98,7 @@ export class MainMenuComponent implements OnInit {
             routerLink: 'contentManagement/CreateNewCategory',
           },
           {
-            label: 'View parent categories',
+            label: 'View Categories',
             routerLink: 'contentManagement/viewParentCategories',
           },
         ],
@@ -109,7 +109,7 @@ export class MainMenuComponent implements OnInit {
         items: [
           {
             label: 'Create new staff',
-            routerLink: 'staffManagement/CreateNewStaff',
+            routerLink: 'staffManagement/createNewStaff',
           },
           {
             label: 'View all staffs',

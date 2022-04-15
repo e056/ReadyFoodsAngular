@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Enquiry } from 'src/app/models/enquiry';
+import { NgForm } from '@angular/forms';
+
 import { Customer } from 'src/app/models/customer';
 import { EnquiryService } from 'src/app/services/enquiry.service';
 import { SessionService } from 'src/app/services/session.service';
@@ -18,7 +20,15 @@ export class ViewAllEnquiriesComponent implements OnInit {
 
   display: boolean
 
+  submitted: boolean;
+
   enquiryToView: Enquiry;
+  response: string;
+  resolved: boolean | undefined | null;
+
+  resultSuccess: boolean;
+  resultError: boolean;
+  message: string | undefined;
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -31,6 +41,16 @@ export class ViewAllEnquiriesComponent implements OnInit {
     ]
     this.display = false;
     this.enquiryToView = new Enquiry();
+    this.submitted = false;
+
+    this.response = "";
+    this.resolved = null;
+
+
+    this.resultSuccess = false;
+    this.resultError = false;
+
+
   }
 
 
@@ -47,6 +67,31 @@ export class ViewAllEnquiriesComponent implements OnInit {
     });
   }
 
+
+  update(updateEnquiryForm: NgForm) {
+    console.log('********** running updateEnquiryForm' + this.response)
+    this.submitted = true;
+    if (updateEnquiryForm.valid) {
+
+      console.log('********** Form is valid')
+
+      this.enquiryService.updateEnquiry(this.enquiryToView, this.response, this.resolved).subscribe({
+        next: (response) => {
+          this.resultSuccess = true;
+          this.resultError = false;
+          this.message = "Enquiry updated successfully";
+        },
+        error: (error) => {
+          this.resultError = true;
+          this.resultSuccess = false;
+          this.message = "An error has occurred while updating the enquiry: " + error;
+
+          console.log('********** UpdateProductComponent.ts: ' + error);
+        }
+      });
+    }
+
+  }
   showDialog(en: Enquiry) {
     this.display = true;
     this.enquiryToView = en;

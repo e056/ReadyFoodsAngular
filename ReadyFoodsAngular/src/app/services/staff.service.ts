@@ -1,3 +1,4 @@
+import { CreateStaffReq } from './../models/create-staff-req';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throwError, Observable } from 'rxjs';
@@ -27,6 +28,17 @@ export class StaffService {
 			catchError(this.handleError)
 		);
 	}
+
+  createNewStaff(newStaff: Staff): Observable<any>{
+    console.log('********** CreateNewStaffService.ts: ' + this.sessionService.getUsername() + this.sessionService.getPassword());
+    console.log('********** CreateNewStaffService.ts: ' + newStaff.firstName + newStaff.lastName + newStaff.username + newStaff.staffType + newStaff.password);
+    let createStaffReq: CreateStaffReq = new CreateStaffReq(this.sessionService.getUsername(), this.sessionService.getPassword(), newStaff);
+    return this.httpClient.put<any>(this.baseUrl + "/createStaff", createStaffReq, httpOptions).pipe
+    (
+      catchError(this.handleError)
+    );
+
+  }
 
 
   private handleError(error: HttpErrorResponse) {

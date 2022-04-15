@@ -46,25 +46,26 @@
     </ng-template>
 </p-table>
 
+<form #updateEnquiryForm="ngForm" (ngSubmit)="update(updateEnquiryForm)">
+    <p-dialog *ngIf="display" header="Enquiry ID: {{enquiryToView.enquiryId}}" [(visible)]="display"
+        [style]="{width: '50vw'}">
+        <div class="ui-g">
 
-<p-dialog *ngIf="display" header="Enquiry ID: {{enquiryToView.enquiryId}}" [(visible)]="display"
-    [style]="{width: '50vw'}">
-    <div class="ui-g">
+            <p-panel header="From:  {{(enquiryToView.customer != null)?(enquiryToView.customer.firstName):('')}}">
 
-        <p-panel header="From:  {{(enquiryToView.customer != null)?(enquiryToView.customer.firstName):('')}}">
-           
-            <p>{{enquiryToView.title}}</p>
-            <p>{{enquiryToView.description}}</p>
-        </p-panel>
-        <br />
-        <p-panel header="Actions">
-            <textarea placeholder="Staff response" rows="5" [cols]="30" pInputTextarea autoResize="autoResize"></textarea>
+                <p>{{enquiryToView.title}}</p>
+                <p>{{enquiryToView.description}}</p>
+            </p-panel>
             <br />
-            <p-button label="Respond"></p-button>
-        </p-panel>
+            <p-panel header="Actions">
+                <textarea [(ngModel)]="response" name="response" placeholder="Staff response" rows="5" [cols]="30"
+                    pInputTextarea autoResize="autoResize"></textarea>
+                <br />
+                <p-button label="Submit" (onClick)="update(updateEnquiryForm)"></p-button>
+            </p-panel>
+            <br />
+        </div>
 
-        <br />
-    </div>
 
-
-</p-dialog>
+    </p-dialog>
+</form>

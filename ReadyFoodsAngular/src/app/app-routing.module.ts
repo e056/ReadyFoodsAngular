@@ -46,7 +46,7 @@ const routes: Routes = [
     component: ViewIngredientsDetailsComponent,
   },
   {
-    path: 'staffManagement/CreateNewStaff',
+    path: 'staffManagement/createNewStaff',
     component: CreateNewStaffComponent,
   },
   { path: 'staffManagement/viewAllStaffs', component: ViewAllStaffsComponent },
@@ -61,10 +61,6 @@ const routes: Routes = [
   {
     path: 'customerManagement/viewAllEnquiries',
     component: ViewAllEnquiriesComponent,
-  },
-  {
-    path: 'contentManagement/viewParentCategories',
-    component: ViewParentCategoriesComponent,
   },
 ];
 

@@ -23,7 +23,7 @@ export class SessionService {
   isAdmin(): boolean {
     let staff: Staff = this.getCurrentStaff();
 
-    if (staff.staffType == AccessRightEnum.ADMINISTRATOR) {
+    if (staff.staffType == 'ADMINISTRATOR') {
       return true;
     } else {
       return false;
@@ -60,7 +60,7 @@ export class SessionService {
     if (this.getIsLogin()) {
       let staff: Staff = this.getCurrentStaff();
 
-      if (staff.staffType == AccessRightEnum.MODERATOR) {
+      if (staff.staffType == 'MODERATOR') {
         if (
           path == '/customerManagement/viewAllCustomers' ||
           path == '/customerManagement/viewCustomerDetails' ||
@@ -71,7 +71,7 @@ export class SessionService {
         } else {
           return false;
         }
-      } else if (staff.staffType == AccessRightEnum.ADMINISTRATOR) {
+      } else if (staff.staffType == 'ADMINISTRATOR') {
         if (
           path == '/customerManagement/viewAllCustomers' ||
           path == '/customerManagement/viewCustomerDetails' ||
@@ -82,8 +82,7 @@ export class SessionService {
           path == '/contentManagement/ViewRecipeDetails' ||
           path == '/contentManagement/viewAllIngredients' ||
           path == '/contentManagement/viewIngredientDetails' ||
-          path == '/staffManagement/CreateNewStaff' ||
-          path == '/contentManagement/viewParentCategories' ||
+          path == '/staffManagement/createNewStaff' ||
           path == '/staffManagement/viewAllStaffs'
         ) {
           return true;

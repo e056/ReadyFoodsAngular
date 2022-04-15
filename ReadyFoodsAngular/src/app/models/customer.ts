@@ -1,3 +1,5 @@
+import { Gender } from "./gender";
+
 export class Customer {
 
     customerId: number | undefined;
@@ -8,6 +10,8 @@ export class Customer {
     email: string | undefined;
     isBanned: boolean | undefined;
     address: string | undefined;
+    gender: Gender | undefined;
+    amountSpent: number | undefined;
 
     // not all attributes have been included yet
 
@@ -20,7 +24,9 @@ export class Customer {
         contactNumber?: string,
         email?: string,
         isBanned?: boolean,
-        address?: string
+        address?: string,
+        gender?: Gender,
+        amountSpent?: number,
     ) {
         this.customerId = customerId
         this.username = username
@@ -30,6 +36,8 @@ export class Customer {
         this.email = email
         this.isBanned = isBanned
         this.address = address
+        this.gender = gender
+        this.amountSpent = amountSpent
     }
 
 

@@ -73,8 +73,14 @@
         <td>{{staff.staffType}}</td>
 
         <td>
+          <div *ngIf="staff.username != currentStaff.username">
 
           <p-button label="Delete" (onClick)="deleteStaff(staff)"></p-button>
+        </div>
+        <div *ngIf="staff.username == currentStaff.username">
+
+          <p-button label="Delete" (onClick)="deleteStaff(staff)" [disabled]="true"></p-button>
+        </div>
         </td>
       </tr>
     </ng-template>

@@ -23,7 +23,7 @@ export class ViewAllStaffsComponent implements OnInit {
 
   currentStaff: Staff;
 
-  isCurrentStaff: boolean
+  
 
 
   constructor(private router: Router,
@@ -36,7 +36,7 @@ export class ViewAllStaffsComponent implements OnInit {
     this.staffToView = new Staff();
     this.display = false;
     this.currentStaff = sessionService.getCurrentStaff();
-    this.isCurrentStaff = false;
+
   }
 
   ngOnInit(): void {

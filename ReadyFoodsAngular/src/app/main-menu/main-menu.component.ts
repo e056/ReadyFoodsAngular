@@ -48,11 +48,11 @@ export class MainMenuComponent implements OnInit {
       label: "Customer Management",
       icon: 'pi pi-user-plus',
       items: [{
-        label: "View all customers",
+        label: "View All Customers",
         routerLink: 'customerManagement/viewAllCustomers'
       },
       {
-        label: "View all enquiries",
+        label: "View All Enquiries",
         routerLink: 'customerManagement/viewAllEnquiries'
       }]
     }];
@@ -75,15 +75,15 @@ export class MainMenuComponent implements OnInit {
       label: "Content Management",
       icon: 'pi pi-folder',
       items: [{
-        label: 'Create new recipe',
+        label: 'Create New Recipe',
         routerLink: 'contentManagement/CreateNewRecipe'
       },
       {
-        label: 'Create new ingredient',
+        label: 'Create New Ingredient',
         routerLink: 'contentManagement/CreateNewIngredient'
       },
       {
-        label: 'Create new category',
+        label: 'Create New Category',
         routerLink: 'contentManagement/CreateNewCategory'
       }]
     },
@@ -91,11 +91,11 @@ export class MainMenuComponent implements OnInit {
       label: "Staff Management",
       icon: 'pi pi-user',
       items: [{
-        label: "Create new staff",
+        label: "Create New Staff",
         routerLink: 'staffManagement/createNewStaff'
       },
       {
-        label: "View all staffs",
+        label: "View All Staffs",
         routerLink: 'staffManagement/viewAllStaff'
       }]
     },
@@ -103,11 +103,11 @@ export class MainMenuComponent implements OnInit {
       label: "Customer Management",
       icon: 'pi pi-user-plus',
       items: [{
-        label: "View all customers",
+        label: "View All Customers",
         routerLink: 'customerManagement/viewAllCustomers'
       },
       {
-        label: "View all enquiries",
+        label: "View All Enquiries",
         routerLink: 'customerManagement/viewAllEnquiries'
       }]
     }];

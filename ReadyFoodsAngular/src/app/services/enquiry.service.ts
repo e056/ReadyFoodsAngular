@@ -45,13 +45,13 @@ export class EnquiryService {
       );
   }
 
-  updateEnquiry(enquiryToUpdate: Enquiry, response: string | undefined, resolved: boolean | undefined | null): Observable<any> {
+  updateEnquiry(enquiryToUpdate: Enquiry, response: string | undefined | null, resolved: boolean | undefined | null): Observable<any> {
     
     let updateEnquiryReq: UpdateEnquiryReq = new
     UpdateEnquiryReq(this.sessionService.getUsername(),
         this.sessionService.getPassword(), enquiryToUpdate, response, resolved);
 
-    console.log(updateEnquiryReq)
+    //console.log(updateEnquiryReq)
 
     return this.httpClient.post<any>(this.baseUrl, updateEnquiryReq, httpOptions).pipe
       (

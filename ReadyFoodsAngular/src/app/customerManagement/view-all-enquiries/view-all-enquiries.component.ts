@@ -58,6 +58,11 @@ export class ViewAllEnquiriesComponent implements OnInit {
   ngOnInit(): void {
     this.checkAccessRight();
     console.log('********** ViewAllProductsComponent.ts: ' + "init");
+    this.retrieveEnquiries();
+
+  }
+
+  retrieveEnquiries() {
     this.enquiryService.getEnquires().subscribe({
       next: (response) => {
         this.enquiries = response;
@@ -67,6 +72,7 @@ export class ViewAllEnquiriesComponent implements OnInit {
         console.log('********** ViewAllProductsComponent.ts: ' + error);
       }
     });
+
   }
 
   checkAccessRight() {
@@ -90,6 +96,7 @@ export class ViewAllEnquiriesComponent implements OnInit {
           this.message = "ID: " + this.enquiryToView.enquiryId;
           this.messageService.add({severity:'success', 
           summary:'Staff response added successfully:', detail: this.message});
+          this.retrieveEnquiries();
        
           
         },
@@ -119,6 +126,7 @@ export class ViewAllEnquiriesComponent implements OnInit {
           this.message = "ID: " + this.enquiryToView.enquiryId;
           this.messageService.add({severity:'success', 
           summary:'Resolved successfully:', detail: this.message});
+          this.retrieveEnquiries();
        
           
         },
@@ -137,7 +145,6 @@ export class ViewAllEnquiriesComponent implements OnInit {
   showDialog(en: Enquiry) {
     this.display = true;
     this.enquiryToView = en;
-    console.log(en.customer?.firstName)
     this.enquiryToView.customer = en.customer;
   }
 

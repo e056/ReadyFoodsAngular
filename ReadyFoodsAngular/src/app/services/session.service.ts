@@ -80,6 +80,7 @@ export class SessionService {
           path == '/contentManagement/CreateNewRecipe' ||
           path == '/contentManagement/updateRecipe' ||
           path == '/contentManagement/viewAllRecipes' ||
+          path == '/contentManagement/viewParentCategories' ||
           path == '/contentManagement/ViewRecipeDetails' ||
           path == '/contentManagement/viewAllIngredients' ||
           path == '/contentManagement/viewIngredientDetails' ||

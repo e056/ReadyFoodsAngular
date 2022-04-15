@@ -26,6 +26,7 @@
   *ngIf="isSubBoolean == true"
   name="table"
   #dt
+  [responsive]="true"
   #categoryDataTable
   [value]="categoriesSub"
   dataKey="id"
@@ -90,6 +91,7 @@
   dataKey="id"
   [rows]="10"
   #dt
+  [responsive]="true"
   [showCurrentPageReport]="true"
   [rowsPerPageOptions]="[10, 25, 50]"
   [paginator]="true"
@@ -238,7 +240,11 @@
     {{ message }}
   </div>
   <br />
-  <form #updateCategoryForm="ngForm" (ngSubmit)="update(updateCategoryForm)">
+  <form
+    #updateCategoryForm="ngForm"
+    (ngSubmit)="update(updateCategoryForm)"
+    update="dt"
+  >
     <div style="margin-bottom: 10px; margin-top: 10px; width: auto">
       <span class="p-float-label">
         <input

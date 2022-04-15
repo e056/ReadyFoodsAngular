@@ -167,8 +167,6 @@ export class ViewParentCategoriesComponent implements OnInit {
           this.resultSuccess = true;
           this.resultError = false;
           this.message = 'Category updated successfully';
-          updateCategoryForm.resetForm();
-          this.categoryToUpdate = new Category();
         },
         error: (error) => {
           this.resultError = true;
@@ -195,6 +193,8 @@ export class ViewParentCategoriesComponent implements OnInit {
           this.categoriesSub = response.slice();
         },
       });
+
+      updateCategoryForm.resetForm();
     }
   }
 }

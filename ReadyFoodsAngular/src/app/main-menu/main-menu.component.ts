@@ -96,7 +96,7 @@ export class MainMenuComponent implements OnInit {
       },
       {
         label: "View all staffs",
-        routerLink: 'staffManagement/viewAllStaff'
+        routerLink: 'staffManagement/viewAllStaffs'
       }]
     },
     {

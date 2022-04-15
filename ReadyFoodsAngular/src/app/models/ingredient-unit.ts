@@ -1,13 +1,13 @@
 export enum IngredientUnit {
-    Piece,
-    Millitre,
-    Litre,
-    Milligram,
-    Gram,
-    Kilogram,
-    Cup,
-    Spoon,
-    Tablespoon,
-    Teaspoon,
-    Whole
+    Piece = "Piece",
+    Millitre = "Millitre",
+    Litre = "Litre",
+    Milligram = "Milligram",
+    Gram = "Gram",
+    Kilogram = "Kilogram",
+    Cup = "Cup",
+    Spoon = "Spoon",
+    Tablespoon = "Tablespoon",
+    Teaspoon = "Teaspoon",
+    Whole = "Whole"
 }

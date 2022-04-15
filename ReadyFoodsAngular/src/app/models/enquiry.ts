@@ -10,14 +10,17 @@ export class Enquiry {
 
     customer: Customer | undefined;
 
+    dateOfEnquiry: Date | undefined
+
     constructor(enquiryId?: number, title?: string, 
         description?: string, resolved?: boolean | null,
-        response?: string) {
+        response?: string, dateOfEnquiry?: Date) {
             this.enquiryId = enquiryId;
             this.title = title;
             this.description = description;
             this.resolved = resolved;
             this.response = response;
+            this.dateOfEnquiry = dateOfEnquiry;
         }
 
 }

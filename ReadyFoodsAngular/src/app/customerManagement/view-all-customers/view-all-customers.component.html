@@ -6,8 +6,7 @@
     [globalFilterFields]="['customerId','firstName','lastName','amountSpent']">
     <ng-template pTemplate="caption">
         <div class="flex">
-            <input pInputText type="text"
-                (input)="customerTable.filterGlobal($any($event.target).value , 'contains')"
+            <input pInputText type="text" (input)="customerTable.filterGlobal($any($event.target).value , 'contains')"
                 placeholder="Search keyword" />
 
         </div>
@@ -18,30 +17,43 @@
             <th>
                 <div>
                     ID
-                    <p-columnFilter type="numeric" field="ID" display="menu"></p-columnFilter>
+                    <p-columnFilter type="numeric" field="customerId" display="menu"></p-columnFilter>
                 </div>
             </th>
 
             <th>
                 <div>
-                    Customer Name
-                    <p-columnFilter type="text" field="customerName" display="menu"></p-columnFilter>
+                    First Name
+                    <p-columnFilter type="text" field="firstName" display="menu"></p-columnFilter>
                 </div>
             </th>
 
-            <th>Amount Spent
-                <p-columnFilter type="numeric" field="balance" display="menu" currency="USD"></p-columnFilter>
+            <th>
+                <div>
+                    Last Name
+                    <p-columnFilter type="text" field="lastName" display="menu"></p-columnFilter>
+                </div>
             </th>
+
+
+
+            <th [pSortableColumn]="'amountSpent'">Amount Spent
+                <p-sortIcon [field]="'amountSpent'"></p-sortIcon>
+              
+            </th>
+            <!--  -->
+
         </tr>
     </ng-template>
-   
+
     <!-- THIS IS THE BODY -->
     <ng-template pTemplate="body" let-customer>
         <tr>
-            <td>{{customer.customerId}}</td> 
-            <td>{{customer.firstName}} {{customer.lastName}}</td>
-            <td> {{customer.amountSpent | currency:'SGD':'symbol'}}</td>
-    
+            <td>{{customer.customerId}}</td>
+            <td>{{customer.firstName}} </td>
+            <td>{{customer.lastName}}</td>
+            <td> {{customer.amountSpent | currency:'$':'symbol'}}</td>
+
         </tr>
     </ng-template>
 </p-table>

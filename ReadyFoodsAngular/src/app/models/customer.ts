@@ -12,13 +12,14 @@ export class Customer {
     address: string | undefined;
     gender: Gender | undefined;
     amountSpent: number | undefined;
+    dob: Date | undefined;
 
     // not all attributes have been included yet
 
 
     constructor(
         customerId?: number,
-        username?: string,
+        userName?: string,
         firstName?: string,
         lastName?: string,
         contactNumber?: string,
@@ -27,9 +28,10 @@ export class Customer {
         address?: string,
         gender?: Gender,
         amountSpent?: number,
+        dob?: Date
     ) {
         this.customerId = customerId
-        this.username = username
+        this.username = userName
         this.firstName = firstName
         this.lastName = lastName
         this.contactNumber = contactNumber
@@ -38,6 +40,9 @@ export class Customer {
         this.address = address
         this.gender = gender
         this.amountSpent = amountSpent
+        this.dob = dob
+        
+        
     }
 
 

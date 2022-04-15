@@ -65,6 +65,7 @@ export class SessionService {
       if (staff.staffType == "MODERATOR") {
         if (path == "/customerManagement/viewAllCustomers" ||
           path == "/customerManagement/viewCustomerDetails" ||
+          path == "/customerManagement/viewAllEnquiries" ||
           path == "/contentManagement/viewAllRecipes" ||
           path == "/contentManagement/ViewRecipeDetails") {
           return true;
@@ -76,6 +77,7 @@ export class SessionService {
       else if (staff.staffType == "ADMINISTRATOR") {
         if (path == "/customerManagement/viewAllCustomers" ||
           path == "/customerManagement/viewCustomerDetails" ||
+          path == "/customerManagement/viewAllEnquiries" ||
           path == "/contentManagement/CreateNewIngredient" ||
           path == "/contentManagement/CreateNewRecipe" ||
           path == "/contentManagement/updateRecipe" ||

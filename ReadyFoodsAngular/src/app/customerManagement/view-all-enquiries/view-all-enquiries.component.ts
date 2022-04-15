@@ -56,6 +56,7 @@ export class ViewAllEnquiriesComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.checkAccessRight();
     console.log('********** ViewAllProductsComponent.ts: ' + "init");
     this.enquiryService.getEnquires().subscribe({
       next: (response) => {
@@ -66,6 +67,12 @@ export class ViewAllEnquiriesComponent implements OnInit {
         console.log('********** ViewAllProductsComponent.ts: ' + error);
       }
     });
+  }
+
+  checkAccessRight() {
+    if (!this.sessionService.checkAccessRight(this.router.url)) {
+      this.router.navigate(['/accessRightError']);
+    }
   }
 
 

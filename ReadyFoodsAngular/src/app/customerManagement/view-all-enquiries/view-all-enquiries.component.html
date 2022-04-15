@@ -19,14 +19,19 @@
             <th>
                 <div>
                     ID
-                    <p-columnFilter type="numeric" field="ID" display="menu"></p-columnFilter>
+                    <p-columnFilter type="numeric" field="enquiryId" display="menu"></p-columnFilter>
                 </div>
+            </th>
+
+            <th [pSortableColumn]="'dateOfEnquiry'">Date
+                <p-sortIcon [field]="'dateOfEnquiry'"></p-sortIcon>
+              
             </th>
 
             <th>
                 <div>
-                    Customer Name
-                    <p-columnFilter type="text" field="customerName" display="menu"></p-columnFilter>
+                    Username
+                    <p-columnFilter type="text" field="customer.userName" display="menu"></p-columnFilter>
                 </div>
             </th>
             <th>
@@ -42,7 +47,9 @@
     <ng-template pTemplate="body" let-enquiry>
         <tr>
             <td>{{enquiry.enquiryId}}</td>
-            <td>{{enquiry.customer.firstName}} {{enquiry.customer.lastName}}</td>
+            <td>{{enquiry.dateOfEnquiry}}</td>
+           
+            <td>{{enquiry.customer.userName}}</td>
             <td><span [class]="'enquiry-badge-' + enquiry.resolved">{{enquiry.resolved}}</span></td>
             <td>
                 <p-button label="View" (onClick)="showDialog(enquiry)" icon="pi pi-search"></p-button>&nbsp;

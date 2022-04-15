@@ -26,7 +26,10 @@ export class ViewAllCustomersComponent implements OnInit {
     this.customers = new Array();
    }
 
+
+
   ngOnInit(): void {
+    this.checkAccessRight()
     console.log('********** ViewAllCustomers.ts: ' + "init");
     this.customerService.getEnquires().subscribe({
       next: (response) => {
@@ -37,6 +40,12 @@ export class ViewAllCustomersComponent implements OnInit {
         console.log('********** ViewAllCustomers.ts: ' + error);
       }
     });
+  }
+
+  checkAccessRight() {
+    if (!this.sessionService.checkAccessRight(this.router.url)) {
+      this.router.navigate(['/accessRightError']);
+    }
   }
 
 }

@@ -1,6 +1,27 @@
-<p>view-parent-categories works!</p>
-
+<div>
+  <p-radioButton
+    [(ngModel)]="isParent"
+    (click)="changeToParent()"
+    update="table"
+    [value]="0"
+  ></p-radioButton
+  >&nbsp;
+  <label>View Parent Categories</label>
+</div>
+<br />
+<div>
+  <p-radioButton
+    [(ngModel)]="isParent"
+    (click)="changeToSub()"
+    update="table"
+    [value]="1"
+  ></p-radioButton
+  >&nbsp;
+  <label>View Sub Categories</label>
+</div>
+<br />
 <p-table
+  name="table"
   #categoryDataTable
   [value]="categories"
   dataKey="id"
@@ -15,6 +36,7 @@
       <th>Category ID</th>
       <th>Name</th>
       <th>Description</th>
+      <th>Parent Category</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-category>

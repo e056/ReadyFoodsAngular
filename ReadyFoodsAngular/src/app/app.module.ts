@@ -13,6 +13,7 @@ import { DialogModule } from 'primeng/dialog';
 import { RatingModule } from 'primeng/rating';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -79,6 +80,7 @@ import { ViewParentCategoriesComponent } from './contentManagement/view-parent-c
     RatingModule,
     DropdownModule,
     InputTextModule,
+    RadioButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

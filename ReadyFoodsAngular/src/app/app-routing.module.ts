@@ -14,27 +14,62 @@ import { IndexComponent } from './index/index.component';
 import { CreateNewStaffComponent } from './staffManagement/create-new-staff/create-new-staff.component';
 import { ViewAllStaffsComponent } from './staffManagement/view-all-staffs/view-all-staffs.component';
 import { ViewAllEnquiriesComponent } from './customerManagement/view-all-enquiries/view-all-enquiries.component';
+import { ViewParentCategoriesComponent } from './contentManagement/view-parent-categories/view-parent-categories.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full' },
   { path: 'index', component: IndexComponent },
   { path: 'accessRightError', component: AccessRightErrorComponent },
-  { path: 'contentManagement/CreateNewIngredient', component: CreateNewIngredientComponent},
-  { path: 'contentManagement/CreateNewRecipe', component: CreateNewRecipeComponent},
-  { path: 'contentManagement/updateRecipe', component: UpdateRecipeComponent},
-  { path: 'contentManagement/viewAllRecipes', component: ViewAllRecipesComponent},
-  { path: 'contentManagement/ViewRecipeDetails', component: ViewRecipeDetailsComponent},
-  { path: 'contentManagement/viewAllIngredients', component: ViewAllIngredientsComponent},
-  { path: 'contentManagement/viewIngredientDetails', component: ViewIngredientsDetailsComponent},
-  { path: 'staffManagement/CreateNewStaff', component: CreateNewStaffComponent},
-  { path: 'staffManagement/viewAllStaffs', component: ViewAllStaffsComponent},
-  { path: 'customerManagement/viewAllCustomers', component: ViewAllCustomersComponent},
-  { path: 'customerManagement/viewCustomerDetails', component: ViewCustomerDetailsComponent},
-  { path: 'customerManagement/viewAllEnquiries', component: ViewAllEnquiriesComponent}
+  {
+    path: 'contentManagement/CreateNewIngredient',
+    component: CreateNewIngredientComponent,
+  },
+  {
+    path: 'contentManagement/CreateNewRecipe',
+    component: CreateNewRecipeComponent,
+  },
+  { path: 'contentManagement/updateRecipe', component: UpdateRecipeComponent },
+  {
+    path: 'contentManagement/viewAllRecipes',
+    component: ViewAllRecipesComponent,
+  },
+  {
+    path: 'contentManagement/ViewRecipeDetails',
+    component: ViewRecipeDetailsComponent,
+  },
+  {
+    path: 'contentManagement/viewAllIngredients',
+    component: ViewAllIngredientsComponent,
+  },
+  {
+    path: 'contentManagement/viewIngredientDetails',
+    component: ViewIngredientsDetailsComponent,
+  },
+  {
+    path: 'staffManagement/CreateNewStaff',
+    component: CreateNewStaffComponent,
+  },
+  { path: 'staffManagement/viewAllStaffs', component: ViewAllStaffsComponent },
+  {
+    path: 'customerManagement/viewAllCustomers',
+    component: ViewAllCustomersComponent,
+  },
+  {
+    path: 'customerManagement/viewCustomerDetails',
+    component: ViewCustomerDetailsComponent,
+  },
+  {
+    path: 'customerManagement/viewAllEnquiries',
+    component: ViewAllEnquiriesComponent,
+  },
+  {
+    path: 'contentManagement/viewParentCategories',
+    component: ViewParentCategoriesComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -10,7 +10,8 @@ import { SessionService } from 'src/app/services/session.service';
   styleUrls: ['./view-parent-categories.component.css'],
 })
 export class ViewParentCategoriesComponent implements OnInit {
-  categories: Category[] | null;
+  categories: Category[];
+  isParent: Number;
 
   constructor(
     private router: Router,
@@ -19,6 +20,7 @@ export class ViewParentCategoriesComponent implements OnInit {
     private categoryService: CategoryService
   ) {
     this.categories = new Array();
+    this.isParent = 0;
   }
 
   ngOnInit(): void {
@@ -30,6 +32,24 @@ export class ViewParentCategoriesComponent implements OnInit {
       },
       error: (error) => {
         console.log('********** ViewAllParentCategories.ts: ' + error);
+      },
+    });
+  }
+
+  changeToSub(): void {
+    this.isParent = 1;
+    this.categoryService.getSubCategories().subscribe({
+      next: (response) => {
+        this.categories = response;
+      },
+    });
+  }
+
+  changeToParent(): void {
+    this.isParent = 0;
+    this.categoryService.getParentCategories().subscribe({
+      next: (response) => {
+        this.categories = response;
       },
     });
   }

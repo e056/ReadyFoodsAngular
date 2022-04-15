@@ -1,1 +1,59 @@
-<p>view-all-customers works!</p>
+<h1>View All Customers</h1>
+
+<p-table #customerTable [value]="customers" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" responsiveLayout="scroll"
+    [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
+    [globalFilterFields]="['customerId','firstName','lastName','amountSpent']">
+    <ng-template pTemplate="caption">
+        <div class="flex">
+            <input pInputText type="text" (input)="customerTable.filterGlobal($any($event.target).value , 'contains')"
+                placeholder="Search keyword" />
+
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <!-- THIS IS THE HEADER LINE WITH FILTERS -->
+        <tr>
+            <th>
+                <div>
+                    ID
+                    <p-columnFilter type="numeric" field="customerId" display="menu"></p-columnFilter>
+                </div>
+            </th>
+
+            <th>
+                <div>
+                    First Name
+                    <p-columnFilter type="text" field="firstName" display="menu"></p-columnFilter>
+                </div>
+            </th>
+
+            <th>
+                <div>
+                    Last Name
+                    <p-columnFilter type="text" field="lastName" display="menu"></p-columnFilter>
+                </div>
+            </th>
+
+
+
+            <th [pSortableColumn]="'amountSpent'">Amount Spent
+                <p-sortIcon [field]="'amountSpent'"></p-sortIcon>
+              
+            </th>
+            <!--  -->
+
+        </tr>
+    </ng-template>
+
+    <!-- THIS IS THE BODY -->
+    <ng-template pTemplate="body" let-customer>
+        <tr>
+            <td>{{customer.customerId}}</td>
+            <td>{{customer.firstName}} </td>
+            <td>{{customer.lastName}}</td>
+            <td> {{customer.amountSpent | currency:'$':'symbol'}}</td>
+
+        </tr>
+    </ng-template>
+</p-table>

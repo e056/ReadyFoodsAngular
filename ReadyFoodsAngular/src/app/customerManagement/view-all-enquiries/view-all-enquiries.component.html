@@ -1,6 +1,6 @@
 <h1>View All Enquiries</h1>
 
-
+<p-messages></p-messages>
 <p-table #enquiryDataTable [value]="enquiries" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" responsiveLayout="scroll"
     [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
@@ -19,13 +19,23 @@
             <th>
                 <div>
                     ID
-                    <p-columnFilter type="numeric" field="balance" display="menu"></p-columnFilter>
+                    <p-columnFilter type="numeric" field="enquiryId" display="menu"></p-columnFilter>
                 </div>
             </th>
 
-            <th>Customer</th>
+            <th [pSortableColumn]="'dateOfEnquiry'">Date
+                <p-sortIcon [field]="'dateOfEnquiry'"></p-sortIcon>
+              
+            </th>
+
             <th>
-                <div class="flex justify-content-center align-items-center">
+                <div>
+                    Username
+                    <p-columnFilter type="text" field="customer.userName" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div>
                     Resolved
                     <p-columnFilter type="boolean" field="resolved" display="menu"></p-columnFilter>
                 </div>
@@ -37,11 +47,13 @@
     <ng-template pTemplate="body" let-enquiry>
         <tr>
             <td>{{enquiry.enquiryId}}</td>
-            <td>{{enquiry.customer.firstName}} {{enquiry.customer.lastName}}</td>
+            <td>{{enquiry.dateOfEnquiry}}</td>
+           
+            <td>{{enquiry.customer.userName}}</td>
             <td><span [class]="'enquiry-badge-' + enquiry.resolved">{{enquiry.resolved}}</span></td>
             <td>
-                <p-button label="View" (onClick)="showDialog(enquiry)" icon="pi pi-search"></p-button>
-                 <p-button  label="Resolve[not implemented]" [disabled]=enquiry.resolved icon="pi pi-check"></p-button>
+                <p-button label="View" (onClick)="showDialog(enquiry)" icon="pi pi-search"></p-button>&nbsp;
+                
             </td>
         </tr>
     </ng-template>
@@ -59,11 +71,16 @@
             </p-panel>
             <br />
             <p-panel header="Actions">
+                <label for="prevResponse">Previous response: </label>
+                {{enquiryToView.response}}
+                <br/>
+                <br />
                 <textarea [(ngModel)]="response" name="response" placeholder="Staff response" rows="10" [cols]="50"
                     pInputTextarea autoResize="autoResize"></textarea>
                 <br />
-                <p-button label="Submit" (onClick)="update(updateEnquiryForm)"></p-button>
-        
+                <p-button label="Submit" (onClick)="update(updateEnquiryForm)"></p-button> &nbsp;
+                <p-button label="Resolve" (onClick)="resolve(updateEnquiryForm)" [disabled]="enquiryToView.resolved!"></p-button>
+
             </p-panel>
             <br />
         </div>

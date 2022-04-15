@@ -6,17 +6,18 @@ import { NgForm } from '@angular/forms';
 import { Customer } from 'src/app/models/customer';
 import { EnquiryService } from 'src/app/services/enquiry.service';
 import { SessionService } from 'src/app/services/session.service';
+import { Message, MessageService,ConfirmationService } from 'primeng/api';
+
 
 @Component({
   selector: 'app-view-all-enquiries',
   templateUrl: './view-all-enquiries.component.html',
-  styleUrls: ['./view-all-enquiries.component.css']
+  styleUrls: ['./view-all-enquiries.component.css'],
+  providers: [MessageService]
 })
 export class ViewAllEnquiriesComponent implements OnInit {
 
   enquiries: Enquiry[];
-
-  statuses: any[];
 
   display: boolean
 
@@ -30,15 +31,15 @@ export class ViewAllEnquiriesComponent implements OnInit {
   resultError: boolean;
   message: string | undefined;
 
+
+
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
     public sessionService: SessionService,
-    private enquiryService: EnquiryService) {
+    private enquiryService: EnquiryService,
+    private messageService: MessageService) {
     this.enquiries = new Array();
-    this.statuses = [
-      { "Not Resolved": false },
-      { "Resolved": true }
-    ]
+
     this.display = false;
     this.enquiryToView = new Enquiry();
     this.submitted = false;
@@ -55,6 +56,7 @@ export class ViewAllEnquiriesComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.checkAccessRight();
     console.log('********** ViewAllProductsComponent.ts: ' + "init");
     this.enquiryService.getEnquires().subscribe({
       next: (response) => {
@@ -67,6 +69,12 @@ export class ViewAllEnquiriesComponent implements OnInit {
     });
   }
 
+  checkAccessRight() {
+    if (!this.sessionService.checkAccessRight(this.router.url)) {
+      this.router.navigate(['/accessRightError']);
+    }
+  }
+
 
   update(updateEnquiryForm: NgForm) {
     console.log('********** running updateEnquiryForm' + this.response)
@@ -75,23 +83,57 @@ export class ViewAllEnquiriesComponent implements OnInit {
 
       console.log('********** Form is valid')
 
-      this.enquiryService.updateEnquiry(this.enquiryToView, this.response, this.resolved).subscribe({
+      this.enquiryService.updateEnquiry(this.enquiryToView, this.response, null).subscribe({
         next: (response) => {
           this.resultSuccess = true;
           this.resultError = false;
-          this.message = "Enquiry updated successfully";
+          this.message = "ID: " + this.enquiryToView.enquiryId;
+          this.messageService.add({severity:'success', 
+          summary:'Staff response added successfully:', detail: this.message});
+       
+          
         },
         error: (error) => {
           this.resultError = true;
           this.resultSuccess = false;
           this.message = "An error has occurred while updating the enquiry: " + error;
 
-          console.log('********** UpdateProductComponent.ts: ' + error);
+          console.log('**********  view-all-enquires.ts: ' + error);
         }
       });
     }
 
   }
+
+  resolve(updateEnquiryForm: NgForm) {
+    console.log('********** running resolve' + this.response)
+    this.submitted = true;
+    if (updateEnquiryForm.valid) {
+
+      console.log('********** Form is valid *******')
+
+      this.enquiryService.updateEnquiry(this.enquiryToView, null, true).subscribe({
+        next: (response) => {
+          this.resultSuccess = true;
+          this.resultError = false;
+          this.message = "ID: " + this.enquiryToView.enquiryId;
+          this.messageService.add({severity:'success', 
+          summary:'Resolved successfully:', detail: this.message});
+       
+          
+        },
+        error: (error) => {
+          this.resultError = true;
+          this.resultSuccess = false;
+          this.message = "An error has occurred while updating the enquiry: " + error;
+
+          console.log('********** view-all-enquires.ts: ' + error);
+        }
+      });
+    }
+
+  }
+
   showDialog(en: Enquiry) {
     this.display = true;
     this.enquiryToView = en;

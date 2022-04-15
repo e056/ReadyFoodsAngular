@@ -13,9 +13,12 @@ import { DialogModule } from 'primeng/dialog';
 import { RatingModule } from 'primeng/rating';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
+import { RadioButtonModule } from 'primeng/radiobutton';
 import { PasswordModule } from 'primeng/password';
-import {MessagesModule} from 'primeng/messages';
-import {MessageModule} from 'primeng/message';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
+import { OrderListModule } from 'primeng/orderlist';
+import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -86,9 +89,12 @@ import { ViewParentCategoriesComponent } from './contentManagement/view-parent-c
     RatingModule,
     DropdownModule,
     InputTextModule,
+    RadioButtonModule,
     PasswordModule,
     MessageModule,
-    MessagesModule
+    MessagesModule,
+    OrderListModule,
+    CommonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

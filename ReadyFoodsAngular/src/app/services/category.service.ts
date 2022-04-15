@@ -9,6 +9,8 @@ import { catchError } from 'rxjs/operators';
 
 import { SessionService } from '../services/session.service';
 import { Category } from '../models/category';
+import { CreateCategoryReq } from '../models/create-category-req';
+import { UpdateCategoryReq } from '../models/update-category-req';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -46,6 +48,33 @@ export class CategoryService {
           '&password=' +
           this.sessionService.getPassword()
       )
+      .pipe(catchError(this.handleError));
+  }
+
+  createCategory(
+    newCategory: Category,
+    parentId: number | null | undefined
+  ): Observable<number> {
+    let createProductReq: CreateCategoryReq = new CreateCategoryReq(
+      this.sessionService.getUsername(),
+      this.sessionService.getPassword(),
+      newCategory,
+      parentId
+    );
+    return this.httpClient
+      .put<number>(this.baseUrl, createProductReq, httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
+  updateCategory(categoryToUpdate: Category): Observable<number> {
+    let updateCategoryReq: UpdateCategoryReq = new UpdateCategoryReq(
+      this.sessionService.getUsername(),
+      this.sessionService.getPassword(),
+      categoryToUpdate
+    );
+    console.log('testttttttttttttttttttttttttt');
+    return this.httpClient
+      .post<number>(this.baseUrl, updateCategoryReq, httpOptions)
       .pipe(catchError(this.handleError));
   }
 

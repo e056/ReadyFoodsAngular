@@ -11,6 +11,7 @@ import { ViewRecipeDetailsComponent } from './contentManagement/view-recipe-deta
 import { ViewAllCustomersComponent } from './customerManagement/view-all-customers/view-all-customers.component';
 import { ViewCustomerDetailsComponent } from './customerManagement/view-customer-details/view-customer-details.component';
 import { IndexComponent } from './index/index.component';
+import { ViewAllOrdersComponent } from './orderManagement/view-all-orders.component';
 import { CreateNewStaffComponent } from './staffManagement/create-new-staff/create-new-staff.component';
 import { ViewAllStaffsComponent } from './staffManagement/view-all-staffs/view-all-staffs.component';
 import { ViewAllEnquiriesComponent } from './customerManagement/view-all-enquiries/view-all-enquiries.component';
@@ -65,6 +66,10 @@ const routes: Routes = [
   {
     path: 'contentManagement/viewParentCategories',
     component: ViewParentCategoriesComponent,
+  },
+  {
+    path: 'orderManagement/viewAllOrders',
+    component:  ViewAllOrdersComponent,
   },
 ];
 

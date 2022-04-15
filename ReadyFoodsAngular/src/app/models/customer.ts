@@ -1,4 +1,5 @@
 import { Gender } from "./gender";
+import { OrderEntity } from "./order-entity";
 
 export class Customer {
 
@@ -13,6 +14,7 @@ export class Customer {
     gender: Gender | undefined;
     amountSpent: number | undefined;
     dob: Date | undefined;
+    orders: OrderEntity | undefined;
 
     // not all attributes have been included yet
 
@@ -28,7 +30,8 @@ export class Customer {
         address?: string,
         gender?: Gender,
         amountSpent?: number,
-        dob?: Date
+        dob?: Date,
+        orders?: OrderEntity
     ) {
         this.customerId = customerId
         this.username = userName
@@ -41,8 +44,9 @@ export class Customer {
         this.gender = gender
         this.amountSpent = amountSpent
         this.dob = dob
-        
-        
+        this.orders = orders
+
+
     }
 
 

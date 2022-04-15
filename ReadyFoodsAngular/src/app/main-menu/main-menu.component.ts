@@ -114,6 +114,20 @@ export class MainMenuComponent implements OnInit {
         ],
       },
       {
+        label: 'Order Management',
+        icon: 'pi pi-user',
+        items: [
+          {
+            label: 'View All Orders',
+            routerLink: 'orderManagement/viewAllOrders',
+          },
+          {
+            label: 'View All Staffs',
+            routerLink: 'staffManagement/viewAllStaffs',
+          },
+        ],
+      },
+      {
         label: 'Customer Management',
         icon: 'pi pi-user-plus',
         items: [

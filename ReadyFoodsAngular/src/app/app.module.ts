@@ -44,6 +44,7 @@ import { ViewAllCustomersComponent } from './customerManagement/view-all-custome
 import { ViewCustomerDetailsComponent } from './customerManagement/view-customer-details/view-customer-details.component';
 import { ViewAllEnquiriesComponent } from './customerManagement/view-all-enquiries/view-all-enquiries.component';
 import { ViewParentCategoriesComponent } from './contentManagement/view-parent-categories/view-parent-categories.component';
+import { ViewAllOrdersComponent } from './orderManagement/view-all-orders.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,8 @@ import { ViewParentCategoriesComponent } from './contentManagement/view-parent-c
     ViewCustomerDetailsComponent,
     ViewAllEnquiriesComponent,
     ViewParentCategoriesComponent,
+    ViewAllOrdersComponent
+
   ],
   imports: [
     BrowserModule,

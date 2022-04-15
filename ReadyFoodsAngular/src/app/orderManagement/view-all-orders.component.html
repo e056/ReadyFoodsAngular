@@ -1,0 +1,97 @@
+<h1>View All Orders</h1>
+
+
+<p-table #orderDataTable [value]="allOrders" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
+currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" responsiveLayout="scroll"
+[rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [globalFilterFields]="[
+'orderEntityId',
+'numPax',
+'totalCost',
+'dateOfOrder',
+'status',
+'additionalNotes',
+'customer'
+]">
+<ng-template pTemplate="caption">
+  <div class="flex">
+    <input pInputText type="text" (input)="
+      orderDataTable.filterGlobal($any($event.target).value, 'contains')
+    " placeholder="Search keyword" />
+  </div>
+</ng-template>
+
+<ng-template pTemplate="header">
+  <tr>
+    <th>
+      <div>
+        Order ID
+        <p-columnFilter type="numeric" field="balance" display="menu"></p-columnFilter>
+      </div>
+    </th>
+
+    <th>
+      <div class="flex justify-content-center align-items-center">
+        Date Ordered
+        <p-columnFilter type="Date" field="dateOfOrder" display="menu"></p-columnFilter>
+      </div>
+    </th>
+
+    <th>
+      <div class="flex justify-content-center align-items-center">
+        Num Pax
+        <p-columnFilter type="numeric" field="numPax" display="menu"></p-columnFilter>
+      </div>
+    </th>
+
+    <th>
+      <div class="flex justify-content-center align-items-center">
+        Total Cost
+        <p-columnFilter type="numeric" field="totalCost" display="menu"></p-columnFilter>
+      </div>
+    </th>
+
+    <th>
+      <div class="flex justify-content-center align-items-center">
+        Order status
+        <p-columnFilter type="text" field="status" display="menu"></p-columnFilter>
+      </div>
+    </th>
+
+    <th>
+      <div class="flex justify-content-center align-items-center">
+        Additional Notes
+        <p-columnFilter type="text" field="additionalNotes" display="menu"></p-columnFilter>
+      </div>
+    </th>
+
+    <th>
+      <div class="flex justify-content-center align-items-center">
+        Action
+
+      </div>
+    </th>
+  </tr>
+</ng-template>
+
+<ng-template pTemplate="body" let-order>
+  <tr>
+    <td>{{order.orderEntityId}}</td>
+    <td>{{order.dateOfOrder}}</td>
+    <td>{{order.numPax}}</td>
+    <td>{{order.totalCost}}</td>
+    <td>{{order.status}}</td>
+    <td>{{order.additionalNotes}}</td>
+
+    <td>
+
+    <!-- <div *ngIf="staff.username == currentStaff.username"> -->
+
+      <!-- <p-button label="Update Status" (onClick)="showDialog(order)" icon="pi pi-search"></p-button> -->
+    <!-- </div> -->
+    </td>
+  </tr>
+</ng-template>
+
+</p-table>
+
+<!--  -->

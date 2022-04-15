@@ -29,9 +29,11 @@ export class StaffService {
 		);
 	}
 
-  createNewStaff(newStaff: Staff): Observable<number>{
+  createNewStaff(newStaff: Staff): Observable<any>{
+    console.log('********** CreateNewStaffService.ts: ' + this.sessionService.getUsername() + this.sessionService.getPassword());
+    console.log('********** CreateNewStaffService.ts: ' + newStaff.firstName + newStaff.lastName + newStaff.username + newStaff.staffType + newStaff.password);
     let createStaffReq: CreateStaffReq = new CreateStaffReq(this.sessionService.getUsername(), this.sessionService.getPassword(), newStaff);
-    return this.httpClient.put<number>(this.baseUrl, createStaffReq, httpOptions).pipe
+    return this.httpClient.put<any>(this.baseUrl + "/createStaff", createStaffReq, httpOptions).pipe
     (
       catchError(this.handleError)
     );

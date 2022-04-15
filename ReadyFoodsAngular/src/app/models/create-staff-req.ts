@@ -3,12 +3,12 @@ export class CreateStaffReq {
 
   username: string | undefined;
   password: string | undefined;
-  staffEntity: Staff | undefined;
+  newStaff: Staff | undefined;
 
-  constructor(username?: string, password?: string, staffEntity?: Staff)
+  constructor(username?: string, password?: string, newStaff?: Staff)
   {
     this.username = username;
     this.password = password;
-    this.staffEntity = staffEntity;
+    this.newStaff = newStaff;
   }
 }

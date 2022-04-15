@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { Message, MessageService } from 'primeng/api';
+import { ConfirmationService, Message, MessageService } from 'primeng/api';
 
 import { Staff } from '../../models/staff';
 import { SessionService } from '../../services/session.service';
@@ -11,7 +11,7 @@ import { StaffService } from '../../services/staff.service';
   selector: 'app-view-all-staffs',
   templateUrl: './view-all-staffs.component.html',
   styleUrls: ['./view-all-staffs.component.css'],
-  providers: [MessageService]
+  providers: [MessageService, ConfirmationService]
 })
 export class ViewAllStaffsComponent implements OnInit {
 
@@ -21,15 +21,22 @@ export class ViewAllStaffsComponent implements OnInit {
 
   display: boolean
 
+  currentStaff: Staff;
+
+  isCurrentStaff: boolean
+
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
     public sessionService: SessionService,
     private staffService: StaffService,
-    private messageService: MessageService) {
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService) {
     this.allStaffs = new Array();
     this.staffToView = new Staff();
     this.display = false;
+    this.currentStaff = sessionService.getCurrentStaff();
+    this.isCurrentStaff = false;
   }
 
   ngOnInit(): void {
@@ -51,8 +58,8 @@ export class ViewAllStaffsComponent implements OnInit {
       this.router.navigate(['/accessRightError']);
     }
   }
-  
-  showDialog(s:Staff) {
+
+  showDialog(s: Staff) {
     console.log('**********dialog:')
     this.display = true;
     this.staffToView = s;
@@ -60,29 +67,33 @@ export class ViewAllStaffsComponent implements OnInit {
 
   }
 
-  closeDialog(){
+  closeDialog() {
     this.staffToView = new Staff();
     this.display = false;
   }
 
-  deleteStaff(deleteStaffForm: NgForm) {
+  deleteStaff(staff: Staff) {
     console.log('********** running viewAllStaffForm: Delete Staff')
 
-    console.log('********** Form is valid')
-
-    this.staffService.deleteStaff(this.staffToView.staffId).subscribe({
+    this.staffService.deleteStaff(staff.staffId).subscribe({
       next: (response) => {
-        this.messageService.add({ severity: 'success', summary: 'Staff Deleted Successfully!', detail: "Staff Id: " + this.staffToView.staffId });
+        this.messageService.add({ severity: 'success', summary: 'Staff Deleted Successfully!', detail: "Staff Id: " + staff.staffId });
       },
       error: (error) => {
         this.messageService.add({ severity: 'error', summary: 'Error occured with deleting staff', detail: error });
 
         console.log('********** ViewAllStaffsComponent.ts: ' + error);
       }
-    });
 
+    })
   }
 
-
-
 }
+
+
+
+
+
+
+
+

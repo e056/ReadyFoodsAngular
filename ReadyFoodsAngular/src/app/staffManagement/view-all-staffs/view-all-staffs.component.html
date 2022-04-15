@@ -1,6 +1,7 @@
+
 <h1>View All Staff</h1>
 
-
+<p-messages></p-messages>
   <p-table #staffDataTable [value]="allStaffs" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" responsiveLayout="scroll"
     [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [globalFilterFields]="[
@@ -72,28 +73,13 @@
         <td>{{staff.staffType}}</td>
 
         <td>
-          <p-button label="View" (onclick)="showDialog(staff)"></p-button>
+
+          <p-button label="Delete" (onClick)="deleteStaff(staff)"></p-button>
         </td>
       </tr>
     </ng-template>
 
   </p-table>
 
-  <form #deleteStaffForm="ngForm" (ngSubmit)="deleteStaff(deleteStaffForm)">
-    <p-dialog *ngIf="display" header="Staff ID: {{staffToView.staffId}}" [(visible)]="display"
-      [style]="{width: '50vw'}">
-      <div class="ui-g">
-
-        <p>Are you sure you want to delete this staff?</p>
-
-
-        <p-button label="Yes" (onClick)="deleteStaff(deleteStaffForm)"></p-button> &nbsp;
-        <p-button label="No" (onClick)="closeDialog()" ></p-button>
-
-      </div>
-
-
-    </p-dialog>
-  </form>
 
 

@@ -20,6 +20,7 @@ import { MessageModule } from 'primeng/message';
 import { OrderListModule } from 'primeng/orderlist';
 import { CommonModule } from '@angular/common';
 import { InputNumberModule } from 'primeng/inputnumber';
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -96,7 +97,9 @@ import { ViewParentCategoriesComponent } from './contentManagement/view-parent-c
     MessagesModule,
     OrderListModule,
     CommonModule,
-    InputNumberModule
+    InputNumberModule,
+    ConfirmPopupModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent],

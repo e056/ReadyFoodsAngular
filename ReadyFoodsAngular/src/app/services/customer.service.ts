@@ -28,6 +28,16 @@ export class CustomerService {
       );
   }
 
+  banCustomer(customerId : number) {
+    return this.httpClient.get<any>(
+      this.baseUrl + "/banCustomer/" + customerId + "?username="
+      + this.sessionService.getUsername()
+      + "&password=" + this.sessionService.getPassword()).pipe
+      (
+        catchError(this.handleError)
+      );
+  }
+
 
   private handleError(error: HttpErrorResponse) {
     let errorMessage: string = "";

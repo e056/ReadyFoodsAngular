@@ -3,7 +3,7 @@ import { Gender } from "./gender";
 export class Customer {
 
     customerId: number | undefined;
-    username: string | undefined;
+    userName: string | undefined;
     firstName: string | undefined;
     lastName: string | undefined;
     contactNumber: string | undefined;
@@ -29,9 +29,10 @@ export class Customer {
         gender?: Gender,
         amountSpent?: number,
         dob?: Date
+    
     ) {
         this.customerId = customerId
-        this.username = userName
+        this.userName = userName
         this.firstName = firstName
         this.lastName = lastName
         this.contactNumber = contactNumber

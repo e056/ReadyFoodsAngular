@@ -59,11 +59,11 @@ export class SessionService {
 
     if (this.getIsLogin()) {
       let staff: Staff = this.getCurrentStaff();
-
       if (staff.staffType == 'MODERATOR') {
         if (
           path == '/customerManagement/viewAllCustomers' ||
           path == '/customerManagement/viewCustomerDetails' ||
+          path == '/customerManagement/viewAllEnquiries' ||
           path == '/contentManagement/viewAllRecipes' ||
           path == '/contentManagement/ViewRecipeDetails'
         ) {
@@ -75,6 +75,7 @@ export class SessionService {
         if (
           path == '/customerManagement/viewAllCustomers' ||
           path == '/customerManagement/viewCustomerDetails' ||
+          path == '/customerManagement/viewAllEnquiries' ||
           path == '/contentManagement/CreateNewIngredient' ||
           path == '/contentManagement/CreateNewRecipe' ||
           path == '/contentManagement/updateRecipe' ||
@@ -83,7 +84,6 @@ export class SessionService {
           path == '/contentManagement/viewAllIngredients' ||
           path == '/contentManagement/viewIngredientDetails' ||
           path == '/staffManagement/createNewStaff' ||
-          path == '/contentManagement/viewParentCategories' ||
           path == '/staffManagement/viewAllStaffs'
         ) {
           return true;

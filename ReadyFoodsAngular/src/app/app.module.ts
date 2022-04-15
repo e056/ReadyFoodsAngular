@@ -17,6 +17,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { PasswordModule } from 'primeng/password';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
+import { OrderListModule } from 'primeng/orderlist';
+import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -91,6 +93,8 @@ import { ViewParentCategoriesComponent } from './contentManagement/view-parent-c
     PasswordModule,
     MessageModule,
     MessagesModule,
+    OrderListModule,
+    CommonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

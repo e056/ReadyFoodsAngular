@@ -20,23 +20,45 @@
   <label>View Sub Categories</label>
 </div>
 <br />
+<div style="margin-bottom: 20px">
+  <p-button (click)="showDialogSub()" label="+ Create a new category">
+  </p-button>
+</div>
 <p-table
+  *ngIf="isSubBoolean == true"
   name="table"
+  #dt
   #categoryDataTable
-  [value]="categories"
+  [value]="categoriesSub"
   dataKey="id"
   [rows]="10"
   [showCurrentPageReport]="true"
   [rowsPerPageOptions]="[10, 25, 50]"
   [paginator]="true"
-  [globalFilterFields]="['categoryId']"
+  [globalFilterFields]="[
+    'categoryId',
+    'name',
+    'description',
+    'parentCategory.name'
+  ]"
 >
+  <ng-template pTemplate="caption">
+    <div class="flex">
+      <input
+        pInputText
+        type="text"
+        (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+        placeholder="Search keyword"
+      />
+    </div>
+  </ng-template>
   <ng-template pTemplate="header">
     <tr>
       <th>Category ID</th>
       <th>Name</th>
       <th>Description</th>
       <th>Parent Category</th>
+      <th>Actions</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-category>
@@ -44,6 +66,269 @@
       <td>{{ category.categoryId }}</td>
       <td>{{ category.name }}</td>
       <td>{{ category.description }}</td>
+      <td>{{ category.parentCategory.name }}</td>
+      <td>
+        <div *ngIf="category.parentCategory.name == 'Diet Type'">
+          <p-button
+            label="View"
+            (click)="showDialogViewDetails(category)"
+          ></p-button>
+        </div>
+        <div *ngIf="category.parentCategory.name != 'Diet Type'">
+          <p-button
+            label="Update"
+            (click)="showDialogUpdateDetails(category)"
+          ></p-button>
+        </div>
+      </td>
     </tr>
   </ng-template>
 </p-table>
+<p-table
+  *ngIf="isSubBoolean == false"
+  name="table"
+  #categoryDataTable
+  [value]="categories"
+  dataKey="id"
+  [rows]="10"
+  #dt
+  [showCurrentPageReport]="true"
+  [rowsPerPageOptions]="[10, 25, 50]"
+  [paginator]="true"
+  [globalFilterFields]="['name', 'categoryId', 'description']"
+>
+  <ng-template pTemplate="caption">
+    <div class="flex">
+      <input
+        pInputText
+        type="text"
+        (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+        placeholder="Search keyword"
+      />
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Category ID</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-category>
+    <tr>
+      <td>{{ category.categoryId }}</td>
+      <td>{{ category.name }}</td>
+      <td>{{ category.description }}</td>
+      <td>
+        <div *ngIf="category.name == 'Diet Type'">
+          <p-button
+            label="View"
+            (click)="showDialogViewDetails(category)"
+          ></p-button>
+        </div>
+        <div *ngIf="category.name != 'Diet Type'">
+          <p-button
+            label="Update"
+            (click)="showDialogUpdateDetails(category)"
+          ></p-button>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+<p-dialog
+  [(visible)]="displaySub"
+  header="Create A Parent Or Sub Category"
+  [modal]="true"
+  [draggable]="true"
+  [resizable]="true"
+>
+  <div *ngIf="resultSuccess == true" style="color: rgb(73, 140, 95)">
+    {{ message }}
+  </div>
+  <div *ngIf="resultError == true" style="color: red">
+    {{ message }}
+  </div>
+  <form #createCategoryForm="ngForm" (ngSubmit)="create(createCategoryForm)">
+    <div>
+      <div style="margin-bottom: 10px; margin-top: 10px; width: auto">
+        <span class="p-float-label">
+          <input
+            type="text"
+            id="name"
+            pInputText
+            [(ngModel)]="newCategory.name"
+            name="name"
+            required="true"
+            #name="ngModel"
+            maxlength="32"
+          />
+          <label for="name">Category Name:</label>
+          <div
+            *ngIf="name.invalid && (name.dirty || name.touched || submitted)"
+            class="errorText"
+          >
+            <div *ngIf="name.errors?.['required']">Name is required.</div>
+          </div>
+        </span>
+      </div>
+      <div></div>
+      <div style="margin-bottom: 10px; margin-top: 30px; width: auto">
+        <span class="p-float-label">
+          <textarea
+            pInputTextarea
+            type="textArea"
+            id="description"
+            pInputText
+            [(ngModel)]="newCategory.description"
+            name="description"
+            required="true"
+            #description="ngModel"
+            maxlength="128"
+          >
+          </textarea>
+          <label for="description">Description: </label>
+          <div
+            *ngIf="
+              description.invalid &&
+              (description.dirty || description.touched || submitted)
+            "
+            class="errorText"
+          >
+            <div *ngIf="description.errors?.['required']">
+              Description is required.
+            </div>
+          </div>
+        </span>
+      </div>
+      <div style="margin-bottom: 20px">
+        <p-table
+          [value]="categories"
+          selectionMode="single"
+          [(selection)]="selectedParentCategory"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Parent Category (Select if necessary)</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-category>
+            <tr [pSelectableRow]="category">
+              <td>{{ category.name }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+      <p-button label="Create New Sub Category" type="submit"></p-button> &nbsp;
+      <p-button label="Clear" (click)="clear()"></p-button>
+    </div>
+  </form>
+</p-dialog>
+
+<p-dialog
+  [(visible)]="displayUpdateDetails"
+  header="View & Update Category Details"
+  [modal]="true"
+  [draggable]="true"
+  [resizable]="true"
+>
+  <div *ngIf="resultSuccess == true" style="color: rgb(73, 140, 95)">
+    {{ message }}
+  </div>
+  <div *ngIf="resultError == true" style="color: red">
+    {{ message }}
+  </div>
+  <form #updateCategoryForm="ngForm" (ngSubmit)="update(updateCategoryForm)">
+    <div style="margin-bottom: 10px; margin-top: 10px; width: auto">
+      <span class="p-float-label">
+        <input
+          type="text"
+          id="name"
+          pInputText
+          [(ngModel)]="categoryToUpdate.name"
+          name="name"
+          required="true"
+          #name="ngModel"
+          maxlength="32"
+        />
+        <label for="name">Category Name:</label>
+        <div
+          *ngIf="name.invalid && (name.dirty || name.touched || submitted)"
+          class="errorText"
+        >
+          <div *ngIf="name.errors?.['required']">Name is required.</div>
+        </div>
+      </span>
+      <div style="margin-bottom: 10px; margin-top: 30px; width: auto">
+        <span class="p-float-label">
+          <textarea
+            pInputTextarea
+            type="textArea"
+            id="description"
+            pInputText
+            [(ngModel)]="categoryToUpdate.description"
+            name="description"
+            required="true"
+            #description="ngModel"
+            maxlength="128"
+          >
+          </textarea>
+          <label for="description">Description: </label>
+          <div
+            *ngIf="
+              description.invalid &&
+              (description.dirty || description.touched || submitted)
+            "
+            class="errorText"
+          >
+            <div *ngIf="description.errors?.['required']">
+              Description is required.
+            </div>
+          </div>
+        </span>
+        <label>Category ID: {{ categoryToUpdate.categoryId }}</label>
+        <br />
+        <label
+          >Parent Category Name:
+          {{
+            categoryToUpdate.parentCategory != null
+              ? categoryToUpdate.parentCategory.name
+              : "NIL"
+          }}</label
+        >
+      </div>
+      <p-button label="Update Category" type="submit"></p-button>
+    </div>
+  </form>
+</p-dialog>
+
+<p-dialog
+  [(visible)]="displayViewDetails"
+  header="View Category Details"
+  [modal]="true"
+  [draggable]="true"
+  [resizable]="true"
+>
+  <form>
+    <label
+      >Sorry, you cannot edit the Diet Type Category and its
+      subcategories!</label
+    >
+    <br />
+    <label>Category Name: {{ categoryToUpdate.name }}</label>
+    <br />
+    <label>Description: {{ categoryToUpdate.description }}</label>
+    <br />
+    <label>Category ID: {{ categoryToUpdate.categoryId }}</label>
+    <br />
+    <label
+      >Parent Category Name:
+      {{
+        categoryToUpdate.parentCategory != null
+          ? categoryToUpdate.parentCategory.name
+          : "NIL"
+      }}</label
+    >
+  </form>
+</p-dialog>

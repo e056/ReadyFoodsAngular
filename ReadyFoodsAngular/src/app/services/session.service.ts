@@ -83,6 +83,7 @@ export class SessionService {
           path == '/contentManagement/viewAllIngredients' ||
           path == '/contentManagement/viewIngredientDetails' ||
           path == '/staffManagement/createNewStaff' ||
+          path == '/contentManagement/viewParentCategories' ||
           path == '/staffManagement/viewAllStaffs'
         ) {
           return true;

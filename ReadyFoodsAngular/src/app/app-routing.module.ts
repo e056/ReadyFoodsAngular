@@ -62,6 +62,10 @@ const routes: Routes = [
     path: 'customerManagement/viewAllEnquiries',
     component: ViewAllEnquiriesComponent,
   },
+  {
+    path: 'contentManagement/viewParentCategories',
+    component: ViewParentCategoriesComponent,
+  },
 ];
 
 @NgModule({

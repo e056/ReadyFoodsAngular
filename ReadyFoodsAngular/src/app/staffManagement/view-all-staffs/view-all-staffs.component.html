@@ -1,6 +1,6 @@
 <h1>View All Staff</h1>
 
-<form #viewAllStaffForm="ngForm" (ngSubmit)="deleteStaff(viewAllStaffForm)">
+
   <p-table #staffDataTable [value]="allStaffs" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" responsiveLayout="scroll"
     [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [globalFilterFields]="[
@@ -54,6 +54,12 @@
             <p-columnFilter type="text" field="accessRight" display="menu"></p-columnFilter>
           </div>
         </th>
+        <th>
+          <div class="flex justify-content-center align-items-center">
+            Action
+
+          </div>
+        </th>
       </tr>
     </ng-template>
 
@@ -63,12 +69,13 @@
         <td>{{staff.firstName}}</td>
         <td>{{staff.lastName}}</td>
         <td>{{staff.username}}</td>
+        <td>{{staff.staffType}}</td>
 
         <td>
-          <p-button label="Delete" (onclick)="deleteStaff(viewAllStaffForm)" icon="pi pi-trash"></p-button>
+          <p-button label="Delete" (onclick)="deleteStaff(staff)" icon="pi pi-trash"></p-button>
         </td>
       </tr>
     </ng-template>
 
   </p-table>
-</form>
+

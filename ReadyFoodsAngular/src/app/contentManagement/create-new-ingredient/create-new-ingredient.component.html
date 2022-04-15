@@ -15,53 +15,48 @@
 
     <table>
         <tr>
-            <td>Ingredient Name: </td>
+            <td><label for="ingredientName">Ingredient Name: </label></td>
             <td>
-                <span class="p-float-label">
-                    <input id="ingredientName" type="text" pInputText [(ngModel)]="newIngredient.name" required="true">
-                    <label for="ingredientName">Ingredient Name</label>
-                </span>
+                <input id="ingredientName" type="text" name="name" pInputText [(ngModel)]="newIngredient.name" required="true">
             </td>
         </tr>
         <tr>
-            <td>Ingredient Description: </td>
+            <td><label for="ingredientDescription">Ingredient Description: </label></td>
             <td>
-                <span class="p-float-label">
-                    <input id="ingredientDescription" type="text" pInputText [(ngModel)]="newIngredient.description"
-                        required="true">
-                    <label for="ingredientDescription">Ingredient Description</label>
-                </span>
+                <input id="ingredientDescription" type="text" name="description"pInputText [(ngModel)]="newIngredient.description"
+                    required="true">
             </td>
         </tr>
         <tr>
-            <td>Ingredient Unit: </td>
+            <td><label for="ingredientUnit">Ingredient Unit: </label></td>
             <td>
-                <p-dropdown [options]="ingredientUnits" [(ngModel)]="ingredientUnit" [autoDisplayFirst]="true">
+                <p-dropdown inputId="ingredientUnit" name="ingredientUnit" [options]="ingredientUnits" [(ngModel)]="newIngredient.ingredientUnit">
                 </p-dropdown>
             </td>
         </tr>
         <tr>
-            <td>Ingredient Unit Price ($): </td>
+            <td><label for="currency-sg">Unit Price($): </label></td>
             <td>
-                <p-inputNumber [(ngModel)]="newIngredient.unitPrice" mode=" decimal" [min]="0.01"
-                    [minFractionDigits]="2" [maxFractionDigits]="2" placeholder="0.01">
+                <p-inputNumber [(ngModel)]="newIngredient.unitPrice" inputId="currency-sg" name="unitPrice" mode="currency"
+                    currency="SGD" locale="en-SG">
                 </p-inputNumber>
             </td>
         </tr>
         <tr>
-            <td>Current Stock Quantity: </td>
+            <td><label for="stockQuantity">Stock Quantity: </label></td>
             <td>
-                <p-inputNumber [(ngModel)]="newIngredient.stockQuantity" [min]="1" placeholder="0">
+                <p-inputNumber [(ngModel)]="newIngredient.stockQuantity" name="stockQuantity" inputId="stockQuantity" [min]="1"
+                    placeholder="0">
                 </p-inputNumber>
             </td>
         </tr>
         <tr>
             <td>Restock Quantity: </td>
             <td>
-                <p-inputNumber [(ngModel)]="newIngredient.reorderQuantity" [showButtons]="true"
+                <p-inputNumber [(ngModel)]="newIngredient.reorderQuantity" name="reorderQuantity" [showButtons]="true"
                     buttonLayout="horizontal" spinnerMode="horizontal" [step]="10"
-                    decrementButtonClass="p-button-danger" incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus" 
-                    decrementButtonIcon="pi pi-minus">
+                    decrementButtonClass="p-button-danger" incrementButtonClass="p-button-success"
+                    incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus">
                 </p-inputNumber>
             </td>
         </tr>

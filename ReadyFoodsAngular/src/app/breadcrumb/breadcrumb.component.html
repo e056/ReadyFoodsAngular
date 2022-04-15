@@ -16,7 +16,25 @@
 	</span>
 
 	<span *ngIf="pageName == 'viewStaffDetails'">
-		> Create New Product
+		> View Staff Details
+	</span>
+
+	<span *ngIf="pageName == 'createNewIngredient' ||
+				 pageName == 'createNewCategory' ||
+				 pageName == 'createNewRecipe'">
+		> Content Management
+	</span>
+
+	<span *ngIf="pageName == 'createNewIngredient'">
+		> Create New Ingredient
+	</span>
+
+	<span *ngIf=" pageName == 'createNewCategory'">
+		> Create New Category
+	</span>
+
+	<span *ngIf=" pageName == 'createNewRecipe'">
+		> Create New Recipe
 	</span>
 
 </section>

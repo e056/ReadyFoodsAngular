@@ -1,1 +1,77 @@
-<p>create-new-ingredient works!</p>
+<app-breadcrumb [pageName]="'createNewIngredient'"></app-breadcrumb>
+
+<h3>Create New Ingredient</h3>
+<br />
+
+<div *ngIf="resultSuccess == true" style="color:blue;">
+    {{message}}
+</div>
+
+<div *ngIf="resultError == true" style="color:red;">
+    {{message}}
+</div>
+
+<form #createIngredientForm="ngForm" (ngSubmit)="create(createIngredientForm)">
+
+    <table>
+        <tr>
+            <td>Ingredient Name: </td>
+            <td>
+                <span class="p-float-label">
+                    <input id="ingredientName" type="text" pInputText [(ngModel)]="newIngredient.name" required="true">
+                    <label for="ingredientName">Ingredient Name</label>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>Ingredient Description: </td>
+            <td>
+                <span class="p-float-label">
+                    <input id="ingredientDescription" type="text" pInputText [(ngModel)]="newIngredient.description"
+                        required="true">
+                    <label for="ingredientDescription">Ingredient Description</label>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>Ingredient Unit: </td>
+            <td>
+                <p-dropdown [options]="ingredientUnits" [(ngModel)]="ingredientUnit" [autoDisplayFirst]="true">
+                </p-dropdown>
+            </td>
+        </tr>
+        <tr>
+            <td>Ingredient Unit Price ($): </td>
+            <td>
+                <p-inputNumber [(ngModel)]="newIngredient.unitPrice" mode=" decimal" [min]="0.01"
+                    [minFractionDigits]="2" [maxFractionDigits]="2" placeholder="0.01">
+                </p-inputNumber>
+            </td>
+        </tr>
+        <tr>
+            <td>Current Stock Quantity: </td>
+            <td>
+                <p-inputNumber [(ngModel)]="newIngredient.stockQuantity" [min]="1" placeholder="0">
+                </p-inputNumber>
+            </td>
+        </tr>
+        <tr>
+            <td>Restock Quantity: </td>
+            <td>
+                <p-inputNumber [(ngModel)]="newIngredient.reorderQuantity" [showButtons]="true"
+                    buttonLayout="horizontal" spinnerMode="horizontal" [step]="10"
+                    decrementButtonClass="p-button-danger" incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus" 
+                    decrementButtonIcon="pi pi-minus">
+                </p-inputNumber>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <p-button label="Submit" (onClick)="create(createIngredientForm)"></p-button>
+            </td>
+        </tr>
+    </table>
+
+
+</form>

@@ -1,1 +1,81 @@
-<p>view-all-staffs works!</p>
+<h1>View All Staff</h1>
+
+
+  <p-table #staffDataTable [value]="allStaffs" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" responsiveLayout="scroll"
+    [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [globalFilterFields]="[
+    'staffId',
+    'firstName',
+    'lastName',
+    'accessRight',
+    'username'
+  ]">
+    <ng-template pTemplate="caption">
+      <div class="flex">
+        <input pInputText type="text" (input)="
+          staffDataTable.filterGlobal($any($event.target).value, 'contains')
+        " placeholder="Search keyword" />
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th>
+          <div>
+            Staff ID
+            <p-columnFilter type="numeric" field="balance" display="menu"></p-columnFilter>
+          </div>
+        </th>
+
+        <th>
+          <div class="flex justify-content-center align-items-center">
+            First Name
+            <p-columnFilter type="text" field="firstName" display="menu"></p-columnFilter>
+          </div>
+        </th>
+
+        <th>
+          <div class="flex justify-content-center align-items-center">
+            Last Name
+            <p-columnFilter type="text" field="lastName" display="menu"></p-columnFilter>
+          </div>
+        </th>
+
+        <th>
+          <div class="flex justify-content-center align-items-center">
+            Username
+            <p-columnFilter type="text" field="username" display="menu"></p-columnFilter>
+          </div>
+        </th>
+
+        <th>
+          <div class="flex justify-content-center align-items-center">
+            Access Right
+            <p-columnFilter type="text" field="accessRight" display="menu"></p-columnFilter>
+          </div>
+        </th>
+        <th>
+          <div class="flex justify-content-center align-items-center">
+            Action
+
+          </div>
+        </th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-staff>
+      <tr>
+        <td>{{staff.staffId}}</td>
+        <td>{{staff.firstName}}</td>
+        <td>{{staff.lastName}}</td>
+        <td>{{staff.username}}</td>
+        <td>{{staff.staffType}}</td>
+
+        <td>
+          <p-button label="Delete" (onclick)="deleteStaff(staff)" icon="pi pi-trash"></p-button>
+        </td>
+      </tr>
+    </ng-template>
+
+  </p-table>
+

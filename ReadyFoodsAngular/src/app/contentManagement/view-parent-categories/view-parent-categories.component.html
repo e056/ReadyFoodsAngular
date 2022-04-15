@@ -2,7 +2,6 @@
   <p-radioButton
     [(ngModel)]="isParent"
     (click)="changeToParent()"
-    update="table"
     [value]="0"
   ></p-radioButton
   >&nbsp;
@@ -13,7 +12,6 @@
   <p-radioButton
     [(ngModel)]="isParent"
     (click)="changeToSub()"
-    update="table"
     [value]="1"
   ></p-radioButton
   >&nbsp;
@@ -239,6 +237,7 @@
   <div *ngIf="resultError == true" style="color: red">
     {{ message }}
   </div>
+  <br />
   <form #updateCategoryForm="ngForm" (ngSubmit)="update(updateCategoryForm)">
     <div style="margin-bottom: 10px; margin-top: 10px; width: auto">
       <span class="p-float-label">
@@ -311,10 +310,12 @@
   [resizable]="true"
 >
   <form>
-    <label
-      >Sorry, you cannot edit the Diet Type Category and its
-      subcategories!</label
-    >
+    <div>
+      <label
+        >Sorry, you cannot edit the Diet Type Category and its
+        subcategories!</label
+      >
+    </div>
     <br />
     <label>Category Name: {{ categoryToUpdate.name }}</label>
     <br />

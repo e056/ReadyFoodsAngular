@@ -55,7 +55,7 @@ export class CreateNewIngredientComponent implements OnInit {
           let newIngredientId: number = response;
           this.resultSuccess = true;
           this.resultError = false;
-          this.message = "New Ingredient" + newIngredientId + " created successfully!";
+          this.message = "New Ingredient " + this.newIngredient.name + " created successfully!";
 
           this.newIngredient = new Ingredient();
           createIngredientForm.resetForm();

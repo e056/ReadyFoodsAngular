@@ -86,6 +86,10 @@ export class MainMenuComponent implements OnInit {
         icon: 'pi pi-folder',
         items: [
           {
+            label: 'View All Recipes',
+            routerLink: 'contentManagement/viewAllRecipes',
+          },
+          {
             label: 'Create New Recipe',
             routerLink: 'contentManagement/CreateNewRecipe',
           },

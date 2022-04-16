@@ -16,8 +16,6 @@ export class CreateNewIngredientComponent implements OnInit {
   submitted: boolean | undefined;
   newIngredient: Ingredient;
   ingredientUnits: any[];
-  ingredientUnit: String | undefined;
-  ingredientUnitEnum: IngredientUnit | undefined;
 
   resultSuccess: boolean;
   resultError: boolean;
@@ -47,8 +45,6 @@ export class CreateNewIngredientComponent implements OnInit {
   create(createIngredientForm: NgForm) {
 
     if (createIngredientForm.valid) {
-
-      this.ingredientUnitEnum = this.ingredientUnit as IngredientUnit;
 
       this.ingredientService.createNewIngredient(this.newIngredient).subscribe({
         next: (response) => {

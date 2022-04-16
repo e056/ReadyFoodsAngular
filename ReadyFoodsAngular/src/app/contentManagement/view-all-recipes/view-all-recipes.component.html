@@ -1,1 +1,56 @@
-<p>view-all-recipes works!</p>
+<h3>All Products</h3>
+<br />
+
+<p-table name="recipeTable" #dt [value]="recipes" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[10,25,50]" responsiveLayout="scroll" [filterDelay]="0"
+    [globalFilterFields]="['recipeTitle','recipeChef','cookingTime']">
+
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+            List of Customers
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                    placeholder="Global Search" />
+            </span>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Recipe Id</th>
+            <th pSortableColumn="recipeTitle">
+                <div class="flex justify-content-between align-items-center">
+                    Recipe Title
+                    <p-sortIcon field="recipeTitle"></p-sortIcon>
+                    <p-columnFilter type="text" field="recipeTitle" display="menu" class="ml-auto"></p-columnFilter>
+                </div>
+            </th>
+            <th>Recipe Chef</th>
+            <th pSortableColumn="cookingTime">
+                <div class="flex justify-content-between align-items-center">
+                    Cooking Time
+                    <p-sortIcon field="cookingTime"></p-sortIcon>
+                    <p-columnFilter type="numeric" field="cookingTime" display="menu" class="ml-auto"></p-columnFilter>
+                </div>
+            </th>
+            <th>Categories</th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-recipe>
+        <tr>
+            <td>{{recipe.recipeId}}</td>
+            <td>{{recipe.recipeTitle}}</td>
+            <td>{{recipe.recipeChef}}</td>
+            <td>{{recipe.cookingTime}}</td>
+            <td>
+                <ul style="margin-left: 20px;">
+                    <li *ngFor="let category of recipe.categories">{{category.name}}</li>
+                </ul>
+            </td>
+
+        </tr>
+    </ng-template>
+
+</p-table>

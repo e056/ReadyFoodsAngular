@@ -1,4 +1,5 @@
 import { Category } from "./category";
+import { CommentEntity } from "./comment-entity";
 import { Ingredient } from "./ingredient";
 import { Review } from "./review";
 
@@ -13,8 +14,10 @@ export class Recipe {
     fatsPerServing: number | undefined;
     proteinsPerServing: number | undefined;
     sugarPerServing: number | undefined;
+    picUrl: string | undefined;
     videoURL: string | undefined;
 
+    comments: CommentEntity[] | undefined;
     reviews: Review[] | undefined;
     ingredientSpecificationList: Ingredient[] | undefined;
     categories: Category[] | undefined;

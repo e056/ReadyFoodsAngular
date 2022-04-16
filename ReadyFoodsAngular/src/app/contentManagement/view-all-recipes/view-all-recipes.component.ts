@@ -72,26 +72,15 @@ export class ViewAllRecipesComponent implements OnInit {
     });
   }
 
-  recipeCategoryView(recipeId: number): Category[] {
-    this.recipeService.getRecipeByRecipeId(recipeId).subscribe({
-      next: (response) => {
-        this.recipeToView = response;
-      },
-      error: (error) => {
-        console.log('********** recipeToView.ts: ' + error);
-      },
-    });
-
-    console.log('*********** test size' + this.recipeToView.categories == null);
-
-    return this.recipeCategories = this.recipeToView.categories as Category[];
-
-  }
-
   checkAccessRight() {
     if (!this.sessionService.checkAccessRight(this.router.url)) {
       this.router.navigate(['/accessRightError']);
     }
+  }
+
+  getParentCatName(categoryId: number): string {
+    
+    return "name";
   }
 
 }

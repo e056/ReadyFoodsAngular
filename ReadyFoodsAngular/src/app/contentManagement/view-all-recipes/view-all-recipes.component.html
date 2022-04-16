@@ -26,6 +26,7 @@
                     <p-columnFilter type="text" field="recipeTitle" display="menu" class="ml-auto"></p-columnFilter>
                 </div>
             </th>
+            <th>Recipe Picture</th>
             <th>Recipe Chef</th>
             <th pSortableColumn="cookingTime">
                 <div class="flex justify-content-between align-items-center">
@@ -42,15 +43,31 @@
         <tr>
             <td>{{recipe.recipeId}}</td>
             <td>{{recipe.recipeTitle}}</td>
+            <td><img src="https://i.imgur.com/eC2H1ix.png"/>
+            <br/> Here is a cute otter to cheer up your day, 
+            <br/>and to testing function of storing pic as 
+            <br>url string in recipe works. It works! :)</td>
             <td>{{recipe.recipeChef}}</td>
             <td>{{recipe.cookingTime}}</td>
             <td>
-                <ul style="margin-left: 20px;">
-                    <li *ngFor="let category of recipe.categories">{{category.name}}</li>
-                </ul>
-            </td>
-
+                <p-table [value]="recipe.categories">
+                    <ng-template pTemplate="header">
+        <tr>
+            <th>Category</th>
+            <th>Description</th>
         </tr>
     </ng-template>
+    <ng-template pTemplate="body" let-category>
+        <tr>
+            <td>{{category.name}}</td>
+            <td>{{category.description}}</td>
+        </tr>
+    </ng-template>
+</p-table>
+</td>
+</tr>
+</ng-template>
+
+
 
 </p-table>

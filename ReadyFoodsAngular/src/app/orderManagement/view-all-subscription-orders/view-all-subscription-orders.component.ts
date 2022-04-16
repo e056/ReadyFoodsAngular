@@ -43,6 +43,12 @@ export class ViewAllSubscriptionOrdersComponent implements OnInit {
      }
 
   ngOnInit(): void {
+    this.retrieveAllSubOrders();
+
+    
+  }
+
+  retrieveAllSubOrders() {
 
     console.log('********** ViewAllSubOrders.ts: ' + "init");
     this.orderEntityService.getAllSubscriptionOrders().subscribe({
@@ -54,6 +60,22 @@ export class ViewAllSubscriptionOrdersComponent implements OnInit {
         console.log('********** ViewAllSubOrders.ts: ' + error);
       }
     });
+  }
+
+  processAllSubscriptionOrders() {
+    this.orderEntityService.processAllSubscriptionOrders().subscribe({
+      next: (response) => {
+     
+        this.messageService.add({severity:'success', 
+        summary:'Orders processed:', detail: "x" + response});
+        this.retrieveAllSubOrders();
+       
+      },
+      error: (error) => {
+        console.log('********** ViewAllProductsComponent.ts: ' + error);
+      }
+    });
+
   }
 
 }

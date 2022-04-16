@@ -47,6 +47,7 @@ import { ViewAllEnquiriesComponent } from './customerManagement/view-all-enquiri
 import { ViewParentCategoriesComponent } from './contentManagement/view-parent-categories/view-parent-categories.component';
 import { ViewAllOrdersComponent } from './orderManagement/view-all-orders.component';
 import { ViewAllSubscriptionOrdersComponent } from './orderManagement/view-all-subscription-orders/view-all-subscription-orders.component';
+import { ViewAllReviewsComponent } from './reviewManagement/view-all-reviews/view-all-reviews.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { ViewAllSubscriptionOrdersComponent } from './orderManagement/view-all-s
     ViewAllEnquiriesComponent,
     ViewParentCategoriesComponent,
     ViewAllOrdersComponent,
-    ViewAllSubscriptionOrdersComponent
+    ViewAllSubscriptionOrdersComponent,
+    ViewAllReviewsComponent
 
   ],
   imports: [
@@ -104,7 +106,7 @@ import { ViewAllSubscriptionOrdersComponent } from './orderManagement/view-all-s
     CommonModule,
     InputNumberModule,
     ConfirmPopupModule,
-    
+
   ],
   providers: [],
   bootstrap: [AppComponent],

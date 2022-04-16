@@ -141,6 +141,17 @@ export class MainMenuComponent implements OnInit {
           },
         ],
       },
+      {
+        label: 'Comment and Review Management',
+        icon: 'pi pi-user-plus',
+        items: [
+          {
+            label: 'View All Reviews',
+            routerLink: 'reviewManagement/viewAllReviews',
+          },
+          
+        ],
+      },
     ];
   }
 

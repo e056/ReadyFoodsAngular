@@ -9,10 +9,9 @@
 'totalCost',
 'dateOfOrder',
 'status',
-'additionalNotes',
-'customer'
 ]">
   <ng-template pTemplate="caption">
+    <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(orderDataTable)"></button>
     <div class="flex">
       <input pInputText type="text" (input)="
       orderDataTable.filterGlobal($any($event.target).value, 'contains')
@@ -53,14 +52,15 @@
       <th>
         <div class="flex justify-content-center align-items-center">
           Status
-          <p-columnFilter type="text" field="status" display="menu"></p-columnFilter>
-        </div>
-      </th>
-
-      <th>
-        <div class="flex justify-content-center align-items-center">
-          Additional Notes
-          <p-columnFilter type="text" field="additionalNotes" display="menu"></p-columnFilter>
+          <p-columnFilter field="status" matchMode="equals" display="menu">
+            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                <p-dropdown [ngModel]="value" [options]="statuses" (onChange)="filter($event.value)" placeholder="Any">
+                    <ng-template let-status pTemplate="item">
+                        <span [class]="'status-badge-' + status">{{status}}</span>
+                    </ng-template>
+                </p-dropdown>
+            </ng-template>
+        </p-columnFilter>
         </div>
       </th>
 
@@ -79,8 +79,7 @@
       <td>{{order.dateOfOrder}}</td>
       <td>{{order.numPax}}</td>
       <td>{{order.totalCost | currency:'$':'symbol'}}</td>
-      <td>{{order.status}}</td>
-      <td>{{order.additionalNotes}}</td>
+      <td> <span [class]="'status-badge-' + order.status">{{order.status}}</span></td>
 
       <td>
         <p-button (click)="showDialogUpdate(order)">
@@ -97,18 +96,19 @@
 
 
 <p-dialog [(visible)]="displayUpdate" header="Update Order Status" [modal]="true" [draggable]="true" [resizable]="true">
-  <div *ngIf="resultSuccess == true" style="color: rgb(73, 140, 95)">
-    {{ message }}
-  </div>
-  <div *ngIf="resultError == true" style="color: red">
-    {{ message }}
-  </div>
+ <p-messages></p-messages>
   <br />
   <form #updateStatusForm="ngForm" (ngSubmit)="update(updateStatusForm)" update="dt">
-    <div style="margin-bottom: 10px; margin-top: 10px; width: auto">
+    <div style="margin-bottom: 10px; width: auto">
+      <label>Updating Order ID: {{orderToUpdate.orderEntityId}}</label>
+      <br/>
+      <br/>
+      
       <p-dropdown  appendTo="body"  inputId="updatedStatus" name="updatedStatus" [options]="statuses" [(ngModel)]="newStatus">
       </p-dropdown>
-      <p-button label="Update Category" type="submit"></p-button>
+    
+      &nbsp;
+      <p-button label="Update Status" type="submit"></p-button>
     </div>
   </form>
 </p-dialog>

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Enquiry } from 'src/app/models/enquiry';
 import { NgForm } from '@angular/forms';
 import { Status } from 'src/app/models/status';
+import { Table } from 'primeng/table';
 
 import { OrderEntity } from 'src/app/models/order-entity';
 import { OrderEntityService } from 'src/app/services/order-entity.service';
@@ -93,7 +94,7 @@ export class ViewAllOrdersComponent implements OnInit {
           this.resultError = false;
           this.message = "ID: " + this.orderToUpdate.orderEntityId;
           this.messageService.add({severity:'success', 
-          summary:'Staff response added successfully:', detail: this.message});
+          summary:'Order status updated successfully:', detail: this.message});
           this.retrieveOrders();
        
           
@@ -110,6 +111,9 @@ export class ViewAllOrdersComponent implements OnInit {
     
 
   }
+  clear(table: Table) {
+    table.clear();
+}
 
 
 

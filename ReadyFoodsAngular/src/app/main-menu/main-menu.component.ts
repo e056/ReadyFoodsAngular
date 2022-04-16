@@ -48,6 +48,48 @@ export class MainMenuComponent implements OnInit {
         ],
       },
       {
+        label: 'Content Management',
+        icon: 'pi pi-folder',
+        items: [
+          {
+            label: 'View All Recipes',
+            routerLink: 'contentManagement/viewAllRecipes',
+          },
+          {
+            label: 'Create New Recipe',
+            routerLink: 'contentManagement/CreateNewRecipe',
+          },
+          {
+            label: 'Create New Ingredient',
+            routerLink: 'contentManagement/CreateNewIngredient',
+          },
+          {
+            label: 'View Categories',
+            routerLink: 'contentManagement/viewParentCategories',
+          },
+        ],
+      },
+
+      {
+        label: 'Order Management',
+        icon: 'pi pi-user',
+        items: [
+          {
+            label: 'View All Orders',
+            routerLink: 'orderManagement/viewAllOrders',
+          },
+          {
+            label: 'View All Subscriptions',
+            routerLink: 'orderManagement/viewAllSubscriptions',
+          },
+          {
+            label: 'View All Subscription Orders',
+            routerLink: 'orderManagement/viewAllSubscriptionOrders',
+          },
+          
+        ],
+      },
+      {
         label: 'Customer Management',
         icon: 'pi pi-user-plus',
         items: [
@@ -59,6 +101,17 @@ export class MainMenuComponent implements OnInit {
             label: 'View All Enquiries',
             routerLink: 'customerManagement/viewAllEnquiries',
           },
+        ],
+      },
+      {
+        label: 'Comment and Review Management',
+        icon: 'pi pi-user-plus',
+        items: [
+          {
+            label: 'View All Reviews',
+            routerLink: 'reviewManagement/viewAllReviews',
+          },
+          
         ],
       },
     ];
@@ -126,9 +179,14 @@ export class MainMenuComponent implements OnInit {
             routerLink: 'orderManagement/viewAllOrders',
           },
           {
+            label: 'View All Subscriptions',
+            routerLink: 'orderManagement/viewAllSubscriptions',
+          },
+          {
             label: 'View All Subscription Orders',
             routerLink: 'orderManagement/viewAllSubscriptionOrders',
           },
+          
         ],
       },
       {

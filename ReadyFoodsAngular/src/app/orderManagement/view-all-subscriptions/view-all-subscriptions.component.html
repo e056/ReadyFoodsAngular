@@ -1,0 +1,54 @@
+<h1>View All Subscriptions</h1>
+
+<p-table #subscriptionDataTable [value]="subscriptions" dataKey="id" 
+[rows]="10" [showCurrentPageReport]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+   responsiveLayout="scroll"
+  [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [globalFilterFields]="[
+'orderEntityId',
+'numPax',
+'totalCost',
+'dateOfOrder',
+'status',
+]">
+  <ng-template pTemplate="caption">
+    <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+      (click)="clear(subscriptionDataTable)"></button>
+    <div class="flex">
+      <input pInputText type="text" (input)="
+      subscriptionDataTable.filterGlobal($any($event.target).value, 'contains')
+    " placeholder="Search keyword" />
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th>
+        <div>
+          Subscription ID
+          <p-columnFilter type="numeric" field="orderEntityId" display="menu"></p-columnFilter>
+        </div>
+      </th>
+
+      <th [pSortableColumn]="'subscriptionStartDate'">Date Subbed
+        <p-sortIcon [field]="'subscriptionStartDate'"></p-sortIcon>
+
+      </th>
+
+  </ng-template>
+
+  <ng-template pTemplate="body" let-sub>
+    <tr>
+      <td>{{sub.subscriptionId}}</td>
+      <td>{{sub.subscriptionStartDate}}</td>
+    
+      <!-- <td>{{order.totalCost | currency:'$':'symbol'}}</td> -->
+      <!-- <td> <span [class]="'status-badge-' + order.status">{{order.status}}</span></td> -->
+
+
+    </tr>
+  </ng-template>
+
+
+
+</p-table>

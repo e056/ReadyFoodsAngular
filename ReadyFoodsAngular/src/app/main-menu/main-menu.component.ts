@@ -122,8 +122,8 @@ export class MainMenuComponent implements OnInit {
             routerLink: 'orderManagement/viewAllOrders',
           },
           {
-            label: 'View All Staffs',
-            routerLink: 'staffManagement/viewAllStaffs',
+            label: 'View All Subscription Orders',
+            routerLink: 'orderManagement/viewAllSubscriptionOrders',
           },
         ],
       },

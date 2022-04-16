@@ -73,6 +73,7 @@ export class ViewAllCustomersComponent implements OnInit {
 
   
   confirm(event: Event) {
+    if (this.customerToView.isBanned) return
     this.confirmationService.confirm({
         target: event.target!,
         message: 'Are you sure that you want to proceed? This ban (on reviewing and commenting) cannot be reversed.',

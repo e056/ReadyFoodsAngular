@@ -30,6 +30,17 @@ export class OrderEntityService {
       );
    }
 
+   getAllSubscriptionOrders():Observable<OrderEntity[]> {
+    return this.httpClient.get<OrderEntity[]>(
+      this.baseUrl + "/retrieveAllSubscriptionOrders?username="
+      + this.sessionService.getUsername()
+      + "&password=" + this.sessionService.getPassword()).pipe
+      (
+        catchError(this.handleError)
+      );
+
+   }
+
    private handleError(error: HttpErrorResponse) {
     let errorMessage: string = "";
 

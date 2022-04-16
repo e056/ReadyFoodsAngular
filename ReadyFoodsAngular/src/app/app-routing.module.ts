@@ -16,6 +16,7 @@ import { CreateNewStaffComponent } from './staffManagement/create-new-staff/crea
 import { ViewAllStaffsComponent } from './staffManagement/view-all-staffs/view-all-staffs.component';
 import { ViewAllEnquiriesComponent } from './customerManagement/view-all-enquiries/view-all-enquiries.component';
 import { ViewParentCategoriesComponent } from './contentManagement/view-parent-categories/view-parent-categories.component';
+import { ViewAllSubscriptionOrdersComponent } from './orderManagement/view-all-subscription-orders/view-all-subscription-orders.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full' },
@@ -70,6 +71,11 @@ const routes: Routes = [
   {
     path: 'orderManagement/viewAllOrders',
     component:  ViewAllOrdersComponent,
+  },
+
+  {
+    path: 'orderManagement/viewAllSubscriptionOrders',
+    component:  ViewAllSubscriptionOrdersComponent,
   },
 ];
 

@@ -4,7 +4,10 @@ import { throwError, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { OrderEntity } from '../models/order-entity';
+import { UpdateOrderReq } from '../models/update-order-req';
 import { SessionService } from './session.service';
+
+import { Status } from '../models/status';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -51,6 +54,21 @@ export class OrderEntityService {
       );
 
    }
+
+   updateOrder(orderToUpdate: OrderEntity,  newStatus: Status): Observable<any> {
+    let updateOrderReq: UpdateOrderReq = new UpdateOrderReq(
+      this.sessionService.getUsername(),
+      this.sessionService.getPassword(),
+      orderToUpdate, newStatus
+    );
+
+    return this.httpClient
+      .post<any>(this.baseUrl, updateOrderReq, httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
+
+
 
    private handleError(error: HttpErrorResponse) {
     let errorMessage: string = "";

@@ -4,14 +4,14 @@
 
 		<div *ngIf="sessionService.getIsLogin() == false">
 			<label for="username">Username </label>
-			<input type="text" [(ngModel)]="username" size="16" required maxlength="32" />
+			<input pInputText  type="text" [(ngModel)]="username" size="16" required maxlength="32" />
 			&nbsp;
 			<label for="password">Password </label>
-			<input type="password" [(ngModel)]="password" size="16" required maxlength="32" />
-			&nbsp;
-			<input type="reset" value="Clear" />
-			&nbsp;
-			<input type="button" (click)="staffLogin()" value="Login" />
+			<input pInputText type="password" [(ngModel)]="password" size="16" required maxlength="32" />
+			<!-- &nbsp;
+			<input pButton styleClass="p-button-link" type="reset" value="Clear" /> -->
+			<!-- &nbsp; -->
+			<p-button type="button" styleClass="p-button-link" (click)="staffLogin()" value="Login">Login</p-button>
 		</div>
 
 		<div *ngIf="loginError == true" style="text-align: right; color: red;">
@@ -19,11 +19,13 @@
 		</div>
 
 		<div *ngIf="sessionService.getIsLogin() == true">
-			You are login as {{sessionService.getCurrentStaff().username}} : {{sessionService.getCurrentStaff().firstName}} {{sessionService.getCurrentStaff().lastName}}
-			(Access Right:
-			<span *ngIf="sessionService.getCurrentStaff().staffType == 'ADMINISTRATOR'">ADMINISTRATOR</span>
-			<span *ngIf="sessionService.getCurrentStaff().staffType == 'MODERATOR'">MODERATOR</span>)
-			<input type="button" (click)="staffLogout()" value="Logout" />
+			<label>Welcome @{{sessionService.getCurrentStaff().username}} :
+				{{sessionService.getCurrentStaff().firstName}} {{sessionService.getCurrentStaff().lastName}}
+				(
+				<span *ngIf="sessionService.getCurrentStaff().staffType == 'ADMINISTRATOR'">ADMINISTRATOR</span>
+				<span *ngIf="sessionService.getCurrentStaff().staffType == 'MODERATOR'">MODERATOR</span>)
+			</label>
+			<p-button type="button" styleClass="p-button-link" (click)="staffLogout()">Logout</p-button>
 		</div>
 	</aside>
 </header>

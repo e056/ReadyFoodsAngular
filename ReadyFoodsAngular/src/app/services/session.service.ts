@@ -85,7 +85,9 @@ export class SessionService {
           path == '/contentManagement/viewAllIngredients' ||
           path == '/contentManagement/viewIngredientDetails' ||
           path == '/staffManagement/createNewStaff' ||
-          path == '/staffManagement/viewAllStaffs'
+          path == '/staffManagement/viewAllStaffs' ||
+          path == '/orderManagement/viewAllOrders' ||
+          path == '/orderManagement/viewAllSubscriptionOrders' 
         ) {
           return true;
         } else {

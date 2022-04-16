@@ -11,12 +11,12 @@ import { ViewRecipeDetailsComponent } from './contentManagement/view-recipe-deta
 import { ViewAllCustomersComponent } from './customerManagement/view-all-customers/view-all-customers.component';
 import { ViewCustomerDetailsComponent } from './customerManagement/view-customer-details/view-customer-details.component';
 import { IndexComponent } from './index/index.component';
-import { ViewAllOrdersComponent } from './orderManagement/view-all-orders.component';
 import { CreateNewStaffComponent } from './staffManagement/create-new-staff/create-new-staff.component';
 import { ViewAllStaffsComponent } from './staffManagement/view-all-staffs/view-all-staffs.component';
 import { ViewAllEnquiriesComponent } from './customerManagement/view-all-enquiries/view-all-enquiries.component';
 import { ViewParentCategoriesComponent } from './contentManagement/view-parent-categories/view-parent-categories.component';
 import { ViewAllSubscriptionOrdersComponent } from './orderManagement/view-all-subscription-orders/view-all-subscription-orders.component';
+import { ViewAllOrdersComponent } from './orderManagement/view-all-orders/view-all-orders.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full' },

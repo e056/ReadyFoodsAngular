@@ -1,18 +1,19 @@
-import { OrderEntity } from './../models/order-entity';
-import { OrderEntityService } from '../services/order-entity.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Enquiry } from 'src/app/models/enquiry';
 import { NgForm } from '@angular/forms';
-import { Message, MessageService } from 'primeng/api';
 
-import { SessionService } from '../services/session.service';
+import { OrderEntity } from 'src/app/models/order-entity';
+import { OrderEntityService } from 'src/app/services/order-entity.service';
+import { SessionService } from 'src/app/services/session.service';
+import { Message, MessageService,ConfirmationService } from 'primeng/api';
 
 
 @Component({
   selector: 'app-view-all-orders',
   templateUrl: './view-all-orders.component.html',
   styleUrls: ['./view-all-orders.component.css'],
-  providers: [MessageService]
+  providers: [MessageService, ConfirmationService]
 })
 export class ViewAllOrdersComponent implements OnInit {
 

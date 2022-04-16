@@ -52,7 +52,7 @@ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" 
 
     <th>
       <div class="flex justify-content-center align-items-center">
-        Order status
+        Status
         <p-columnFilter type="text" field="status" display="menu"></p-columnFilter>
       </div>
     </th>
@@ -78,7 +78,7 @@ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" 
     <td>{{order.orderEntityId}}</td>
     <td>{{order.dateOfOrder}}</td>
     <td>{{order.numPax}}</td>
-    <td>{{order.totalCost}}</td>
+    <td>{{order.totalCost | currency:'$':'symbol'}}</td>
     <td>{{order.status}}</td>
     <td>{{order.additionalNotes}}</td>
 

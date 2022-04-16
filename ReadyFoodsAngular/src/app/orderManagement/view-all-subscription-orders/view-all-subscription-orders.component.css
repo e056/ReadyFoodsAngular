@@ -1,0 +1,82 @@
+.status-badge-PENDING {
+    border-radius: 2px;
+    padding: .25em .5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .3px;
+    background-color: #FFCDD2;
+    color: #C63737;
+ 
+}
+
+.status-badge-PROCESSED {
+    border-radius: 2px;
+    padding: .25em .5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .3px;
+    background-color: #FEEDAF;
+    color: #8A5340;
+}
+
+.status-badge-ONTHEWAY {
+    border-radius: 2px;
+    padding: .25em .5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .3px;
+    background-color: #ECCFFF;
+    color: #694382;
+}
+
+.status-badge-DELIVERED {
+    border-radius: 2px;
+    padding: .25em .5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .3px;
+    background-color: #B3E5FC;
+    color: #23547B;
+
+}
+
+
+.status-badge-RECEIVED {
+    border-radius: 2px;
+    padding: .25em .5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .3px;
+    background-color: #C8E6C9;
+    color: #256029;
+}
+
+
+.paid-badge-true {
+    border-radius: 2px;
+    padding: .25em .5rem;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 12px;
+    letter-spacing: .3px;
+    background-color: #C8E6C9;
+    color: #256029;
+}
+
+.paid-badge-false {
+    border-radius: 2px;
+    padding: .25em .5rem;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 12px;
+    letter-spacing: .3px;
+    background-color: #FFCDD2;
+    color: #C63737;
+
+}
+

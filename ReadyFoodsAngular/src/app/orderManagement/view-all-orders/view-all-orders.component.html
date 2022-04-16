@@ -11,7 +11,8 @@
 'status',
 ]">
   <ng-template pTemplate="caption">
-    <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(orderDataTable)"></button>
+    <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+      (click)="clear(orderDataTable)"></button>
     <div class="flex">
       <input pInputText type="text" (input)="
       orderDataTable.filterGlobal($any($event.target).value, 'contains')
@@ -24,15 +25,13 @@
       <th>
         <div>
           Order ID
-          <p-columnFilter type="numeric" field="balance" display="menu"></p-columnFilter>
+          <p-columnFilter type="numeric" field="orderEntityId" display="menu"></p-columnFilter>
         </div>
       </th>
 
-      <th>
-        <div class="flex justify-content-center align-items-center">
-          Date Ordered
-          <p-columnFilter type="Date" field="dateOfOrder" display="menu"></p-columnFilter>
-        </div>
+      <th [pSortableColumn]="'dateOfOrder'">Date Ordered
+        <p-sortIcon [field]="'dateOfOrder'"></p-sortIcon>
+
       </th>
 
       <th>
@@ -42,11 +41,9 @@
         </div>
       </th>
 
-      <th>
-        <div class="flex justify-content-center align-items-center">
-          Total Cost
-          <p-columnFilter type="numeric" field="totalCost" display="menu"></p-columnFilter>
-        </div>
+      <th [pSortableColumn]="'totalCost'">Total Cost
+        <p-sortIcon [field]="'totalCost'"></p-sortIcon>
+
       </th>
 
       <th>
@@ -54,13 +51,13 @@
           Status
           <p-columnFilter field="status" matchMode="equals" display="menu">
             <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                <p-dropdown [ngModel]="value" [options]="statuses" (onChange)="filter($event.value)" placeholder="Any">
-                    <ng-template let-status pTemplate="item">
-                        <span [class]="'status-badge-' + status">{{status}}</span>
-                    </ng-template>
-                </p-dropdown>
+              <p-dropdown [ngModel]="value" [options]="statuses" (onChange)="filter($event.value)" placeholder="Any">
+                <ng-template let-status pTemplate="item">
+                  <span [class]="'status-badge-' + status">{{status}}</span>
+                </ng-template>
+              </p-dropdown>
             </ng-template>
-        </p-columnFilter>
+          </p-columnFilter>
         </div>
       </th>
 
@@ -96,17 +93,18 @@
 
 
 <p-dialog [(visible)]="displayUpdate" header="Update Order Status" [modal]="true" [draggable]="true" [resizable]="true">
- <p-messages></p-messages>
+  <p-messages></p-messages>
   <br />
   <form #updateStatusForm="ngForm" (ngSubmit)="update(updateStatusForm)" update="dt">
     <div style="margin-bottom: 10px; width: auto">
       <label>Updating Order ID: {{orderToUpdate.orderEntityId}}</label>
-      <br/>
-      <br/>
-      
-      <p-dropdown  appendTo="body"  inputId="updatedStatus" name="updatedStatus" [options]="statuses" [(ngModel)]="newStatus">
+      <br />
+      <br />
+
+      <p-dropdown appendTo="body" inputId="updatedStatus" name="updatedStatus" [options]="usableStatuses"
+        [(ngModel)]="newStatus">
       </p-dropdown>
-    
+
       &nbsp;
       <p-button label="Update Status" type="submit"></p-button>
     </div>

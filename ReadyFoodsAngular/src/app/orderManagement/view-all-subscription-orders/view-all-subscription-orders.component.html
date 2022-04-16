@@ -1,12 +1,29 @@
 <h1>View All Subscription Orders</h1>
-<br/>
+<br />
 <p-messages></p-messages>
-<p-button (onClick)="processAllSubscriptionOrders()" >Process all orders</p-button>
+<p-button (onClick)="processAllSubscriptionOrders()">Process all orders</p-button>
+<br /><br />
 
-<p-table #subOrderDataTable [value]="orders" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
+<p-table #orderDataTable [value]="orders" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
+   
+[resizableColumns]="true" [autoLayout]="true"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" responsiveLayout="scroll"
-    [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
-    [globalFilterFields]="['enquiryId','title','description','resolved','customer.firstName']">
+    [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [globalFilterFields]="[
+'orderEntityId',
+'dateOfOrder',
+'dateForDelivery',
+'dateOfOrder',
+'status',
+]">
+    <ng-template pTemplate="caption">
+        <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+            (click)="clear(orderDataTable)"></button>
+        <div class="flex">
+            <input pInputText type="text" (input)="
+      orderDataTable.filterGlobal($any($event.target).value, 'contains')
+    " placeholder="Search keyword" />
+        </div>
+    </ng-template>
     <ng-template pTemplate="header">
         <!-- THIS IS THE HEADER LINE WITH FILTERS -->
         <tr>
@@ -18,16 +35,37 @@
             </th>
             <th [pSortableColumn]="'dateOfOrder'">Date Ordered
                 <p-sortIcon [field]="'dateOfOrder'"></p-sortIcon>
-              
+
             </th>
 
-            <th [pSortableColumn]="'dateOfOrder'">Date For Delivery
-                <p-sortIcon [field]="'dateOfOrder'"></p-sortIcon>
-              
-            </th>
+            <th [pSortableColumn]="'dateForDelivery'">Date For Delivery
+                <p-sortIcon [field]="'dateForDelivery'"></p-sortIcon>
 
-            <th>Status</th>
-            <th>Paid</th>
+            </th>
+               <th [pSortableColumn]="'totalCost'">Total Cost
+        <p-sortIcon [field]="'totalCost'"></p-sortIcon>
+
+      </th>
+
+            <th>
+                <div class="flex justify-content-center align-items-center">
+                  Status
+                  <p-columnFilter field="status" matchMode="equals" display="menu">
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                      <p-dropdown [ngModel]="value" [options]="statuses" (onChange)="filter($event.value)" placeholder="Any">
+                        <ng-template let-status pTemplate="item">
+                          <span [class]="'status-badge-' + status">{{status}}</span>
+                        </ng-template>
+                      </p-dropdown>
+                    </ng-template>
+                  </p-columnFilter>
+                </div>
+              </th>
+            <th>       <div>
+                Paid
+                <p-columnFilter type="boolean" field="paid" display="menu"></p-columnFilter>
+            </div></th>
+            <th>Notes</th>
             <th>Action</th>
 
 
@@ -40,13 +78,38 @@
             <td>{{order.orderEntityId}}</td>
             <td>{{order.dateOfOrder}}</td>
             <td>{{order.dateForDelivery}}</td>
-            <td>{{order.status}}</td>
-            <td>{{order.paid}}</td>
+            <td>{{order.totalCost | currency:'$':'symbol'}}</td>
+            <td> <span [class]="'status-badge-' + order.status">{{order.status}}</span></td>
+
+            <td> <span [class]="'paid-badge-' + order.paid">{{order.paid}}</span></td>
+
+            <td>{{order.additionalNotes}}</td>
             <td>
-                <p-button label="View" icon="pi pi-search"></p-button>&nbsp;
-                
+                <p-button (click)="showDialogUpdate(order)">Update</p-button>
+
             </td>
-            
+
         </tr>
     </ng-template>
+
 </p-table>
+
+<p-dialog [(visible)]="displayUpdate" header="Update Subscription Order Status" [modal]="true" [draggable]="true"
+    [resizable]="true">
+  
+    <br />
+    <form #updateStatusForm="ngForm" (ngSubmit)="update(updateStatusForm)" update="dt">
+        <div style="margin-bottom: 10px; width: auto">
+            <label>Updating Subscription Order ID: {{orderToView.orderEntityId}}</label>
+            <br />
+            <br />
+
+            <p-dropdown appendTo="body" inputId="updatedStatus" name="updatedStatus" [options]="usableStatuses"
+                [(ngModel)]="newStatus">
+            </p-dropdown>
+
+            &nbsp;
+            <p-button label="Update Status" type="submit"></p-button>
+        </div>
+    </form>
+</p-dialog>

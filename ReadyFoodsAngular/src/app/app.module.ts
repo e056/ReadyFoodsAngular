@@ -20,7 +20,7 @@ import { MessageModule } from 'primeng/message';
 import { OrderListModule } from 'primeng/orderlist';
 import { CommonModule } from '@angular/common';
 import { InputNumberModule } from 'primeng/inputnumber';
-import {ConfirmPopupModule} from 'primeng/confirmpopup';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -45,6 +45,9 @@ import { ViewAllCustomersComponent } from './customerManagement/view-all-custome
 import { ViewCustomerDetailsComponent } from './customerManagement/view-customer-details/view-customer-details.component';
 import { ViewAllEnquiriesComponent } from './customerManagement/view-all-enquiries/view-all-enquiries.component';
 import { ViewParentCategoriesComponent } from './contentManagement/view-parent-categories/view-parent-categories.component';
+import { ViewAllOrdersComponent } from './orderManagement/view-all-orders/view-all-orders.component';
+import { ViewAllSubscriptionOrdersComponent } from './orderManagement/view-all-subscription-orders/view-all-subscription-orders.component';
+import { ViewAllReviewsComponent } from './reviewManagement/view-all-reviews/view-all-reviews.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +73,10 @@ import { ViewParentCategoriesComponent } from './contentManagement/view-parent-c
     ViewCustomerDetailsComponent,
     ViewAllEnquiriesComponent,
     ViewParentCategoriesComponent,
+    ViewAllOrdersComponent,
+    ViewAllSubscriptionOrdersComponent,
+    ViewAllReviewsComponent
+
   ],
   imports: [
     BrowserModule,
@@ -99,7 +106,7 @@ import { ViewParentCategoriesComponent } from './contentManagement/view-parent-c
     CommonModule,
     InputNumberModule,
     ConfirmPopupModule,
-    
+
   ],
   providers: [],
   bootstrap: [AppComponent],

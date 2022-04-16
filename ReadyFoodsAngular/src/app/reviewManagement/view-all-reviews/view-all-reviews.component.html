@@ -1,0 +1,83 @@
+<h1>View All Reviews</h1>
+
+<p-messages></p-messages>
+<p-table #reviewDataTable [value]="reviews" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" responsiveLayout="scroll"
+    [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
+    [globalFilterFields]="['reviewId','title','description','reviewDate','customer.username','recipe.recipeId']">
+    <ng-template pTemplate="caption">
+        <div class="flex">
+            <input pInputText type="text"
+                (input)="reviewDataTable.filterGlobal($any($event.target).value , 'contains')"
+                placeholder="Search keyword" />
+
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <!-- THIS IS THE HEADER LINE WITH FILTERS -->
+        <tr>
+            <th>
+                <div>
+                    Review ID
+                    <p-columnFilter type="numeric" field="reviewId" display="menu"></p-columnFilter>
+                </div>
+            </th>
+
+
+            <th [pSortableColumn]="'reviewDate'">Date
+                <p-sortIcon [field]="'reviewDate'"></p-sortIcon>
+
+            </th>
+
+            <th>
+                <div>
+                    Username
+                    <p-columnFilter type="text" field="customer.userName" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div>
+                    Recipe
+                    <p-columnFilter type="text" field="recipe.recipeId" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>Action</th>
+        </tr>
+    </ng-template>
+    <!-- THIS IS THE BODY -->
+    <ng-template pTemplate="body" let-review>
+        <tr>
+            <td>{{review.reviewId}}</td>
+            <td>{{review.reviewDate}}</td>
+
+            <td>{{review.customer.userName}}</td>
+            <td>{{review.recipe.recipeId}}</td>
+            <td>
+                <p-button label="View" (onClick)="showDialog(review)" icon="pi pi-search"></p-button>&nbsp;
+
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<form #viewReviewForm="ngForm" (ngSubmit)="deleteReview()">
+  <p-dialog *ngIf="display" header="View Review ID: {{reviewToView.reviewId}}" [(visible)]="display"
+      [style]="{width: '50vw'}">
+      <div class="ui-g">
+
+          <p-panel header="{{reviewToView.title}} by {{(reviewToView.customer != null)?(reviewToView.customer.userName):('')}} ">
+            <p><p-rating [ngModel]="reviewToView.rating" [readonly]="true" name="rating"  [cancel]="false"></p-rating></p>
+
+              <p>{{reviewToView.description}}</p>
+
+            </p-panel>
+          <br />
+
+              <p-button label="Delete" (onClick)="deleteReview()"></p-button> &nbsp;
+
+          <br />
+      </div>
+
+
+  </p-dialog>
+</form>

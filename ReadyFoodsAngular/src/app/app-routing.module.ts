@@ -15,6 +15,9 @@ import { CreateNewStaffComponent } from './staffManagement/create-new-staff/crea
 import { ViewAllStaffsComponent } from './staffManagement/view-all-staffs/view-all-staffs.component';
 import { ViewAllEnquiriesComponent } from './customerManagement/view-all-enquiries/view-all-enquiries.component';
 import { ViewParentCategoriesComponent } from './contentManagement/view-parent-categories/view-parent-categories.component';
+import { ViewAllSubscriptionOrdersComponent } from './orderManagement/view-all-subscription-orders/view-all-subscription-orders.component';
+import { ViewAllReviewsComponent } from './reviewManagement/view-all-reviews/view-all-reviews.component';
+import { ViewAllOrdersComponent } from './orderManagement/view-all-orders/view-all-orders.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full' },
@@ -65,6 +68,20 @@ const routes: Routes = [
   {
     path: 'contentManagement/viewParentCategories',
     component: ViewParentCategoriesComponent,
+  },
+  {
+    path: 'orderManagement/viewAllOrders',
+    component:  ViewAllOrdersComponent,
+  },
+
+  {
+    path: 'orderManagement/viewAllSubscriptionOrders',
+    component:  ViewAllSubscriptionOrdersComponent,
+  },
+
+  {
+    path: 'reviewManagement/viewAllReviews',
+    component:  ViewAllReviewsComponent,
   },
 ];
 

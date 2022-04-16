@@ -118,6 +118,20 @@ export class MainMenuComponent implements OnInit {
         ],
       },
       {
+        label: 'Order Management',
+        icon: 'pi pi-user',
+        items: [
+          {
+            label: 'View All Orders',
+            routerLink: 'orderManagement/viewAllOrders',
+          },
+          {
+            label: 'View All Subscription Orders',
+            routerLink: 'orderManagement/viewAllSubscriptionOrders',
+          },
+        ],
+      },
+      {
         label: 'Customer Management',
         icon: 'pi pi-user-plus',
         items: [
@@ -129,6 +143,17 @@ export class MainMenuComponent implements OnInit {
             label: 'View All Enquiries',
             routerLink: 'customerManagement/viewAllEnquiries',
           },
+        ],
+      },
+      {
+        label: 'Comment and Review Management',
+        icon: 'pi pi-user-plus',
+        items: [
+          {
+            label: 'View All Reviews',
+            routerLink: 'reviewManagement/viewAllReviews',
+          },
+          
         ],
       },
     ];

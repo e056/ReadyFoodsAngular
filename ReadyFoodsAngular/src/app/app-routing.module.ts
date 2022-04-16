@@ -18,7 +18,7 @@ import { ViewParentCategoriesComponent } from './contentManagement/view-parent-c
 import { ViewAllSubscriptionOrdersComponent } from './orderManagement/view-all-subscription-orders/view-all-subscription-orders.component';
 import { ViewAllReviewsComponent } from './reviewManagement/view-all-reviews/view-all-reviews.component';
 import { ViewAllOrdersComponent } from './orderManagement/view-all-orders/view-all-orders.component';
-
+import { ViewAllSubscriptionsComponent } from './orderManagement/view-all-subscriptions/view-all-subscriptions.component';
 const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full' },
   { path: 'index', component: IndexComponent },
@@ -82,6 +82,11 @@ const routes: Routes = [
   {
     path: 'reviewManagement/viewAllReviews',
     component:  ViewAllReviewsComponent,
+  },
+
+  {
+    path: 'orderManagement/viewAllSubscriptions',
+    component:  ViewAllSubscriptionsComponent,
   },
 ];
 

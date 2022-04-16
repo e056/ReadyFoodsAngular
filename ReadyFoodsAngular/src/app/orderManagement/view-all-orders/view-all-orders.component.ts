@@ -3,11 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Enquiry } from 'src/app/models/enquiry';
 import { NgForm } from '@angular/forms';
 import { Status } from 'src/app/models/status';
+import { Table } from 'primeng/table';
 
 import { OrderEntity } from 'src/app/models/order-entity';
 import { OrderEntityService } from 'src/app/services/order-entity.service';
 import { SessionService } from 'src/app/services/session.service';
-import { Message, MessageService,ConfirmationService } from 'primeng/api';
+import { Message, MessageService, ConfirmationService } from 'primeng/api';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class ViewAllOrdersComponent implements OnInit {
   orderToUpdate: OrderEntity;
 
   statuses: any[];
+  usableStatuses: string[];
 
   submitted: Boolean;
   resultSuccess: Boolean;
@@ -31,7 +33,7 @@ export class ViewAllOrdersComponent implements OnInit {
   message: string | undefined;
 
   newStatus: Status | undefined;
-  
+
 
 
   constructor(private router: Router,
@@ -39,16 +41,22 @@ export class ViewAllOrdersComponent implements OnInit {
     public sessionService: SessionService,
     private orderEntityService: OrderEntityService,
     private messageService: MessageService) {
-      this.allOrders = new Array();
+    this.allOrders = new Array();
 
-      this.orderToUpdate = new OrderEntity();
+    this.orderToUpdate = new OrderEntity();
 
-      this.resultSuccess = false;
-      this.resultError = false;
-      this.submitted = false;
-      this.statuses = Object.keys(Status);
-
+    this.resultSuccess = false;
+    this.resultError = false;
+    this.submitted = false;
+    this.statuses = Object.keys(Status);
+    this.usableStatuses = Object.keys(Status);
+    const index = this.usableStatuses.indexOf("RECEIVED", 0);
+    if (index > -1) {
+      this.usableStatuses.splice(index, 1); // remove "RECEIVED"
     }
+ 
+
+  }
 
   ngOnInit(): void {
     this.checkAccessRight();
@@ -76,7 +84,7 @@ export class ViewAllOrdersComponent implements OnInit {
     }
   }
 
-  showDialogUpdate(orderToUpdate : OrderEntity) {
+  showDialogUpdate(orderToUpdate: OrderEntity) {
     this.orderToUpdate = orderToUpdate;
     this.displayUpdate = true;
   }
@@ -92,11 +100,14 @@ export class ViewAllOrdersComponent implements OnInit {
           this.resultSuccess = true;
           this.resultError = false;
           this.message = "ID: " + this.orderToUpdate.orderEntityId;
-          this.messageService.add({severity:'success', 
-          summary:'Staff response added successfully:', detail: this.message});
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Order status updated successfully:', detail: this.message
+          });
           this.retrieveOrders();
-       
-          
+          console.log('********** RE-Retrieved orders')
+
+
         },
         error: (error) => {
           this.resultError = true;
@@ -107,8 +118,11 @@ export class ViewAllOrdersComponent implements OnInit {
         }
       });
     }
-    
 
+
+  }
+  clear(table: Table) {
+    table.clear();
   }
 
 

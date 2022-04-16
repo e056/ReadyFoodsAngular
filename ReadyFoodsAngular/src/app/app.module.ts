@@ -48,6 +48,7 @@ import { ViewParentCategoriesComponent } from './contentManagement/view-parent-c
 import { ViewAllOrdersComponent } from './orderManagement/view-all-orders/view-all-orders.component';
 import { ViewAllSubscriptionOrdersComponent } from './orderManagement/view-all-subscription-orders/view-all-subscription-orders.component';
 import { ViewAllReviewsComponent } from './reviewManagement/view-all-reviews/view-all-reviews.component';
+import { ViewAllSubscriptionsComponent } from './orderManagement/view-all-subscriptions/view-all-subscriptions.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { ViewAllReviewsComponent } from './reviewManagement/view-all-reviews/vie
     ViewParentCategoriesComponent,
     ViewAllOrdersComponent,
     ViewAllSubscriptionOrdersComponent,
-    ViewAllReviewsComponent
+    ViewAllReviewsComponent,
+    ViewAllSubscriptionsComponent
 
   ],
   imports: [

@@ -2,52 +2,34 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Subscription } from '../models/subscription';
 
 
 import { SessionService } from '../services/session.service';
-import { Customer } from '../models/customer';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerService {
-  baseUrl: string = "/api/Customer";
+export class SubscriptionService {
+  baseUrl: string = "/api/Subscription";
 
   constructor(private httpClient: HttpClient,
     private sessionService: SessionService) {
   }
 
-  
-  getEnquires(): Observable<Customer[]> {
-    return this.httpClient.get<Customer[]>(
-      this.baseUrl + "/retrieveAllCustomers?username="
+  getSubscriptions(): Observable<Subscription[]> {
+    return this.httpClient.get<Subscription[]>(
+      this.baseUrl + "/retrieveAllSubscriptions?username="
       + this.sessionService.getUsername()
       + "&password=" + this.sessionService.getPassword()).pipe
       (
         catchError(this.handleError)
       );
   }
-
-  banCustomer(customerId : number) {
-    return this.httpClient.get<any>(
-      this.baseUrl + "/banCustomer/" + customerId + "?username="
-      + this.sessionService.getUsername()
-      + "&password=" + this.sessionService.getPassword()).pipe
-      (
-        catchError(this.handleError)
-      );
-  }
-
-  unbanCustomer(customerId : number) {
-    return this.httpClient.get<any>(
-      this.baseUrl + "/unbanCustomer/" + customerId + "?username="
-      + this.sessionService.getUsername()
-      + "&password=" + this.sessionService.getPassword()).pipe
-      (
-        catchError(this.handleError)
-      );
-  }
-
 
   private handleError(error: HttpErrorResponse) {
     let errorMessage: string = "";

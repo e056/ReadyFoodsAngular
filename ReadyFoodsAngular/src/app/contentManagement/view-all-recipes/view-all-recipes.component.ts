@@ -25,11 +25,6 @@ export class ViewAllRecipesComponent implements OnInit {
 
   recipes: Recipe[];
   recipeToView: Recipe;
-  recipeCategories: Category[];
-
-  ingredients: Ingredient[];
-  ingredientSpecification: IngredientSpecification[];
-  newRecipe: Recipe;
 
   submitted: Boolean;
   resultSuccess: Boolean;
@@ -37,6 +32,7 @@ export class ViewAllRecipesComponent implements OnInit {
   message: string | undefined;
   display: Boolean;
   commentsA: CommentEntity[];
+  recipeCategories: Category[];
 
 
   constructor(private router: Router,
@@ -50,17 +46,15 @@ export class ViewAllRecipesComponent implements OnInit {
     this.categories = [];
     this.recipes = [];
     this.recipeToView = new Recipe();
-    this.recipeCategories = [];
-    this.ingredients = [];
-    this.ingredientSpecification = [];
-    this.newRecipe = new Recipe();
-    this.commentsA = new Array();
 
     this.resultSuccess = false;
     this.resultError = false;
     this.submitted = false;
 
     this.display = false;
+
+    this.commentsA = new Array();
+    this.recipeCategories = new Array();
 
 
 
@@ -150,5 +144,4 @@ export class ViewAllRecipesComponent implements OnInit {
       this.router.navigate(['/accessRightError']);
     }
   }
-
 }

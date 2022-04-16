@@ -64,8 +64,18 @@ export class SessionService {
           path == '/customerManagement/viewAllCustomers' ||
           path == '/customerManagement/viewCustomerDetails' ||
           path == '/customerManagement/viewAllEnquiries' ||
+          path == '/contentManagement/CreateNewIngredient' ||
+          path == '/contentManagement/CreateNewRecipe' ||
+          path == '/contentManagement/updateRecipe' ||
           path == '/contentManagement/viewAllRecipes' ||
-          path == '/contentManagement/ViewRecipeDetails'
+          path == '/contentManagement/viewParentCategories' ||
+          path == '/contentManagement/ViewRecipeDetails' ||
+          path == '/contentManagement/viewAllIngredients' ||
+          path == '/contentManagement/viewIngredientDetails' ||
+          path == '/reviewManagement/viewAllReviews'||
+          path == '/orderManagement/viewAllOrders' ||
+          path == '/orderManagement/viewAllSubscriptionOrders' ||
+          path == '/orderManagement/viewAllSubscriptions'
         ) {
           return true;
         } else {
@@ -88,7 +98,8 @@ export class SessionService {
           path == '/staffManagement/viewAllStaffs' ||
           path == '/reviewManagement/viewAllReviews'||
           path == '/orderManagement/viewAllOrders' ||
-          path == '/orderManagement/viewAllSubscriptionOrders'
+          path == '/orderManagement/viewAllSubscriptionOrders' ||
+          path == '/orderManagement/viewAllSubscriptions'
         ) {
           return true;
         } else {

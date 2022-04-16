@@ -66,6 +66,7 @@ export class ViewAllReviewsComponent implements OnInit {
     this.reviewService.deleteReview(this.reviewToView.reviewId).subscribe({
       next: (response) => {
         this.messageService.add({ severity: 'success', summary: 'Review Deleted Successfully!', detail: "Review Id: " + this.reviewToView.reviewId });
+        this.retrieveReviews();
       },
       error: (error) => {
         this.messageService.add({ severity: 'error', summary: 'Error occured with deleting staff', detail: error });

@@ -4,11 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/models/category';
 import { CategoryService } from 'src/app/services/category.service';
 import { SessionService } from 'src/app/services/session.service';
+import { Message, MessageService, ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-view-parent-categories',
   templateUrl: './view-parent-categories.component.html',
   styleUrls: ['./view-parent-categories.component.css'],
+  providers: [MessageService],
 })
 export class ViewParentCategoriesComponent implements OnInit {
   categories: Category[];
@@ -23,6 +25,7 @@ export class ViewParentCategoriesComponent implements OnInit {
   categoriesSub: Category[];
   selectedParentCategory: Category | null;
   categoryToUpdate: Category;
+  categoriesWithoutDietType: Category[];
 
   submitted: Boolean;
   resultSuccess: Boolean;
@@ -33,12 +36,14 @@ export class ViewParentCategoriesComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     public sessionService: SessionService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private messageService: MessageService
   ) {
     this.categories = new Array();
     this.isParent = 0;
     this.name = '';
     this.newCategory = new Category();
+    this.categoriesWithoutDietType = new Array();
     this.isSubBoolean = false;
     this.categoriesSub = new Array();
     this.selectedParentCategory = null;
@@ -55,6 +60,22 @@ export class ViewParentCategoriesComponent implements OnInit {
     this.categoryService.getParentCategories().subscribe({
       next: (response) => {
         this.categories = response;
+      },
+      error: (error) => {
+        console.log('********** ViewAllParentCategories.ts: ' + error);
+      },
+    });
+
+    this.categoryService.getParentCategories().subscribe({
+      next: (response) => {
+        this.categoriesWithoutDietType = response;
+
+        for (let i = 0; i < this.categoriesWithoutDietType.length; i++) {
+          if (this.categoriesWithoutDietType[i].name == 'Diet Type') {
+            let category = this.categoriesWithoutDietType.splice(i, i);
+            console.log(category);
+          }
+        }
       },
       error: (error) => {
         console.log('********** ViewAllParentCategories.ts: ' + error);
@@ -125,9 +146,29 @@ export class ViewParentCategoriesComponent implements OnInit {
             this.resultError = false;
             this.message =
               'New Category ' + this.newCategory.name + ' created successfully';
-
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Category created successfully!:',
+              detail: this.message,
+            });
             this.newCategory = new Category();
             this.selectedParentCategory = null;
+
+            //Update the parent and sub categories table
+            this.categoryService.getParentCategories().subscribe({
+              next: (response) => {
+                this.categories = response;
+              },
+              error: (error) => {
+                console.log('********** ViewAllParentCategories.ts: ' + error);
+              },
+            });
+
+            this.categoryService.getSubCategories().subscribe({
+              next: (response) => {
+                this.categoriesSub = response;
+              },
+            });
 
             createCategoryForm.resetForm();
           },
@@ -140,21 +181,6 @@ export class ViewParentCategoriesComponent implements OnInit {
             console.log('********** CreateNewProductComponent.ts: ' + error);
           },
         });
-      //Update the parent and sub categories table
-      this.categoryService.getParentCategories().subscribe({
-        next: (response) => {
-          this.categories = response;
-        },
-        error: (error) => {
-          console.log('********** ViewAllParentCategories.ts: ' + error);
-        },
-      });
-
-      this.categoryService.getSubCategories().subscribe({
-        next: (response) => {
-          this.categoriesSub = response;
-        },
-      });
     }
   }
 
@@ -166,7 +192,34 @@ export class ViewParentCategoriesComponent implements OnInit {
         next: (response) => {
           this.resultSuccess = true;
           this.resultError = false;
-          this.message = 'Category updated successfully';
+          this.message =
+            'Category ' + this.categoryToUpdate.name + ' updated successfully';
+
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Category updated successfully!:',
+            detail: this.message,
+          });
+
+          this.categoryToUpdate = new Category();
+
+          //Update the parent and sub categories table
+          this.categoryService.getParentCategories().subscribe({
+            next: (response) => {
+              this.categories = response;
+            },
+            error: (error) => {
+              console.log('********** ViewAllParentCategories.ts: ' + error);
+            },
+          });
+
+          this.categoryService.getSubCategories().subscribe({
+            next: (response) => {
+              this.categoriesSub = response;
+            },
+          });
+
+          updateCategoryForm.resetForm();
         },
         error: (error) => {
           this.resultError = true;
@@ -177,24 +230,6 @@ export class ViewParentCategoriesComponent implements OnInit {
           console.log('********** UpdateCategoryComponent.ts: ' + error);
         },
       });
-
-      //Update the parent and sub categories table
-      this.categoryService.getParentCategories().subscribe({
-        next: (response) => {
-          this.categories = response.slice();
-        },
-        error: (error) => {
-          console.log('********** ViewAllParentCategories.ts: ' + error);
-        },
-      });
-
-      this.categoryService.getSubCategories().subscribe({
-        next: (response) => {
-          this.categoriesSub = response.slice();
-        },
-      });
-
-      updateCategoryForm.resetForm();
     }
   }
 }

@@ -22,6 +22,7 @@
   <p-button (click)="showDialogSub()" label="+ Create a new category">
   </p-button>
 </div>
+<p-messages></p-messages>
 <p-table
   *ngIf="isSubBoolean == true"
   name="table"
@@ -204,7 +205,7 @@
       </div>
       <div style="margin-bottom: 20px">
         <p-table
-          [value]="categories"
+          [value]="categoriesWithoutDietType"
           selectionMode="single"
           [(selection)]="selectedParentCategory"
         >

@@ -5,6 +5,9 @@
     [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
     [globalFilterFields]="['customerId','firstName','lastName','amountSpent']">
     <ng-template pTemplate="caption">
+        <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+      (click)="clear(customerTable)"></button>
+    
         <div class="flex">
             <input pInputText type="text" (input)="customerTable.filterGlobal($any($event.target).value , 'contains')"
                 placeholder="Search keyword" />
@@ -66,7 +69,8 @@
                   : "NOT BANNED"
               }}
               </span></td>
-            <td><p-button label="View" (onClick)="showDialog(customer)" icon="pi pi-search"></p-button></td>
+            <td><p-button label="View" (onClick)="showDialog(customer)"
+                 icon="pi pi-search"></p-button></td>
 
         </tr>
     </ng-template>
@@ -87,8 +91,25 @@
             <p><label>{{customerToView.address}}</label></p>
             <p><label>+65 {{customerToView.contactNumber}}</label></p>
             <br />
-            <p-button label="Ban" [disabled]="customerToView.isBanned!" (click)="confirm($event)"></p-button>
-
+            <!-- <p-button label="Ban" [disabled]="customerToView.isBanned!" 
+                (click)="confirm($event)"></p-button> -->
+            <div *ngIf="customerToView.isBanned">
+                <p-button
+                  label="Unban"
+                  icon="pi pi-undo"
+                  (click)="confirmUnban($event)"
+                  
+              
+                ></p-button>
+              </div>
+              <div *ngIf="!customerToView.isBanned">
+                <p-button
+                  label="Ban"
+                  icon="pi pi-ban"
+                  (click)="confirmBan($event)"
+   
+                ></p-button>
+              </div>
             <br />
         </div>
 

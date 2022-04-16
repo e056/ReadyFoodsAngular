@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Enquiry } from 'src/app/models/enquiry';
 import { NgForm } from '@angular/forms';
+import { Table } from 'primeng/table';
+
 
 import { Customer } from 'src/app/models/customer';
 import { CustomerService } from 'src/app/services/customer.service';
 import { SessionService } from 'src/app/services/session.service';
-import { Message, MessageService,ConfirmationService } from 'primeng/api';
+import { Message, MessageService, ConfirmationService } from 'primeng/api';
 
 
 @Component({
@@ -21,7 +23,7 @@ export class ViewAllCustomersComponent implements OnInit {
 
   customerToView: Customer
 
-  display : boolean
+  display: boolean
 
   resultSuccess: boolean;
   resultError: boolean;
@@ -41,12 +43,21 @@ export class ViewAllCustomersComponent implements OnInit {
 
     this.resultSuccess = false;
     this.resultError = false;
-   }
+  }
 
 
 
   ngOnInit(): void {
-    this.checkAccessRight()
+    this.checkAccessRight();
+    this.retrieveAllCustomers();
+
+  }
+
+  clear(table: Table) {
+    table.clear();
+  }
+
+  retrieveAllCustomers() {
     console.log('********** ViewAllCustomers.ts: ' + "init");
     this.customerService.getEnquires().subscribe({
       next: (response) => {
@@ -57,6 +68,7 @@ export class ViewAllCustomersComponent implements OnInit {
         console.log('********** ViewAllCustomers.ts: ' + error);
       }
     });
+
   }
 
   checkAccessRight() {
@@ -72,37 +84,111 @@ export class ViewAllCustomersComponent implements OnInit {
   }
 
   
-  confirm(event: Event) {
+  confirmBan(event: Event) {
     if (this.customerToView.isBanned) return
     this.confirmationService.confirm({
-        target: event.target!,
-        message: 'Are you sure that you want to proceed? This ban (on reviewing and commenting) cannot be reversed.',
-        icon: 'pi pi-exclamation-triangle',
-        accept: () => {
+      target: event.target!,
+      message: 'Are you sure that you want to ban this customer?',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
 
-          this.customerService.banCustomer(this.customerToView.customerId!).subscribe({
-            next: (response) => {
-              this.resultSuccess = true;
-              this.resultError = false;
-              this.message = "ID: " + this.customerToView.customerId;
-              this.messageService.add({severity:'success', 
-              summary:'Customer banned:', detail: this.message});
+        this.customerService.banCustomer(this.customerToView.customerId!).subscribe({
+          next: (response) => {
+            this.resultSuccess = true;
+            this.resultError = false;
+            this.message = "ID: " + this.customerToView.customerId;
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Customer banned:', detail: this.message
+            });
+            this.retrieveAllCustomers();
 
-            },
-            error: (error) => {
-              this.resultError = true;
-              this.resultSuccess = false;
-              this.message = "An error has occurred while updating the enquiry: " + error;
-    
-              console.log('**********  view-all-enquires.ts: ' + error);
-            }
-          });
-  
-        },
-        reject: () => {
-            //reject action
-        }
+          },
+          error: (error) => {
+            this.resultError = true;
+            this.resultSuccess = false;
+            this.message = "An error has occurred while banning: " + error;
+          }
+        });
+
+      },
+      reject: () => {
+        //reject action
+      }
     });
-}
+  }
+
+  
+  confirmUnban(event: Event) {
+    if (!this.customerToView.isBanned) return
+    this.confirmationService.confirm({
+      target: event.target!,
+      message: 'Are you sure that you want to unban this customer?',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+
+        this.customerService.unbanCustomer(this.customerToView.customerId!).subscribe({
+          next: (response) => {
+            this.resultSuccess = true;
+            this.resultError = false;
+            this.message = "ID: " + this.customerToView.customerId;
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Customer unbanned:', detail: this.message
+            });
+            this.retrieveAllCustomers();
+
+          },
+          error: (error) => {
+            this.resultError = true;
+            this.resultSuccess = false;
+            this.message = "An error has occurred while banning: " + error;
+          }
+        });
+
+      },
+      reject: () => {
+        //reject action
+      }
+    });
+  }
+
+
+
+
+  // confirm(event: Event) {
+  //   if (this.customerToView.isBanned) return
+  //   this.confirmationService.confirm({
+  //     target: event.target!,
+  //     message: 'Are you sure that you want to proceed? This ban (on reviewing and commenting) cannot be reversed.',
+  //     icon: 'pi pi-exclamation-triangle',
+  //     accept: () => {
+
+  //       this.customerService.banCustomer(this.customerToView.customerId!).subscribe({
+  //         next: (response) => {
+  //           this.resultSuccess = true;
+  //           this.resultError = false;
+  //           this.message = "ID: " + this.customerToView.customerId;
+  //           this.messageService.add({
+  //             severity: 'success',
+  //             summary: 'Customer banned:', detail: this.message
+  //           });
+
+  //         },
+  //         error: (error) => {
+  //           this.resultError = true;
+  //           this.resultSuccess = false;
+  //           this.message = "An error has occurred while updating the enquiry: " + error;
+
+  //           console.log('**********  view-all-enquires.ts: ' + error);
+  //         }
+  //       });
+
+  //     },
+  //     reject: () => {
+  //       //reject action
+  //     }
+  //   });
+  // }
 
 }

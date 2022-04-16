@@ -21,11 +21,6 @@ export class ViewAllRecipesComponent implements OnInit {
 
   recipes: Recipe[];
   recipeToView: Recipe;
-  recipeCategories: Category[];
-
-  ingredients: Ingredient[];
-  ingredientSpecification: IngredientSpecification[];
-  newRecipe: Recipe;
 
   submitted: Boolean;
   resultSuccess: Boolean;
@@ -40,10 +35,6 @@ export class ViewAllRecipesComponent implements OnInit {
     this.categories = [];
     this.recipes = [];
     this.recipeToView = new Recipe();
-    this.recipeCategories = [];
-    this.ingredients = [];
-    this.ingredientSpecification = [];
-    this.newRecipe = new Recipe();
 
     this.resultSuccess = false;
     this.resultError = false;
@@ -77,10 +68,4 @@ export class ViewAllRecipesComponent implements OnInit {
       this.router.navigate(['/accessRightError']);
     }
   }
-
-  getParentCatName(categoryId: number): string {
-    
-    return "name";
-  }
-
 }

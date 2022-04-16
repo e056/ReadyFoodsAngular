@@ -1,6 +1,7 @@
 <h1>View All Subscription Orders</h1>
 <br/>
-<p-button>Process all orders</p-button>
+<p-messages></p-messages>
+<p-button (onClick)="processAllSubscriptionOrders()" >Process all orders</p-button>
 
 <p-table #subOrderDataTable [value]="orders" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" responsiveLayout="scroll"

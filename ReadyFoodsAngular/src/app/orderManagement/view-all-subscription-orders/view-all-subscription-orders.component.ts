@@ -56,4 +56,20 @@ export class ViewAllSubscriptionOrdersComponent implements OnInit {
     });
   }
 
+  processAllSubscriptionOrders() {
+    this.orderEntityService.processAllSubscriptionOrders().subscribe({
+      next: (response) => {
+     
+        this.messageService.add({severity:'success', 
+        summary:'Orders processed:', detail: "x" + response});
+        
+       
+      },
+      error: (error) => {
+        console.log('********** ViewAllProductsComponent.ts: ' + error);
+      }
+    });
+
+  }
+
 }

@@ -6,6 +6,7 @@ import { Review } from "./review";
 export class Recipe {
 
     recipeId: number | undefined;
+    recipeTitle: string| undefined;
     recipeChef: string | undefined;
     cookingTime: number | undefined;
     recipeSteps: string | undefined;
@@ -17,16 +18,17 @@ export class Recipe {
     picUrl: string | undefined;
     videoURL: string | undefined;
 
-    comments: CommentEntity[] | undefined;
-    reviews: Review[] | undefined;
-    ingredientSpecificationList: Ingredient[] | undefined;
-    categories: Category[] | undefined;
+    comments: CommentEntity[] | undefined | null;
+    reviews: Review[] | undefined | null;
+    ingredientSpecificationList: Ingredient[] | undefined | null;
+    categories: Category[] | undefined | null;
 
-    constructor(recipeId?: number, recipeChef?: string, cookingTime?: number, recipeSteps?: string,
+    constructor(recipeId?: number, recipeTitle?: string, recipeChef?: string, cookingTime?: number, recipeSteps?: string,
         caloriesPerServing?: number, carbsPerServing?: number, fatsPerServing?: number,
         proteinsPerServing?: number, sugarPerServing?: number, videoURL?: string) {
 
         this.recipeId = recipeId;
+        this.recipeTitle = recipeTitle;
         this.recipeChef = recipeChef;
         this.cookingTime = cookingTime;
         this.recipeSteps = recipeSteps;

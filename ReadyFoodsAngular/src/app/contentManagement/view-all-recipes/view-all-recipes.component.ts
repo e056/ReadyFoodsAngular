@@ -17,10 +17,7 @@ import { SessionService } from 'src/app/services/session.service';
 })
 export class ViewAllRecipesComponent implements OnInit {
 
-  categories: Category[];
-
   recipes: Recipe[];
-  recipeToView: Recipe;
 
   submitted: Boolean;
   resultSuccess: Boolean;
@@ -32,9 +29,7 @@ export class ViewAllRecipesComponent implements OnInit {
     public sessionService: SessionService,
     private recipeService: RecipeService,
     private categoryService: CategoryService) {
-    this.categories = [];
     this.recipes = [];
-    this.recipeToView = new Recipe();
 
     this.resultSuccess = false;
     this.resultError = false;
@@ -51,15 +46,6 @@ export class ViewAllRecipesComponent implements OnInit {
       error: (error) => {
         console.log('********** ViewAllRecipes.ts: ' + error);
       }
-    });
-
-    this.categoryService.getParentCategories().subscribe({
-      next: (response) => {
-        this.categories = response;
-      },
-      error: (error) => {
-        console.log('********** ViewAllParentCategories.ts: ' + error);
-      },
     });
   }
 

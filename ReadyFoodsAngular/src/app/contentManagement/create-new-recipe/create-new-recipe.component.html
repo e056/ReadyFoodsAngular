@@ -1,1 +1,86 @@
-<p>create-new-recipe works!</p>
+<h3>Create New Recipe</h3>
+<br />
+<!-- 
+<form class="basic-container" [formGroup]="emailForm">
+	<div formArrayName="emails">
+    <div class="row" *ngFor="let email of emailForm.get('emails').controls; let i = index"
+        [formGroupName]="i"> -->
+
+<div *ngIf="resultSuccess == true" style="color: rgb(73, 140, 95)">
+    {{ message }}
+</div>
+<div *ngIf="resultError == true" style="color: red">
+    {{ message }}
+</div>
+
+<form #createRecipeForm="ngForm" (ngSubmit)="createRecipe(createRecipeForm)">
+
+    <div>
+        <label for="title">Recipe Title:</label>
+        <input id="title" type="text" name="title" pInputText [(ngModel)]="newRecipe.recipeTitle" required="true"
+            #title="ngModel" maxlength="64" minlength="2" />
+    </div>
+
+    <div>
+        <label for="chef">Recipe Chef:</label>
+        <input id="chef" type="text" name="chef" pInputText [(ngModel)]="newRecipe.recipeChef" required="true"
+            #chef="ngModel" maxlength="64" minlength="2" />
+    </div>
+
+    <div>
+        <label for="cookingTime">Cooking Time:</label>
+        <p-inputNumber inputId="cookingTime" name="cookingTime" [(ngModel)]="newRecipe.cookingTime" [min]="5"
+            [max]="240">
+        </p-inputNumber>
+    </div>
+
+    <div>
+        <label for="recipeSteps">Recipe Steps:</label>
+        <p-editor id="recipeSteps" name="recipeSteps" [(ngModel)]="newRecipe.recipeSteps" [style]="{'height':'320px'}">
+        </p-editor>
+    </div>
+
+    <div>
+        <label for="calories">Amount of calories per serving: </label>
+        <p-inputNumber inputId="calories" name="calories" [(ngModel)]="newRecipe.caloriesPerServing" [min]="0">
+        </p-inputNumber>
+    </div>
+
+    <div>
+        <label for="carbs">Amount of carbs per serving: </label>
+        <p-inputNumber inputId="carbs" name="carbs" [(ngModel)]="newRecipe.carbsPerServing" [min]="0">
+        </p-inputNumber>
+    </div>
+
+    <div>
+        <label for="fats">Amount of fats per serving: </label>
+        <p-inputNumber inputId="fats" name="fats" [(ngModel)]="newRecipe.fatsPerServing" [min]="0">
+        </p-inputNumber>
+    </div>
+
+    <div>
+        <label for="protein">Amount of protein per serving: </label>
+        <p-inputNumber inputId="protein" name="protein" [(ngModel)]="newRecipe.proteinsPerServing" [min]="0">
+        </p-inputNumber>
+    </div>
+
+    <div>
+        <label for="sugar">Amount of sugar per serving: </label>
+        <p-inputNumber inputId="sugar" name="sugar" [(ngModel)]="newRecipe.sugarPerServing" [min]="0">
+        </p-inputNumber>
+    </div>
+
+    <div>
+        <label for="picUrl">Picture Url: </label>
+        <input id="picUrl" type="text" name="picUrl" pInputText [(ngModel)]="newRecipe.picUrl" required="true"
+            #picUrl="ngModel" maxlength="256" minlength="16"
+            placeholder="Please insert only links ending with .png, .jpg or .jpeg" />
+    </div>
+
+    <div>
+        <label for="picUrl">Video Url: </label>
+        <input id="vidUrl" type="text" name="vidUrl" pInputText [(ngModel)]="newRecipe.videoURL" required="true"
+            #vidUrl="ngModel" maxlength="256" minlength="16" placeholder="Please insert embedded video links" />
+    </div>
+
+</form>

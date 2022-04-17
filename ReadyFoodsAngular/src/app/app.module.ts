@@ -21,6 +21,7 @@ import { OrderListModule } from 'primeng/orderlist';
 import { CommonModule } from '@angular/common';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { EditorModule } from 'primeng/editor';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -108,6 +109,7 @@ import { ViewAllSubscriptionsComponent } from './orderManagement/view-all-subscr
     CommonModule,
     InputNumberModule,
     ConfirmPopupModule,
+    EditorModule
 
   ],
   providers: [],

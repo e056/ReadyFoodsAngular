@@ -5,6 +5,9 @@ import { catchError } from 'rxjs/operators';
 
 import { SessionService } from './session.service';
 import { Recipe } from '../models/recipe';
+import { IngredientSpecification } from '../models/ingredient-specification';
+import { CreateIngredientSpecificationReq } from '../models/create-ingredient-specification-req';
+import { CreateRecipeReq } from '../models/create-recipe-req';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -20,20 +23,40 @@ export class RecipeService {
   constructor(
     private httpClient: HttpClient,
     private sessionService: SessionService
-  ) {}
+  ) { }
 
   getAllRecipes(): Observable<Recipe[]> {
     return this.httpClient.get<Recipe[]>(this.baseUrl + "/retrieveAllRecipes?username=" + this.sessionService.getUsername() + "&password=" + this.sessionService.getPassword()).pipe
-    (
-      catchError(this.handleError)
-    );
-  } 
+      (
+        catchError(this.handleError)
+      );
+  }
 
   getRecipeByRecipeId(recipeId: number): Observable<Recipe> {
     return this.httpClient.get<Recipe>(this.baseUrl + "/retrieveRecipe/" + recipeId + "?username=" + this.sessionService.getUsername() + "&password=" + this.sessionService.getPassword()).pipe
-    (
-      catchError(this.handleError)
+      (
+        catchError(this.handleError)
+      );
+  }
+
+  createIngredientSpecification(ingredientSpecification: IngredientSpecification): Observable<number> {
+    let createIngredientSpecificationReq: CreateIngredientSpecificationReq = new CreateIngredientSpecificationReq(
+      this.sessionService.getUsername(), this.sessionService.getPassword(), 
+      ingredientSpecification,
     );
+    return this.httpClient
+      .put<number>("/api/IngredientSpecification", createIngredientSpecificationReq, httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
+  createRecipe(recipe: Recipe, ingredientSpecificationIds: number[]): Observable<number> {
+    let createRecipeReq: CreateRecipeReq = new CreateRecipeReq(
+      this.sessionService.getUsername(), this.sessionService.getPassword(),
+      recipe, ingredientSpecificationIds
+    );
+    return this.httpClient
+      .put<number>(this.baseUrl, createRecipeReq, httpOptions)
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {

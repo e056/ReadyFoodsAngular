@@ -1,5 +1,8 @@
-<h3>ReadyFoods Recipes</h3>
+<h3>All Products</h3>
 <br />
+
+<p-messages>
+</p-messages>
 
 <p-table name="recipeTable" #dt [value]="recipes" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
     [rowsPerPageOptions]="[10,25,50]" responsiveLayout="scroll" [filterDelay]="0"
@@ -7,7 +10,7 @@
 
     <ng-template pTemplate="caption">
         <div class="table-header">
-            List of Customers
+            List of Recipes
             <span class="p-input-icon-left">
                 <i class="pi pi-search"></i>
                 <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')"
@@ -36,6 +39,7 @@
                 </div>
             </th>
             <th>Categories</th>
+            <th>Action</th>
         </tr>
     </ng-template>
 
@@ -43,10 +47,11 @@
         <tr>
             <td>{{recipe.recipeId}}</td>
             <td>{{recipe.recipeTitle}}</td>
-            <td><img src="https://i.imgur.com/eC2H1ix.png"/>
-            <br/> Here is a cute otter to cheer up your day, 
-            <br/>and to test function of storing pic as 
-            <br>url string in recipe works. It works! :)</td>
+            <td><img src="https://i.imgur.com/eC2H1ix.png" />
+                <br /> Here is a cute otter to cheer up your day,
+                <br />and to testing function of storing pic as
+                <br>url string in recipe works. It works! :)
+            </td>
             <td>{{recipe.recipeChef}}</td>
             <td>{{recipe.cookingTime}}</td>
             <td>
@@ -65,9 +70,77 @@
     </ng-template>
 </p-table>
 </td>
+<td>
+    <p-button label="View Comments" (onClick)="showDialog(recipe)" icon="pi pi-search"></p-button>&nbsp;
+</td>
+
 </tr>
 </ng-template>
 
-
-
 </p-table>
+
+
+<p-dialog *ngIf="display" header="View Comments for Recipe ID: {{recipeToView.recipeId}}" [(visible)]="display"
+    [style]="{width: '50vw'}">
+    <div class="ui-g">
+
+        <p-table #commentDataTable name="recipeTable" [value]="commentsA" dataKey="id"
+            [globalFilterFields]="['commentId','commentDate','customerName','description']">
+
+            <ng-template pTemplate="caption">
+                <div class="flex">
+                    <input pInputText type="text"
+                        (input)="commentDataTable.filterGlobal($any($event.target).value , 'contains')"
+                        placeholder="Search keyword" />
+
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="header">
+                <!-- THIS IS THE HEADER LINE WITH FILTERS -->
+                <tr>
+                    <th>
+                        <div>
+                            Comment ID
+                            <p-columnFilter type="numeric" field="commentId" display="menu"></p-columnFilter>
+                        </div>
+                    </th>
+
+
+                    <th [pSortableColumn]="'commentDate'">Date
+                        <p-sortIcon [field]="'commentDate'"></p-sortIcon>
+
+                    </th>
+
+                    <th>
+                        <div>
+                            Username
+                            <p-columnFilter type="text" field="customerName" display="menu"></p-columnFilter>
+                        </div>
+                    </th>
+
+                    <th>
+                        <div>
+                            Description
+                            <p-columnFilter type="text" field="description" display="menu"></p-columnFilter>
+                        </div>
+                    </th>
+
+                    <th>Action</th>
+                </tr>
+            </ng-template>
+            <!-- THIS IS THE BODY -->
+            <ng-template pTemplate="body" let-comment>
+                <tr>
+                    <td>{{comment.commentEntityId}}</td>
+                    <td>{{comment.commentDate}}</td>
+                    <td>{{comment.customerName}}</td>
+                    <td>{{comment.description}}</td>
+                    <td>
+                        <p-button label="Delete" (onClick)="deleteComment(comment)" icon="pi pi-search"></p-button>
+                        &nbsp;
+
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>

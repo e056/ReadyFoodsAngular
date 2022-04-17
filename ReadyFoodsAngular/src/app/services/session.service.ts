@@ -72,7 +72,7 @@ export class SessionService {
           path == '/contentManagement/ViewRecipeDetails' ||
           path == '/contentManagement/viewAllIngredients' ||
           path == '/contentManagement/viewIngredientDetails' ||
-          path == '/reviewManagement/viewAllReviews'||
+          path == '/reviewManagement/viewAllReviews' ||
           path == '/orderManagement/viewAllOrders' ||
           path == '/orderManagement/viewAllSubscriptionOrders' ||
           path == '/orderManagement/viewAllSubscriptions'
@@ -96,7 +96,7 @@ export class SessionService {
           path == '/contentManagement/viewIngredientDetails' ||
           path == '/staffManagement/createNewStaff' ||
           path == '/staffManagement/viewAllStaffs' ||
-          path == '/reviewManagement/viewAllReviews'||
+          path == '/reviewManagement/viewAllReviews' ||
           path == '/orderManagement/viewAllOrders' ||
           path == '/orderManagement/viewAllSubscriptionOrders' ||
           path == '/orderManagement/viewAllSubscriptions'

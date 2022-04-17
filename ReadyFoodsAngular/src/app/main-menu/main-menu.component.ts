@@ -64,6 +64,10 @@ export class MainMenuComponent implements OnInit {
             routerLink: 'contentManagement/CreateNewIngredient',
           },
           {
+            label: 'View All Ingredients',
+            routerLink: 'contentManagement/viewAllIngredients',
+          },
+          {
             label: 'View Categories',
             routerLink: 'contentManagement/viewParentCategories',
           },
@@ -86,7 +90,6 @@ export class MainMenuComponent implements OnInit {
             label: 'View All Subscription Orders',
             routerLink: 'orderManagement/viewAllSubscriptionOrders',
           },
-          
         ],
       },
       {
@@ -111,7 +114,6 @@ export class MainMenuComponent implements OnInit {
             label: 'View All Reviews',
             routerLink: 'reviewManagement/viewAllReviews',
           },
-          
         ],
       },
     ];
@@ -151,6 +153,10 @@ export class MainMenuComponent implements OnInit {
             routerLink: 'contentManagement/CreateNewIngredient',
           },
           {
+            label: 'View All Ingredients',
+            routerLink: 'contentManagement/viewAllIngredients',
+          },
+          {
             label: 'View Categories',
             routerLink: 'contentManagement/viewParentCategories',
           },
@@ -186,7 +192,6 @@ export class MainMenuComponent implements OnInit {
             label: 'View All Subscription Orders',
             routerLink: 'orderManagement/viewAllSubscriptionOrders',
           },
-          
         ],
       },
       {
@@ -211,7 +216,6 @@ export class MainMenuComponent implements OnInit {
             label: 'View All Reviews',
             routerLink: 'reviewManagement/viewAllReviews',
           },
-          
         ],
       },
     ];

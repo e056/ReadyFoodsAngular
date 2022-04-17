@@ -56,14 +56,6 @@ export class MainMenuComponent implements OnInit {
             routerLink: 'contentManagement/viewAllRecipes',
           },
           {
-            label: 'Create New Recipe',
-            routerLink: 'contentManagement/CreateNewRecipe',
-          },
-          {
-            label: 'Create New Ingredient',
-            routerLink: 'contentManagement/CreateNewIngredient',
-          },
-          {
             label: 'View All Ingredients',
             routerLink: 'contentManagement/viewAllIngredients',
           },

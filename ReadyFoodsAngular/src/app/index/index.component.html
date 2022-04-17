@@ -9,6 +9,6 @@
 <ng-template [ngIf]="sessionService.getIsLogin() == true">		
     <br/><br/>
     
-    You are logged in, welcome (This name is to try accessing session service property): {{sessionService.getCurrentStaff().firstName}}
+    You are logged in, welcome: {{sessionService.getCurrentStaff().firstName}}
 
 </ng-template>

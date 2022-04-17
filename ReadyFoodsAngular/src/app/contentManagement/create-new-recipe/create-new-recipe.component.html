@@ -172,14 +172,14 @@
                     <td>
                         <input type="number" name="quantityPerServing" pInputText [(ngModel)]="is.quantityPerServing"
                             [min]="0" />
-                        <label> value="{{is.quantityPerServing}}" </label>
+                        <label> Current quantity selected="{{is.quantityPerServing}}" </label>
                     </td>
                     <td>
 
                         <p-dropdown inputId="preparationMethod" name="preparationMethod" [options]="preparationMethod"
                             [(ngModel)]="is.preperationMethod">
                         </p-dropdown>
-                        <label> value="{{is.preparationMethod}}" </label>
+                        <!-- <label> value="{{is.preparationMethod}}" </label> -->
                     </td>
                 </tr>
             </ng-template>

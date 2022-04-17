@@ -51,8 +51,11 @@ export class RecipeService {
 
   createRecipe(recipe: Recipe, categoryIds: number[], ingredientSpecificationIds: number[]): Observable<number> {
     let createRecipeReq: CreateRecipeReq = new CreateRecipeReq(
-      this.sessionService.getUsername(), this.sessionService.getPassword(),
-      recipe, categoryIds, ingredientSpecificationIds
+      this.sessionService.getUsername(), 
+      this.sessionService.getPassword(),
+      recipe, 
+      categoryIds, 
+      ingredientSpecificationIds
     );
     return this.httpClient
       .put<number>(this.baseUrl, createRecipeReq, httpOptions)

@@ -8,9 +8,9 @@ export class CreateIngredientSpecificationReq {
     ingredient: Ingredient | undefined;
 
     constructor(username?: string, password?: string, ingredientSpecification?: IngredientSpecification) {
-    this.username = username;
-    this.password = password;
-    this.ingredientSpecification = ingredientSpecification;
-    this.ingredient = ingredientSpecification?.ingredient;
-}
+        this.username = username;
+        this.password = password;
+        this.ingredientSpecification = ingredientSpecification;
+        this.ingredient = ingredientSpecification?.ingredient;
+    }
 }

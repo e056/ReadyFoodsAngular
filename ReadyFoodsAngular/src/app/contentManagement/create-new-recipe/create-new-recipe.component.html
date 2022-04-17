@@ -10,73 +10,187 @@
 </div>
 
 <form #createRecipeForm="ngForm" (ngSubmit)="createRecipe(createRecipeForm)">
+    <p-panel class="card" header="Create New Recipe">
+        <div class="p-fluid grid" style="margin-bottom: 10px;margin-top: 10px;">
+            <label for="title">Recipe Title:</label>
+            <input id="title" type="text" name="title" pInputText [(ngModel)]="newRecipe.recipeTitle" required="true"
+                #title="ngModel" maxlength="64" minlength="2" />
+        </div>
 
-    <div>
-        <label for="title">Recipe Title:</label>
-        <input id="title" type="text" name="title" pInputText [(ngModel)]="newRecipe.recipeTitle" required="true"
-            #title="ngModel" maxlength="64" minlength="2" />
-    </div>
+        <div class="p-fluid grid" style="margin-bottom: 10px;margin-top: 10px;">
+            <label for="chef">Recipe Chef:</label>
+            <input id="chef" type="text" name="chef" pInputText [(ngModel)]="newRecipe.recipeChef" required="true"
+                #chef="ngModel" maxlength="64" minlength="2" />
+        </div>
 
-    <div>
-        <label for="chef">Recipe Chef:</label>
-        <input id="chef" type="text" name="chef" pInputText [(ngModel)]="newRecipe.recipeChef" required="true"
-            #chef="ngModel" maxlength="64" minlength="2" />
-    </div>
+        <div class="p-fluid grid" style="margin-bottom: 10px;margin-top: 10px;">
+            <label for="picUrl">Picture Url: </label>
+            <input id="picUrl" type="text" name="picUrl" pInputText [(ngModel)]="newRecipe.picUrl" required="true"
+                #picUrl="ngModel" maxlength="256" minlength="16"
+                placeholder="Please insert only links ending with .png, .jpg or .jpeg" />
+        </div>
 
-    <div>
-        <label for="cookingTime">Cooking Time:</label>
-        <p-inputNumber inputId="cookingTime" name="cookingTime" [(ngModel)]="newRecipe.cookingTime" [min]="5"
-            [max]="240">
-        </p-inputNumber>
-    </div>
+        <div class="p-fluid grid" style="margin-bottom: 10px;margin-top: 10px;">
+            <label for="picUrl">Video Url: </label>
 
-    <div>
-        <label for="recipeSteps">Recipe Steps:</label>
-        <p-editor id="recipeSteps" name="recipeSteps" [(ngModel)]="newRecipe.recipeSteps" [style]="{'height':'320px'}">
-        </p-editor>
-    </div>
+            <input id="vidUrl" type="text" name="vidUrl" pInputText [(ngModel)]="newRecipe.videoURL" required="true"
+                #vidUrl="ngModel" maxlength="256" minlength="16" placeholder="Please insert embedded video links" />
+        </div>
 
-    <div>
-        <label for="calories">Amount of calories per serving: </label>
-        <p-inputNumber inputId="calories" name="calories" [(ngModel)]="newRecipe.caloriesPerServing" [min]="0">
-        </p-inputNumber>
-    </div>
+        <table>
+            <tr>
+                <td>
+                    <label for="cookingTime">Cooking Time:</label>
+                </td>
+                <td>
+                    <p-inputNumber inputId="cookingTime" name="cookingTime" [(ngModel)]="newRecipe.cookingTime"
+                        [min]="5" [max]="240" [showButtons]="true">
+                    </p-inputNumber>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="calories">Amount of calories per serving: </label>
+                </td>
+                <td>
+                    <p-inputNumber inputId="calories" name="calories" [(ngModel)]="newRecipe.caloriesPerServing"
+                        [min]="0" [showButtons]="true">
+                    </p-inputNumber>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="carbs">Amount of carbs per serving: </label>
+                </td>
+                <td>
+                    <p-inputNumber inputId="carbs" name="carbs" [(ngModel)]="newRecipe.carbsPerServing" [min]="0"
+                        [showButtons]="true">
+                    </p-inputNumber>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="fats">Amount of fats per serving: </label>
+                </td>
+                <td>
+                    <p-inputNumber inputId="fats" name="fats" [(ngModel)]="newRecipe.fatsPerServing" [min]="0"
+                        [showButtons]="true">
+                    </p-inputNumber>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="protein">Amount of protein per serving: </label>
+                </td>
+                <td>
+                    <p-inputNumber inputId="protein" name="protein" [(ngModel)]="newRecipe.proteinsPerServing" [min]="0"
+                        [showButtons]="true">
+                    </p-inputNumber>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="sugar">Amount of sugar per serving: </label>
+                </td>
+                <td>
+                    <p-inputNumber inputId="sugar" name="sugar" [(ngModel)]="newRecipe.sugarPerServing" [min]="0"
+                        [showButtons]="true">
+                    </p-inputNumber>
+                </td>
+            </tr>
 
-    <div>
-        <label for="carbs">Amount of carbs per serving: </label>
-        <p-inputNumber inputId="carbs" name="carbs" [(ngModel)]="newRecipe.carbsPerServing" [min]="0">
-        </p-inputNumber>
-    </div>
+            <tr>
+                <td>
+                    Select a Diet Type
+                </td>
+                <td>
+                    <p-selectButton [options]="dietCategories" name="selectedDiet" [(ngModel)]="selectedDiet"
+                        optionLabel="name" optionValue="categoryId" required="true"></p-selectButton>
+                </td>
+            </tr>
 
-    <div>
-        <label for="fats">Amount of fats per serving: </label>
-        <p-inputNumber inputId="fats" name="fats" [(ngModel)]="newRecipe.fatsPerServing" [min]="0">
-        </p-inputNumber>
-    </div>
+            <tr>
+                <td>Select Categories</td>
+                <td>
+                    <p-selectButton [options]="nonDietCategories" name="selectedCategories"
+                        [(ngModel)]="selectedCategories" [multiple]="true" optionLabel="name" optionValue="categoryId"
+                        required="true"></p-selectButton>
+                    <!-- <select id="category" name="category" [(ngModel)]="selectedCategories" multiple="true">
+                    <option *ngFor="let cat of nonDietCategories" value="{{cat.categoryId}}">{{cat.name}}</option>
+                </select> -->
+                </td>
+            </tr>
 
-    <div>
-        <label for="protein">Amount of protein per serving: </label>
-        <p-inputNumber inputId="protein" name="protein" [(ngModel)]="newRecipe.proteinsPerServing" [min]="0">
-        </p-inputNumber>
-    </div>
+        </table>
 
-    <div>
-        <label for="sugar">Amount of sugar per serving: </label>
-        <p-inputNumber inputId="sugar" name="sugar" [(ngModel)]="newRecipe.sugarPerServing" [min]="0">
-        </p-inputNumber>
-    </div>
+        <br />
 
-    <div>
-        <label for="picUrl">Picture Url: </label>
-        <input id="picUrl" type="text" name="picUrl" pInputText [(ngModel)]="newRecipe.picUrl" required="true"
-            #picUrl="ngModel" maxlength="256" minlength="16"
-            placeholder="Please insert only links ending with .png, .jpg or .jpeg" />
-    </div>
+        <p-table name="ingredientSpecificationTable" #dt [responsive]="true" #ingredientSpecDataTable
+            [value]="ingredientSpecifications" [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll"
+            [filterDelay]="0" [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true"
+            [globalFilterFields]="['ingredientName']">
 
-    <div>
-        <label for="picUrl">Video Url: </label>
-        <input id="vidUrl" type="text" name="vidUrl" pInputText [(ngModel)]="newRecipe.videoURL" required="true"
-            #vidUrl="ngModel" maxlength="256" minlength="16" placeholder="Please insert embedded video links" />
-    </div>
+            <ng-template pTemplate="caption">
+                <div class="table-header">
+                    Selection of ingredients for new recipe
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                            placeholder="Search keyword" />
+                    </span>
+                </div>
+            </ng-template>
 
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="ingredient.name">
+                        <div class="flex justify-content-between align-items-center">
+                            Name
+                            <p-sortIcon field="ingredient.name"></p-sortIcon>
+                            <p-columnFilter type="text" field="ingredient.name" display="menu" class="ml-auto">
+                            </p-columnFilter>
+                        </div>
+                    </th>
+                    <th>Description</th>
+                    <th>Ingredient Unit</th>
+                    <th pSortableColumn="quantityPerServing">
+                        <div class="flex justify-content-between align-items-center">
+                            Quantity per recipe
+                            <p-sortIcon field="quantityPerServing"></p-sortIcon>
+                            <p-columnFilter type="text" field="quantityPerServing" display="menu" class="ml-auto">
+                            </p-columnFilter>
+                        </div>
+                    </th>
+                    <th>Preparation Method</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-is>
+                <tr>
+                    <td>{{ is.ingredient.name }}</td>
+                    <td>{{ is.ingredient.description }}</td>
+                    <td>{{ is.ingredient.ingredientUnit }}</td>
+                    <td>
+                        <input type="number" name="quantityPerServing" pInputText [(ngModel)]="is.quantityPerServing"
+                            [min]="0" />
+                    </td>
+                    <td>
+                        <p-dropdown inputId="preparationMethod" name="preparationMethod" [options]="preparationMethod"
+                            [(ngModel)]="is.preperationMethod">
+                        </p-dropdown>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+        <br />
+
+        <div class="p-fluid grid" style="margin-bottom: 10px;margin-top: 10px;">
+            <label for="recipeSteps">Recipe Steps:<br /></label>
+            <p-editor id="recipeSteps" name="recipeSteps" [(ngModel)]="newRecipe.recipeSteps"
+                [style]="{'height':'320px'}">
+            </p-editor>
+        </div>
+    </p-panel>
+    <br />
+    <p-button label="Submit" (onClick)="createRecipe(createRecipeForm)"></p-button>
 </form>

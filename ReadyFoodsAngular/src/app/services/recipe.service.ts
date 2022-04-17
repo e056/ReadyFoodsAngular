@@ -49,10 +49,10 @@ export class RecipeService {
       .pipe(catchError(this.handleError));
   }
 
-  createRecipe(recipe: Recipe, ingredientSpecificationIds: number[]): Observable<number> {
+  createRecipe(recipe: Recipe, categoryIds: number[], ingredientSpecificationIds: number[]): Observable<number> {
     let createRecipeReq: CreateRecipeReq = new CreateRecipeReq(
       this.sessionService.getUsername(), this.sessionService.getPassword(),
-      recipe, ingredientSpecificationIds
+      recipe, categoryIds, ingredientSpecificationIds
     );
     return this.httpClient
       .put<number>(this.baseUrl, createRecipeReq, httpOptions)

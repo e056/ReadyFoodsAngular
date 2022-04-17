@@ -1,4 +1,4 @@
-<h3>All Products</h3>
+<h3>ReadyFoods Recipes</h3>
 <br />
 
 <p-messages>
@@ -6,6 +6,7 @@
 
 <p-table name="recipeTable" #dt [value]="recipes" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
     [rowsPerPageOptions]="[10,25,50]" responsiveLayout="scroll" [filterDelay]="0"
+    [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true"
     [globalFilterFields]="['recipeTitle','recipeChef','cookingTime']">
 
     <ng-template pTemplate="caption">
@@ -14,7 +15,7 @@
             <span class="p-input-icon-left">
                 <i class="pi pi-search"></i>
                 <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')"
-                    placeholder="Global Search" />
+                    placeholder="Search keyword" />
             </span>
         </div>
     </ng-template>

@@ -1,8 +1,8 @@
 export enum PreparationMethod {
-    Nil,
-    Chopped,
-    Diced,
-    Minced,
-    Crushed,
-    Sliced,
+    Nil = "Nil",
+    Chopped = "Chopped",
+    Diced = "Diced",
+    Minced = "Minced",
+    Crushed = "Crushed",
+    Sliced = "Sliced",
 }

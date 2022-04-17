@@ -51,6 +51,30 @@ export class CategoryService {
       .pipe(catchError(this.handleError));
   }
 
+  getDietSubCategories(): Observable<Category[]> {
+    return this.httpClient
+      .get<Category[]>(
+        this.baseUrl +
+          '/retrieveDietCategories?username=' +
+          this.sessionService.getUsername() +
+          '&password=' +
+          this.sessionService.getPassword()
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+  getNonDietSubCategories(): Observable<Category[]> {
+    return this.httpClient
+      .get<Category[]>(
+        this.baseUrl +
+          '/retrieveNonDietCategories?username=' +
+          this.sessionService.getUsername() +
+          '&password=' +
+          this.sessionService.getPassword()
+      )
+      .pipe(catchError(this.handleError));
+  }
+
   createCategory(
     newCategory: Category,
     parentId: number | null | undefined

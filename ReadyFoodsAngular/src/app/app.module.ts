@@ -22,6 +22,8 @@ import { CommonModule } from '@angular/common';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { EditorModule } from 'primeng/editor';
+import { SliderModule} from 'primeng/slider'
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -109,8 +111,9 @@ import { ViewAllSubscriptionsComponent } from './orderManagement/view-all-subscr
     CommonModule,
     InputNumberModule,
     ConfirmPopupModule,
-    EditorModule
-
+    EditorModule,
+    SliderModule,
+    SelectButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent],

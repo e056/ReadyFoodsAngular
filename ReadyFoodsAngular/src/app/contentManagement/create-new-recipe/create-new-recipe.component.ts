@@ -136,7 +136,8 @@ export class CreateNewRecipeComponent implements OnInit {
             this.ingredientSpecificationIds.push(newIngredientSpecificationId);
             this.resultSuccess = true;
             this.resultError = false;
-            console.log("New ingredient specification for" + confirmedIngredientSpecifications[i].ingredient?.ingredientId + "created, ID: " + newIngredientSpecificationId)
+            console.log("New ingredient specification created, ID: " + newIngredientSpecificationId);
+            console.log("size of ingredient specs to be added" + this.ingredientSpecificationIds.length);
           },
           error: (error) => {
             this.resultError = true;
@@ -152,11 +153,11 @@ export class CreateNewRecipeComponent implements OnInit {
         this.selectedCategories.push(this.selectedDiet);
       }
 
-      console.log("List of selected Category size" + this.selectedCategories.length);
-
+      console.log("size of ingredient specs to be added" + this.ingredientSpecificationIds.length);
       for(var i = 0; i < this.ingredientSpecificationIds.length; i++) {
         console.log("ingredient specs ids to be added" + this.ingredientSpecificationIds[i]);
       }
+      console.log("List of selected Category size" + this.selectedCategories.length);
       for(var j = 0; i < this.selectedCategories.length; i++) {
         console.log("selected categories ids to be added" + this.selectedCategories[i]);
       }
@@ -165,7 +166,6 @@ export class CreateNewRecipeComponent implements OnInit {
 
       this.recipeService.createRecipe(this.newRecipe, this.selectedCategories, this.ingredientSpecificationIds).subscribe({
         next: (response) => {
-          
           let newRecipeId: number = response;
           this.resultSuccess = true;
           this.resultError = false;

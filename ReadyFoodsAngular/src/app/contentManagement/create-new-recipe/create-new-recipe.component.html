@@ -26,7 +26,7 @@
         <div class="p-fluid grid" style="margin-bottom: 10px;margin-top: 10px;">
             <label for="picUrl">Picture Url: </label>
             <input id="picUrl" type="text" name="picUrl" pInputText [(ngModel)]="newRecipe.picUrl" required="true"
-                #picUrl="ngModel" maxlength="256" minlength="16"
+                #picUrl="ngModel" maxlength="256" minlength="8"
                 placeholder="Please insert only links ending with .png, .jpg or .jpeg" />
         </div>
 
@@ -34,7 +34,7 @@
             <label for="picUrl">Video Url: </label>
 
             <input id="vidUrl" type="text" name="vidUrl" pInputText [(ngModel)]="newRecipe.videoURL" required="true"
-                #vidUrl="ngModel" maxlength="256" minlength="16" placeholder="Please insert embedded video links" />
+                #vidUrl="ngModel" maxlength="256" minlength="8" placeholder="Please insert embedded video links" />
         </div>
 
         <table>
@@ -44,7 +44,7 @@
                 </td>
                 <td>
                     <p-inputNumber inputId="cookingTime" name="cookingTime" [(ngModel)]="newRecipe.cookingTime"
-                        [min]="5" [max]="240" [showButtons]="true">
+                        [min]="15" [max]="240" [showButtons]="true">
                     </p-inputNumber>
                 </td>
             </tr>
@@ -172,11 +172,14 @@
                     <td>
                         <input type="number" name="quantityPerServing" pInputText [(ngModel)]="is.quantityPerServing"
                             [min]="0" />
+                        <label> value="{{is.quantityPerServing}}" </label>
                     </td>
                     <td>
+
                         <p-dropdown inputId="preparationMethod" name="preparationMethod" [options]="preparationMethod"
                             [(ngModel)]="is.preperationMethod">
                         </p-dropdown>
+                        <label> value="{{is.preparationMethod}}" </label>
                     </td>
                 </tr>
             </ng-template>

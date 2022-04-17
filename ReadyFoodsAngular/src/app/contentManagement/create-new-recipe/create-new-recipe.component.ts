@@ -18,7 +18,7 @@ import { SessionService } from 'src/app/services/session.service';
 })
 export class CreateNewRecipeComponent implements OnInit {
 
-  selectedDiet: Category;
+  selectedDiet: number;
   dietCategories: Category[];
   nonDietCategories: Category[];
   selectedCategories: number[];
@@ -42,14 +42,15 @@ export class CreateNewRecipeComponent implements OnInit {
     private ingredientService: IngredientService,
 
   ) {
-    this.selectedDiet = new Category(); //special cat selection
+    //special cat selection
     this.dietCategories = new Array(); //for display
     this.nonDietCategories = new Array(); //for display
+    this.selectedDiet = -1;
 
     this.selectedCategories = new Array(); //for selection during display and creation of recipe to be passed
     this.ingredients = new Array();
-    this.ingredientSpecifications = new Array(); //during selection to display
-    this.ingredientSpecificationIds = new Array(); //after creating ingrespec to store ids
+    this.ingredientSpecifications = new Array(); //during display to selection
+    this.ingredientSpecificationIds = new Array(); //during creating ingrespec to store ids
     this.newRecipe = new Recipe();
     this.preparationMethod = Object.keys(PreparationMethod);
 
@@ -83,21 +84,23 @@ export class CreateNewRecipeComponent implements OnInit {
       },
     });
 
-      this.ingredientService.getIngredients().subscribe({
-        next: (response) => {
-          this.ingredients = response;
-          for (var i = 0; i < this.ingredients.length; i++) {
-            console.log("Retrieved name: " + this.ingredients[i].name)
-            const tempIS: IngredientSpecification = new IngredientSpecification(-1, 0,
-              PreparationMethod.Nil, this.ingredients[i]);
-            this.addIs(tempIS);
-          }
-          console.log(this.ingredients);
-        },
-        error: (error) => {
-          console.log('********** ViewAllIngredients.ts: ' + error);
-        },
-      });
+    this.ingredientService.getIngredients().subscribe({
+      next: (response) => {
+        this.ingredients = response;
+        for (var i = 0; i < this.ingredients.length; i++) {
+          console.log("Retrieved name: " + this.ingredients[i].name)
+          const tempIS: IngredientSpecification = new IngredientSpecification(-1, 0,
+            PreparationMethod.Nil, this.ingredients[i]);
+          this.addIs(tempIS);
+          console.log("ingredient specs way of prep: " + this.ingredientSpecifications[i].preperationMethod);
+        }
+
+        console.log(this.ingredients);
+      },
+      error: (error) => {
+        console.log('********** ViewAllIngredients.ts: ' + error);
+      },
+    });
 
   }
 
@@ -108,49 +111,67 @@ export class CreateNewRecipeComponent implements OnInit {
 
   createRecipe(createRecipeForm: NgForm) {
 
-    let confirmedIngredientSpecifications: IngredientSpecification[] = [];
-
-    for(var i = 0 ; i < this.ingredientSpecifications.length; i++) {
-      if(this.ingredientSpecifications[i].quantityPerServing != 0) {
-        confirmedIngredientSpecifications.push(this.ingredientSpecifications[i]);
-      }
-    }
-
-    console.log("Confirmed ingredient specification size  " + confirmedIngredientSpecifications.length);
-    console.log("Sampling first element " + confirmedIngredientSpecifications[0].ingredient?.name);
-
-    //to persist and create list of ingredient specifications first
-    for(var i = 0 ; i < confirmedIngredientSpecifications.length; i++) {
-      this.recipeService.createIngredientSpecification(confirmedIngredientSpecifications[0]).subscribe({
-        next: (response) => {
-          let newIngredientSpecificationId: number = response;
-          this.ingredientSpecificationIds.push(newIngredientSpecificationId);
-          this.resultSuccess = true;
-          this.resultError = false;
-          console.log("New ingredient specification for" + this.ingredientSpecifications[0].ingredient?.name + "created, ID: " + newIngredientSpecificationId)
-        },
-        error: (error) => {
-          this.resultError = true;
-          this.resultSuccess = false;
-          this.message = "An error has occurred while creating the new ingredient specification: " + error;
-          console.log('********** CreateNewISComponent.ts: ' + error);
-        }
-      });
-    }
-
-    //checking if theres any diet type selected
-    if(this.selectedDiet.name != "No Diet Type") {
-      this.selectedCategories.push(this.selectedDiet.categoryId as number);
-    }
-
-    //creation of recipe
     if (createRecipeForm.valid) {
+
+      let confirmedIngredientSpecifications: IngredientSpecification[] = [];
+
+      for (var i = 0; i < this.ingredientSpecifications.length; i++) {
+        if (this.ingredientSpecifications[i].quantityPerServing != 0) {
+          confirmedIngredientSpecifications.push(this.ingredientSpecifications[i]);
+        }
+      }
+
+      console.log("Confirmed ingredient specification size  " + confirmedIngredientSpecifications.length);
+      console.log("Sampling first element " + confirmedIngredientSpecifications[0].ingredient?.name);
+      console.log("Sampling first element " + confirmedIngredientSpecifications[0].ingredient?.ingredientId);
+      console.log("Sampling first element " + confirmedIngredientSpecifications[0].preperationMethod);
+      console.log("Selected diet type " + this.selectedDiet);
+
+
+      //to persist and create list of ingredient specifications first
+      for (var i = 0; i < confirmedIngredientSpecifications.length; i++) {
+        this.recipeService.createIngredientSpecification(confirmedIngredientSpecifications[i]).subscribe({
+          next: (response) => {
+            let newIngredientSpecificationId: number = response;
+            this.ingredientSpecificationIds.push(newIngredientSpecificationId);
+            this.resultSuccess = true;
+            this.resultError = false;
+            console.log("New ingredient specification for" + confirmedIngredientSpecifications[i].ingredient?.ingredientId + "created, ID: " + newIngredientSpecificationId)
+          },
+          error: (error) => {
+            this.resultError = true;
+            this.resultSuccess = false;
+            this.message = "An error has occurred while creating the new ingredient specification: " + error;
+            console.log('********** CreateNewISComponent.ts: ' + error);
+          }
+        });
+      }
+
+      //checking if theres any diet type selected
+      if (this.selectedDiet != -1) {
+        this.selectedCategories.push(this.selectedDiet);
+      }
+
+      console.log("List of selected Category size" + this.selectedCategories.length);
+
+      for(var i = 0; i < this.ingredientSpecificationIds.length; i++) {
+        console.log("ingredient specs ids to be added" + this.ingredientSpecificationIds[i]);
+      }
+      for(var j = 0; i < this.selectedCategories.length; i++) {
+        console.log("selected categories ids to be added" + this.selectedCategories[i]);
+      }
+
+      //creation of recipe
+
       this.recipeService.createRecipe(this.newRecipe, this.selectedCategories, this.ingredientSpecificationIds).subscribe({
         next: (response) => {
+          
           let newRecipeId: number = response;
           this.resultSuccess = true;
           this.resultError = false;
           this.message = "New Recipe " + this.newRecipe.recipeTitle + " created successfully!";
+
+          console.log("New recipe for" + newRecipeId + "created!");
 
           this.newRecipe = new Recipe();
           this.ingredientSpecificationIds = [];

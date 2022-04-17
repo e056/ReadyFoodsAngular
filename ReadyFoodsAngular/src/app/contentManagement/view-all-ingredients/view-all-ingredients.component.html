@@ -1,1 +1,232 @@
-<p>view-all-ingredients works!</p>
+<p-messages></p-messages>
+<p-table
+  name="table"
+  #dt
+  [responsive]="true"
+  #categoryDataTable
+  [value]="ingredients"
+  dataKey="id"
+  [rows]="10"
+  [showCurrentPageReport]="true"
+  [rowsPerPageOptions]="[10, 25, 50]"
+  [paginator]="true"
+  [globalFilterFields]="[
+    'ingredientId',
+    'name',
+    'description',
+    'parentCategory.name'
+  ]"
+>
+  <ng-template pTemplate="caption">
+    <div class="flex">
+      <input
+        pInputText
+        type="text"
+        (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+        placeholder="Search keyword"
+      />
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>
+        <div>
+          Ingredient ID
+          <p-columnFilter
+            type="numeric"
+            field="ingredientId"
+            display="menu"
+          ></p-columnFilter>
+        </div>
+      </th>
+      <th>
+        <div>
+          Name
+          <p-columnFilter
+            type="text"
+            field="ingredient.name"
+            display="menu"
+          ></p-columnFilter>
+        </div>
+      </th>
+      <th>Description</th>
+      <th>Ingredient Unit</th>
+      <th>Actions</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-ingredient>
+    <tr>
+      <td>{{ ingredient.ingredientId }}</td>
+      <td>{{ ingredient.name }}</td>
+      <td>{{ ingredient.description }}</td>
+      <td>{{ ingredient.ingredientUnit }}</td>
+      <td>
+        <p-button
+          label="Update"
+          (click)="showDialogUpdateDetails(ingredient)"
+        ></p-button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog
+  [(visible)]="displayUpdateDetails"
+  header="Update Ingredient"
+  [modal]="true"
+  [draggable]="true"
+  [resizable]="true"
+>
+  <div *ngIf="resultSuccess == true" style="color: rgb(73, 140, 95)">
+    {{ message }}
+  </div>
+  <div *ngIf="resultError == true" style="color: red">
+    {{ message }}
+  </div>
+  <form
+    #updateIngredientForm="ngForm"
+    (ngSubmit)="update(updateIngredientForm)"
+  >
+    <div style="margin-bottom: 10px; margin-top: 10px; width: auto">
+      <span class="p-float-label">
+        <input
+          type="text"
+          id="name"
+          pInputText
+          [(ngModel)]="ingredientToUpdate.name"
+          name="name"
+          required="true"
+          #name="ngModel"
+          maxlength="32"
+        />
+        <label for="name">Ingredient Name:</label>
+        <div
+          *ngIf="name.invalid && (name.dirty || name.touched || submitted)"
+          class="errorText"
+        >
+          <div *ngIf="name.errors?.['required']">Name is required.</div>
+        </div>
+      </span>
+    </div>
+    <div style="margin-bottom: 10px; margin-top: 30px; width: auto">
+      <span class="p-float-label">
+        <textarea
+          pInputTextarea
+          type="textArea"
+          id="description"
+          pInputText
+          [(ngModel)]="ingredientToUpdate.description"
+          name="description"
+          required="true"
+          #description="ngModel"
+          maxlength="128"
+        >
+        </textarea>
+        <label for="description">Description: </label>
+        <div
+          *ngIf="
+            description.invalid &&
+            (description.dirty || description.touched || submitted)
+          "
+          class="errorText"
+        >
+          <div *ngIf="description.errors?.['required']">
+            Description is required.
+          </div>
+        </div>
+      </span>
+    </div>
+    <div style="margin-bottom: 10px">
+      <p-dropdown
+        inputId="ingredientUnit"
+        name="ingredientUnit"
+        [options]="ingredientUnits"
+        [(ngModel)]="ingredientToUpdate.ingredientUnit"
+      >
+      </p-dropdown>
+    </div>
+    <div style="margin-bottom: 10px; margin-top: 30px; width: auto">
+      <span class="p-float-label">
+        <input
+          pInputTextarea
+          type="textArea"
+          id="reorderQuantity"
+          pInputText
+          [(ngModel)]="ingredientToUpdate.reorderQuantity"
+          name="reorderQuantity"
+          required="true"
+          #reorderQuantity="ngModel"
+          maxlength="128"
+        />
+        <label for="reorderQuantity">Reorder Quantity: </label>
+        <div
+          *ngIf="
+            reorderQuantity.invalid &&
+            (reorderQuantity.dirty || reorderQuantity.touched || submitted)
+          "
+          class="errorText"
+        >
+          <div *ngIf="reorderQuantity.errors?.['required']">
+            ReorderQuantity is required.
+          </div>
+        </div>
+      </span>
+    </div>
+    <div style="margin-bottom: 10px; margin-top: 30px; width: auto">
+      <span class="p-float-label">
+        <input
+          pInputTextarea
+          type="textArea"
+          id="stockQuantity"
+          pInputText
+          [(ngModel)]="ingredientToUpdate.stockQuantity"
+          name="stockQuantity"
+          required="true"
+          #stockQuantity="ngModel"
+          maxlength="128"
+        />
+        <label for="stockQuantity">Stock Quantity: </label>
+        <div
+          *ngIf="
+            stockQuantity.invalid &&
+            (stockQuantity.dirty || stockQuantity.touched || submitted)
+          "
+          class="errorText"
+        >
+          <div *ngIf="stockQuantity.errors?.['required']">
+            RestockQuantity is required.
+          </div>
+        </div>
+      </span>
+    </div>
+    <div style="margin-bottom: 10px; margin-top: 30px; width: auto">
+      <span class="p-float-label">
+        <input
+          pInputTextarea
+          type="textArea"
+          id="unitPrice"
+          pInputText
+          [(ngModel)]="ingredientToUpdate.unitPrice"
+          name="unitPrice"
+          required="true"
+          #unitPrice="ngModel"
+          maxlength="128"
+        />
+        <label for="unitPrice">Unit Price ($SGD): </label>
+        <div
+          *ngIf="
+            unitPrice.invalid &&
+            (unitPrice.dirty || unitPrice.touched || submitted)
+          "
+          class="errorText"
+        >
+          <div *ngIf="unitPrice.errors?.['required']">
+            Unit Price is required.
+          </div>
+        </div>
+      </span>
+    </div>
+    <p-button label="Update Ingredient" type="submit"></p-button> &nbsp;
+    <p-button label="Clear" (click)="clear()"></p-button>
+  </form>
+</p-dialog>

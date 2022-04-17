@@ -21,7 +21,6 @@ export class CreateNewRecipeComponent implements OnInit {
   parentCategories: Category[];
   subCategories: Category[];
 
-  // ingredientSpecificationForm: FormGroup;
   ingredients: Ingredient[];
   ingredientSpecifications: IngredientSpecification[];
   ingredientSpecificationIds: number[];
@@ -38,7 +37,7 @@ export class CreateNewRecipeComponent implements OnInit {
     private recipeService: RecipeService,
     private categoryService: CategoryService,
     private ingredientService: IngredientService,
-    private formBuilder: FormBuilder
+
   ) {
     this.recipeToView = new Recipe();
     this.parentCategories = [];
@@ -47,11 +46,6 @@ export class CreateNewRecipeComponent implements OnInit {
     this.ingredientSpecifications = [];
     this.ingredientSpecificationIds = [];
     this.newRecipe = new Recipe();
-    
-    //form for ingredient specification group
-    // this.ingredientSpecificationForm = this.formBuilder.group({
-    //   isGroup: this.formBuilder.array([this.createISFormGroup()])
-    // });
 
     this.resultSuccess = false;
     this.resultError = false;
@@ -88,29 +82,6 @@ export class CreateNewRecipeComponent implements OnInit {
       },
     });
   }
-
-  //methods for IS Form.
-  // removeOrClearISGroup(i: number) {
-  //   const isGroup = this.ingredientSpecificationForm.get('isGroup') as FormArray
-  //   if (isGroup.length > 1) {
-  //     isGroup.removeAt(i)
-  //   } else {
-  //     isGroup.reset()
-  //   }
-  // }
-
-  // addISFormGroup() {
-  //   const isGroup = this.ingredientSpecificationForm.get('isGroup') as FormArray
-  //   isGroup.push(this.createISFormGroup())
-  // }
-
-  // private createISFormGroup(): FormGroup {
-  //   return new FormGroup({
-  //     'Ingredient': new FormControl(''),
-  //     'Quantity per serving': new FormControl(''),
-  //     'Preparation method': new FormControl('')
-  //   })
-  // }
 
   //creation of ingreSpec and recipe methods
   //empty for now, but planning to iterate and loop through the ingre spec list 

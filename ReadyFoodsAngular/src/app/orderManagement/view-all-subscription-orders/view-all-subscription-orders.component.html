@@ -5,8 +5,7 @@
 <br /><br />
 
 <p-table #orderDataTable [value]="orders" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
-   
-[resizableColumns]="true" [autoLayout]="true"
+    [resizableColumns]="true" [autoLayout]="true"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" responsiveLayout="scroll"
     [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [globalFilterFields]="[
 'orderEntityId',
@@ -42,29 +41,32 @@
                 <p-sortIcon [field]="'dateForDelivery'"></p-sortIcon>
 
             </th>
-               <th [pSortableColumn]="'totalCost'">Total Cost
-        <p-sortIcon [field]="'totalCost'"></p-sortIcon>
+            <th [pSortableColumn]="'totalCost'">Total Cost
+                <p-sortIcon [field]="'totalCost'"></p-sortIcon>
 
-      </th>
+            </th>
 
             <th>
                 <div class="flex justify-content-center align-items-center">
-                  Status
-                  <p-columnFilter field="status" matchMode="equals" display="menu">
-                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                      <p-dropdown [ngModel]="value" [options]="statuses" (onChange)="filter($event.value)" placeholder="Any">
-                        <ng-template let-status pTemplate="item">
-                          <span [class]="'status-badge-' + status">{{status}}</span>
+                    Status
+                    <p-columnFilter field="status" matchMode="equals" display="menu">
+                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-dropdown [ngModel]="value" [options]="statuses" (onChange)="filter($event.value)"
+                                placeholder="Any">
+                                <ng-template let-status pTemplate="item">
+                                    <span [class]="'status-badge-' + status">{{status}}</span>
+                                </ng-template>
+                            </p-dropdown>
                         </ng-template>
-                      </p-dropdown>
-                    </ng-template>
-                  </p-columnFilter>
+                    </p-columnFilter>
                 </div>
-              </th>
-            <th>       <div>
-                Paid
-                <p-columnFilter type="boolean" field="paid" display="menu"></p-columnFilter>
-            </div></th>
+            </th>
+            <th>
+                <div>
+                    Paid
+                    <p-columnFilter type="boolean" field="paid" display="menu"></p-columnFilter>
+                </div>
+            </th>
             <th>Notes</th>
             <th>Action</th>
 
@@ -96,7 +98,7 @@
 
 <p-dialog [(visible)]="displayUpdate" header="Update Subscription Order Status" [modal]="true" [draggable]="true"
     [resizable]="true">
-  
+
     <br />
     <form #updateStatusForm="ngForm" (ngSubmit)="update(updateStatusForm)" update="dt">
         <div style="margin-bottom: 10px; width: auto">

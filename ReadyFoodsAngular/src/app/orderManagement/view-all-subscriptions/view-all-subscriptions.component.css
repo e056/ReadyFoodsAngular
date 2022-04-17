@@ -1,0 +1,23 @@
+.ongoing-badge-true {
+    border-radius: 2px;
+    padding: .25em .5rem;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 12px;
+    letter-spacing: .3px;
+    background-color: #C8E6C9;
+    color: #256029;
+}
+
+.ongoing-badge-false {
+    border-radius: 2px;
+    padding: .25em .5rem;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 12px;
+    letter-spacing: .3px;
+    background-color: #FFCDD2;
+    color: #C63737;
+
+}
+
